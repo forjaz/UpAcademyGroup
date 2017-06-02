@@ -1,0 +1,46 @@
+/* HEADER */
+#headerDiv {
+	position: fixed;
+	height: 60px;
+	top: 0px;
+	width: 100%;
+	background-color: red;
+	z-index: 1;
+	background-color: red;
+}
+
+#headerTitle {
+	font-size: 20px;
+}
+
+/* FRIDGE MENU */
+#menuFridgeDiv {
+	height: 100vh;
+	background-color: purple;
+}
+
+/* CONTENT */
+#contentDisplayDiv {
+	height: 100vh;
+	background-color: blue;
+}
+
+/* FILTER MENU */
+#menuFilterDiv {
+	height: 100vh;
+	background-color: green;
+}
+
+/* FOOTER */
+#footerDiv {
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	height: 50px;
+	width: 100%;
+	background-color: yellow;
+}
+
+#footerContent {
+	font-size: 10px;
+}

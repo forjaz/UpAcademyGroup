@@ -1,4 +1,4 @@
-?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -13,11 +13,108 @@
 	<title>UpAcademy Group</title>
 
 	<h:outputStylesheet name="bootstrap/css/bootstrap.css" />
-	<h:outputStylesheet name="css/basic-style.css" />
+	<h:outputStylesheet name="css/default.css" />
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" />
 	<h:outputScript name="bootstrap/js/bootstrap.js" />
 </h:head>
 
 <h:body>
+
+	<div class="container-fluid">
+
+		<!-- HEADER -->
+		<div class="row">
+			<div id="headerDiv" class="col-md-12">
+				<h1 id="headerTitle">UpAcademyGroup</h1>
+			</div>
+		</div>
+
+		<div class="row">
+			<!-- FRIDGE MENU -->
+			<div id="menuFridgeDiv" class="col-md-2 side-nav side-nav-left">
+
+				<div id="menuFridgeImage" class="col-md-12 fridgeComponent">
+					<ui:insert name="menuFridgeImage"></ui:insert>
+				</div>
+
+				<div id="menuFridgeInstructions" class="col-md-12 fridgeComponent">
+					<ui:insert name="menuFridgeInstructions"></ui:insert>
+				</div>
+
+				<div id="menuFridgeInput" class="col-md-12 fridgeComponent">
+					<ui:insert name="menuFridgeInput"></ui:insert>
+				</div>
+
+				<div id="menuFridgeInputDisplay" class="col-md-12 fridgeComponent">
+					<ui:insert name="menuFridgeInputDisplay"></ui:insert>
+				</div>
+
+				<div id="menuFridgeSubmit" class="col-md-12 fridgeComponent">
+					<ui:insert name="menuFridgeSubmit"></ui:insert>
+				</div>
+
+			</div>
+
+			<!-- CONTENT DISPLAY -->
+			<div id="contentDisplayDiv" class="col-md-8">
+				<ui:insert name="contentDisplay"></ui:insert>
+			</div>
+
+			<!-- FILTER MENU -->
+			<div id="menuFilterDiv" class="col-md-2 side-nav side-nav-right">
+
+				<div id="menuFilterImage" class="col-md-12 filterComponent">
+					<ui:insert name="menuFilterImage"></ui:insert>
+				</div>
+
+				<div id="menuFilterSubMenuMain" class="col-md-12 filterComponent">
+					<ui:insert name="menuFilterSubMenuMain"></ui:insert>
+				</div>
+
+				<div id="menuFilterSubMenu1" class="col-md-12 filterComponent">
+					<ui:insert name="menuFilterSubMenu1"></ui:insert>
+				</div>
+
+				<div id="menuFilterOptions1" class="col-md-12 filterComponent">
+					<ui:insert name="menuFilterOptions1"></ui:insert>
+				</div>
+
+				<div id="menuFilterSubMenu2" class="col-md-12 filterComponent">
+					<ui:insert name="menuFilterSubMenu2"></ui:insert>
+				</div>
+
+				<div id="menuFilterOptions2" class="col-md-12 filterComponent">
+					<ui:insert name="menuFilterOptions2"></ui:insert>
+				</div>
+
+				<div id="menuFilterSubMenu3" class="col-md-12 filterComponent">
+					<ui:insert name="menuFilterSubMenu3"></ui:insert>
+				</div>
+
+				<div id="menuFilterOptions3" class="col-md-12 filterComponent">
+					<ui:insert name="menuFilterOptions3"></ui:insert>
+				</div>
+
+				<div id="menuFilterSubmit" class="col-md-12 filterComponent">
+					<ui:insert name="menuFilterSubmit"></ui:insert>
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="row">
+
+			<!-- FOOTER -->
+			<div id="footerDiv" class="col-md-12">
+				<h2 id="footerContent">&#169; Up Academy Group 1</h2>
+			</div>
+
+		</div>
+
+
+	</div>
 
 </h:body>
 
