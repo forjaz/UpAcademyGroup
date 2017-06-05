@@ -22,7 +22,7 @@
 /* CONTENT */
 #contentDisplayDiv {
 	height: 100vh;
-	background-color: blue;
+	padding-top:60px;
 }
 
 /* FILTER MENU */
