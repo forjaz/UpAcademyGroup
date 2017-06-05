@@ -17,12 +17,14 @@
 #menuFridgeDiv {
 	height: 100vh;
 	background-color: purple;
+	color: white;
+	padding-top: 60px;
 }
 
 /* CONTENT */
 #contentDisplayDiv {
 	height: 100vh;
-	background-color: blue;
+	padding-top: 60px;
 }
 
 /* FILTER MENU */
