@@ -6,7 +6,7 @@
 	width: 100%;
 	background-color: red;
 	z-index: 1;
-	background-color: red;
+	color: white;
 }
 
 #headerTitle {
@@ -22,7 +22,26 @@
 /* CONTENT */
 #contentDisplayDiv {
 	height: 100vh;
-	background-color: blue;
+	padding-top: 60px;
+	padding-bottom: 50px;
+}
+
+#fotos{
+	text-align: center;
+	height:50%;
+	padding: 25% 0;
+	border: 2px solid green;
+	
+}
+
+
+#grid-menu{
+	text-align: center;
+	height:50%;
+	padding: 25% 0;
+	border: 2px solid green;
+	
+	
 }
 
 /* FILTER MENU */

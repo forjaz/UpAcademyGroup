@@ -2,29 +2,48 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:h="http://java.sun.com/jsf/html"	
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://java.sun.com/jsf/html">
 <h:body>
 
 	<ui:composition template="/template/default/defaultLayout.xhtml">
 
-		<ui:define name="menuFridgeImage">menuFridgeImage</ui:define>
-		<ui:define name="menuFridgeInstructions">menuFridgeInstructions</ui:define>
-		<ui:define name="menuFridgeInput">menuFridgeInput</ui:define>
-		<ui:define name="menuFridgeInputDisplay">menuFridgeInputDisplay</ui:define>
-		<ui:define name="menuFridgeSubmit">menuFridgeSubmit</ui:define>
 
-		<ui:define name="contentDisplay">contentDisplay</ui:define>
+		<ui:define name="contentDisplay">
+		
+		<row>
+		
+			<div id="fotos" class="col-md-12">
+			<!--  
+				<p:contentFlow value="#{imagesView.images}" var="image">
+				    <p:graphicImage name="demo/images/nature/#{image}" styleClass="content" />
+				    <div class="caption">#{image}</div>
+				</p:contentFlow>
+			-->		
+				Batatas
+			
+			</div>
+		</row>
+		
+		
+		
+		<row>
+		
+			<div id="grid-menu" class="col-md-12">
+			
+				Cenouras
+			
+			</div>
+			
+		</row>
+		
+		
+		
+		</ui:define>
 
-		<ui:define name="menuFilterImage">menuFilterImage</ui:define>
-		<ui:define name="menuFilterSubMenuMain">menuFridgeSubMenuMain</ui:define>
-		<ui:define name="menuFilterSubMenu1">menuFridgeSubMenu1</ui:define>
-		<ui:define name="menuFridgeOptions1">menuFridgeOptions1</ui:define>
-		<ui:define name="menuFilterSubMenu2">menuFridgeSubMenu2</ui:define>
-		<ui:define name="menuFridgeOptions2">menuFridgeOptions2</ui:define>
-		<ui:define name="menuFilterSubMenu3">menuFridgeSubMenu3</ui:define>
-		<ui:define name="menuFridgeOptions3">menuFridgeOptions3</ui:define>
-		<ui:define name="menuFridgeSubmit">menuFridgeSubmit</ui:define>
 
 
 	</ui:composition>
