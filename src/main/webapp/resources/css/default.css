@@ -4,43 +4,49 @@
 	height: 60px;
 	top: 0px;
 	width: 100%;
-	background-color: red;
+	border: 1px solid black;
 	z-index: 1;
-	background-color: red;
 }
 
 #headerTitle {
 	font-size: 20px;
+	text-align: center;
+	border: 1px solid black;
 }
 
-/* FRIDGE MENU */
-#menuFridgeDiv {
-	height: 100vh;
-	background-color: purple;
+/* NAV */
+#navDiv {
+	position: fixed;
+	height: 20px;
+	top: 60px;
+	width: 100%;
+	text-align: center;
+	border: 1px solid black;
+	z-index: 1;
 }
 
 /* CONTENT */
 #contentDisplayDiv {
 	height: 100vh;
-	background-color: blue;
+	border: 1px solid black;
+	margin-top: 80px;
 }
 
-/* FILTER MENU */
-#menuFilterDiv {
-	height: 100vh;
-	background-color: green;
+/* SOCIAL */
+#socialDiv {
+	left: 0px;
+	height: 40px;
+	width: 100%;
+	text-align: center;
+	border: 1px solid black;
 }
 
-/* FOOTER */
-#footerDiv {
-	position: fixed;
+/* SITE MAP */
+#siteMapDiv {
 	left: 0px;
 	bottom: 0px;
-	height: 50px;
+	height: 60px;
 	width: 100%;
-	background-color: yellow;
-}
-
-#footerContent {
-	font-size: 10px;
+	text-align: center;
+	border: 1px solid black;
 }
