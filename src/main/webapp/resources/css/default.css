@@ -1,44 +1,64 @@
 /* HEADER */
 #headerDiv {
 	position: fixed;
-	height: 60px;
+	height: 70px;
 	top: 0px;
 	width: 100%;
-	border: 1px solid black;
+	background-color: white;
+	opacity: 0.7;
 	z-index: 1;
 }
 
 #headerTitle {
-	font-size: 20px;
+	font-family: serif;
+	font-size: 25px;
 	text-align: center;
-	border: 1px solid black;
+	font-weight: bold;
+	color: #191970;
 }
 
 /* NAV */
 #navDiv {
 	position: fixed;
 	height: 20px;
-	top: 60px;
+	top: 70px;
 	width: 100%;
 	text-align: center;
-	border: 1px solid black;
+	background-color: white;
 	z-index: 1;
+}
+
+.navBar-text {
+	font-family: serif;
+	color: #1a1b7f !important;
 }
 
 /* CONTENT */
 #contentDisplayDiv {
 	height: 100vh;
-	border: 1px solid black;
 	margin-top: 80px;
 }
 
 /* SOCIAL */
 #socialDiv {
 	left: 0px;
-	height: 40px;
+	height: 37px;
 	width: 100%;
 	text-align: center;
-	border: 1px solid black;
+	background-color: #696969;
+	padding-top: 2px;
+	padding-left: 10px;
+	text-align: right;
+}
+
+.btn {
+	border: 0px !important;
+}
+
+.btn-social-icon {
+	background-color: transparent !important;
+	border-color: transparent !important;
+	margin-right: 10px;
 }
 
 /* SITE MAP */
@@ -47,6 +67,14 @@
 	bottom: 0px;
 	height: 60px;
 	width: 100%;
+	padding-top: 20px;
 	text-align: center;
-	border: 1px solid black;
+	background-color: #474747;
+	text-align: center;
+}
+
+.footer-text {
+	font-family: serif;
+	color: darkgrey !important;
+	margin-left: 50px;
 }
