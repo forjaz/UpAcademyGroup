@@ -4,11 +4,16 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
-public class Reservation extends HotelEntity implements Serializable {
+public class Reservation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue
+	private Long id;
 	private Date startDate;
 	private Date endDate;
 	private int numbNights;
@@ -21,19 +26,6 @@ public class Reservation extends HotelEntity implements Serializable {
 	// Constructor
 	public Reservation() {
 
-	}
-
-	public Reservation(Date startDate, Date endDate, int numbNights, String contactName, String contactEmail,
-			String contactPhone, int numbPeople, Long roomID) {
-		super();
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.numbNights = numbNights;
-		this.contactName = contactName;
-		this.contactEmail = contactEmail;
-		this.contactPhone = contactPhone;
-		this.numbPeople = numbPeople;
-		this.roomID = roomID;
 	}
 
 	// Getters and Setters
@@ -103,6 +95,14 @@ public class Reservation extends HotelEntity implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

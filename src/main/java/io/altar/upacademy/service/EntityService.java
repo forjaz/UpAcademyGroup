@@ -1,18 +1,15 @@
 package io.altar.upacademy.service;
 
-import java.io.Serializable;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.io.Serializable;
 
-import io.altar.upacademy.model.HotelEntity;
-
-public abstract class EntityService<T2 extends HotelEntity> implements Serializable {
+public abstract class EntityService implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	// Entity Manager
 	@PersistenceContext(name = "UpAcademyGroupPU")
-	private static EntityManager em;
+	protected static EntityManager em;
 
 	// Getters and Setters
 	public static EntityManager getEm() {
