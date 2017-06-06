@@ -6,10 +6,7 @@
 	width: 100%;
 	border: 1px solid black;
 	z-index: 1;
-<<<<<<< HEAD
-=======
 	color: white;
->>>>>>> origin/Bruno
 }
 
 #headerTitle {
@@ -32,12 +29,8 @@
 /* CONTENT */
 #contentDisplayDiv {
 	height: 100vh;
-<<<<<<< HEAD
 	border: 1px solid black;
 	margin-top: 80px;
-=======
-	padding-top: 60px;
-	padding-bottom: 50px;
 }
 
 #fotos{
@@ -56,7 +49,6 @@
 	border: 2px solid green;
 	
 	
->>>>>>> origin/Bruno
 }
 
 /* SOCIAL */
@@ -74,15 +66,12 @@
 	bottom: 0px;
 	height: 60px;
 	width: 100%;
-<<<<<<< HEAD
 	text-align: center;
 	border: 1px solid black;
 }
-=======
 	background-color: yellow;
 }
 
 #footerContent {
 	font-size: 10px;
 }
->>>>>>> origin/Bruno
