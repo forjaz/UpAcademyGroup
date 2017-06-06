@@ -25,8 +25,10 @@ import org.primefaces.model.ScheduleModel;
 @RequestScoped
 
 public class ScheduleView implements Serializable {
- 
-    private ScheduleModel eventModel;
+
+	private static final long serialVersionUID = 1L;
+
+	private ScheduleModel eventModel;
      
     private ScheduleModel lazyEventModel;
  
