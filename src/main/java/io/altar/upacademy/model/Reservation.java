@@ -3,10 +3,12 @@ package io.altar.upacademy.model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Reservation implements Serializable {
+import javax.persistence.Entity;
+
+@Entity
+public class Reservation extends HotelEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Long id;
 	private Date startDate;
 	private Date endDate;
 	private int numbNights;
@@ -16,15 +18,25 @@ public class Reservation implements Serializable {
 	private int numbPeople;
 	private Long roomID;
 
+	// Constructor
+	public Reservation() {
+
+	}
+
+	public Reservation(Date startDate, Date endDate, int numbNights, String contactName, String contactEmail,
+			String contactPhone, int numbPeople, Long roomID) {
+		super();
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.numbNights = numbNights;
+		this.contactName = contactName;
+		this.contactEmail = contactEmail;
+		this.contactPhone = contactPhone;
+		this.numbPeople = numbPeople;
+		this.roomID = roomID;
+	}
+
 	// Getters and Setters
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public Date getStartDate() {
 		return startDate;
 	}
