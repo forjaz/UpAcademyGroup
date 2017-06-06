@@ -6,7 +6,10 @@
 	width: 100%;
 	border: 1px solid black;
 	z-index: 1;
+<<<<<<< HEAD
 	color: white;
+=======
+>>>>>>> 1ce6395af47ed9b2ecaee25b18e234ed8b5b82ba
 }
 
 #headerTitle {
@@ -31,6 +34,7 @@
 	height: 100vh;
 	border: 1px solid black;
 	margin-top: 80px;
+<<<<<<< HEAD
 }
 
 #fotos{
@@ -49,6 +53,8 @@
 	border: 2px solid green;
 	
 	
+=======
+>>>>>>> 1ce6395af47ed9b2ecaee25b18e234ed8b5b82ba
 }
 
 /* SOCIAL */
@@ -68,6 +74,7 @@
 	width: 100%;
 	text-align: center;
 	border: 1px solid black;
+<<<<<<< HEAD
 }
 	background-color: yellow;
 }
@@ -75,3 +82,6 @@
 #footerContent {
 	font-size: 10px;
 }
+=======
+}
+>>>>>>> 1ce6395af47ed9b2ecaee25b18e234ed8b5b82ba
