@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:body>
+
+    <ui:composition template="/template/default/defaultLayout.xhtml">
+
+        <ui:define name="contentDisplay">
+
+            <h1>Create Rooms!</h1>
+
+            <h:form>
+                <h:panelGrid columns="2" cellpadding="3">
+                    <h:outputLabel value="Room Type"/>
+                    <h:inputText
+                            value="#{roomBean.room.type}"/>
+
+                    <h:outputLabel value="Price per Night"/>
+                    <p:spinner value="#{roomBean.room.price}"
+                               suffix="€" min="0.00" stepFactor="0.01"/>
+
+                    <h:outputLabel value="Max Occupation"/>
+                    <p:spinner
+                            value="#{roomBean.room.maxOccupation}"
+                            min="1"/>
+
+                    <h:outputLabel value="Description"/>
+                    <h:inputText
+                            value="#{roomBean.room.description}"/>
+
+                    <h:outputLabel value="Image URL"/>
+                    <h:inputText
+                            value="#{roomBean.room.imageSrc}"/>
+
+                    <h:outputLabel value="Extras"/>
+                    <h:inputText
+                            value="#{roomBean.room.extras}"/>
+                </h:panelGrid>
+
+                <h:commandButton value="Create Room"
+                                 action="#{roomService.newRoom(roomBean.room, 'dbtest.xhtml')}"
+                                 styleClass="btn-submit"/>
+
+            </h:form>
+
+            <h1>Book Now!</h1>
+
+
+            <h:form>
+                <h:panelGrid columns="2" cellpadding="3">
+                    <h:outputLabel value="RoomID"/>
+                    <h:inputText
+                            value="#{reservationBean.reservation.roomID}"/>
+
+                    <h:outputLabel value="Name"/>
+                    <h:inputText
+                            value="#{reservationBean.reservation.contactName}"/>
+
+                    <h:outputLabel value="Email"/>
+                    <h:inputText
+                            value="#{reservationBean.reservation.contactEmail}"/>
+
+                    <h:outputLabel value="Phone"/>
+                    <h:inputText
+                            value="#{reservationBean.reservation.contactPhone}"/>
+
+                    <p:outputLabel for="bookStart" value="Start Date" />
+                    <p:calendar id="bookStart" value="#{reservationBean.reservation.startDate}" mode="inline" />
+
+                    <p:outputLabel for="bookEnd" value="End Date" />
+                    <p:calendar id="bookEnd" value="#{reservationBean.reservation.endDate}" mode="inline" />
+
+                    <h:outputLabel value="People"/>
+                    <p:spinner min="1"
+                               value="#{reservationBean.reservation.numbPeople}"/>
+
+                    <h:commandButton value="Create Reservation"
+                                     action="#{reservationService.newReservation(reservationBean.reservation, 'dbtest.xhtml')}"
+                                     styleClass="btn-submit"/>
+                </h:panelGrid>
+
+
+
+            </h:form>
+
+
+        </ui:define>
+
+    </ui:composition>
+
+</h:body>
+
+</html>
