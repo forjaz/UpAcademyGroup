@@ -5,9 +5,9 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
-	
+
 
 <h:head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -16,9 +16,8 @@
 
 	<title>UpAcademy Group 1</title>
 
-	<h:outputStylesheet name="css/default.css" />
-	<h:outputStylesheet name="css/defaultBM.css" />
 	<h:outputStylesheet name="bootstrap/css/bootstrap.css" />
+	<h:outputStylesheet name="css/default.css" />
 	<h:outputScript name="bootstrap/js/bootstrap.js" />
 	<link rel="stylesheet"
 		href="resources/css/font-awesome-4.7.0/css/font-awesome.min.css" />
@@ -28,99 +27,106 @@
 
 <h:body>
 
+
 	<div class="container-fluid">
 
 		<!-- HEADER -->
 		<div class="row">
 			<div id="headerDiv" class="col-md-12">
-				<h1 id="headerTitle">Hotel Fantastique</h1>
+				<h1 id="headerTitle">Receita-me</h1>
 			</div>
 		</div>
 
 		<div class="row">
-			<!-- NAV BAR -->
-			<div id="navDiv" class="col-md-12">
+			<!-- FRIDGE MENU -->
+			<div id="menuIngredientsDiv" class="col-md-2 side-nav side-nav-left">
 
-				<div class="nav nav-pills navButton col-md-1"></div>
-
-				<div class="nav nav-pills navButton col-md-1"></div>
-
-				<div id="aboutUsDiv" class="nav nav-pills navButton col-md-1">
-					<a class="navBar-text" href="#">About Us</a>
+				<div id="menuIngredientsTitle"
+					class="col-md-12 ingredientsComponent">
+					<ui:insert name="menuIngredientsTitle"></ui:insert>
 				</div>
 
-				<div id="roomsDiv" class="nav nav-pills navButton col-md-1">
-					<a class="navBar-text" href="#">Rooms</a>
+				<div id="menuIngredientsInstructions"
+					class="col-md-12 ingredientsComponent">
+					<ui:insert name="menuIngredientsInstructions"></ui:insert>
 				</div>
 
-				<div id="restaurantDiv" class="nav nav-pills navButton col-md-1">
-					<a class="navBar-text" href="#">Restaurant</a>
+				<div id="menuIngredientsInput"
+					class="col-md-12 ingredientsComponent">
+					<ui:insert name="menuIngredientsInput"></ui:insert>
 				</div>
 
-				<div id="eventsDiv" class="nav nav-pills navButton col-md-1">
-					<a class="navBar-text" href="#">Events</a>
+				<div id="menuIngredientsOutput"
+					class="col-md-12 ingredientsComponent">
+					<ui:insert name="menuIngredientsInputDisplay"></ui:insert>
 				</div>
 
-				<div id="galleryDiv" class="nav nav-pills navButton col-md-1">
-					<a class="navBar-text" href="#">Gallery</a>
+				<div id="menuIngredientsSubmit"
+					class="col-md-12 ingredientsComponent">
+					<ui:insert name="menuIngredientsSubmit"></ui:insert>
 				</div>
-
-				<div id="contactDiv" class="nav nav-pills navButton col-md-1">
-					<a class="navBar-text" href="#">Contact</a>
-				</div>
-
-				<div id="bookNowDiv" class="nav nav-pills navButton col-md-1">
-					<a class="navBar-text" href="#">Book Now</a>
-				</div>
-
-				<div id="staffDiv" class="nav nav-pills navButton col-md-1">
-					<a class="navBar-text" href="#">Staff</a>
-				</div>
-
-				<div class="nav nav-pills navButton col-md-1"></div>
-
-				<div class="nav nav-pills navButton col-md-1"></div>
 
 			</div>
 
 			<!-- CONTENT DISPLAY -->
-			<div class="row">
-				<div id="contentDisplayDiv" class="col-md-12">
-					<ui:insert name="contentDisplay"></ui:insert>
-				</div>
+			<div id="contentDisplayDiv" class="col-md-8">
+				<ui:insert name="contentDisplay"></ui:insert>
 			</div>
 
-			<!-- SOCIAL FOOTER MENU -->
-			<div class="row">
-				<div id="socialDiv" class="col-md-12">
+			<!-- FILTER MENU -->
+			<div id="menuFilterDiv" class="col-md-2 side-nav side-nav-right">
 
-					<a class="btn btn-social-icon btn-facebook"> <span
-						class="fa fa-facebook"> </span>
-					</a> <a class="btn btn-social-icon btn-twitter"> <span
-						class="fa fa-twitter"> </span>
-					</a> <a class="btn btn-social-icon btn-pinterest"> <span
-						class="fa fa-pinterest"> </span>
-					</a> <a class="btn btn-social-icon btn-instagram"> <span
-						class="fa fa-instagram"> </span>
-					</a>
-
+				<div id="menuFilterTitle" class="col-md-12 filterComponent">
+					<ui:insert name="menuFilterTitle"></ui:insert>
 				</div>
+
+				<div id="menuFilterInstructions" class="col-md-12 filterComponent">
+					<ui:insert name="menuFilterInstructions"></ui:insert>
+				</div>
+
+				<div id="menuFilterSubMenu1" class="col-md-12 filterComponent">
+					<ui:insert name="menuFilterSubMenu1"></ui:insert>
+				</div>
+
+				<div id="menuFilterOptions1" class="col-md-12 filterComponent">
+					<ui:insert name="menuFilterOptions1"></ui:insert>
+				</div>
+
+				<div id="menuFilterSubMenu2" class="col-md-12 filterComponent">
+					<ui:insert name="menuFilterSubMenu2"></ui:insert>
+				</div>
+
+				<div id="menuFilterOptions2" class="col-md-12 filterComponent">
+					<ui:insert name="menuFilterOptions2"></ui:insert>
+				</div>
+
+				<div id="menuFilterSubMenu3" class="col-md-12 filterComponent">
+					<ui:insert name="menuFilterSubMenu3"></ui:insert>
+				</div>
+
+				<div id="menuFilterOptions3" class="col-md-12 filterComponent">
+					<ui:insert name="menuFilterOptions3"></ui:insert>
+				</div>
+
+				<div id="menuFilterSubmit" class="col-md-12 filterComponent">
+					<ui:insert name="menuFilterSubmit"></ui:insert>
+				</div>
+
 			</div>
 
-			<!-- SITE MAP FOOTER MENU -->
-			<div class="row">
-				<div id="siteMapDiv" class="col-md-12">
-
-					<a class="footer-text" href="">ABOUT US</a> <a class="footer-text"
-						href="">ROOMS</a> <a class="footer-text" href="">RESTAURANT</a> <a
-						class="footer-text" href="">EVENTS</a> <a class="footer-text"
-						href="">GALLERY</a> <a class="footer-text" href="">CONTACT</a>
-
-				</div>
-			</div>
 		</div>
+
+		<div class="row">
+
+			<!-- FOOTER -->
+			<div id="footerDiv" class="col-md-12">
+				<h2 id="footerContent">&#169; Up Academy Group 1</h2>
+			</div>
+
+		</div>
+
+
 	</div>
-<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.js" type="text/javascript"></script>
 </h:body>
 
 </html>

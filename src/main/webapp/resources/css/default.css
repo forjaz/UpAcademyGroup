@@ -1,41 +1,48 @@
 /* HEADER */
 #headerDiv {
 	position: fixed;
-	height: 70px;
+	height: 60px;
 	top: 0px;
 	width: 100%;
-	background-color: white;
+	background-color: #007167;
 	z-index: 1;
+	/* darkgreen #007167 */
+	/*  lightgreen #66b562 */
 }
 
 #headerTitle {
 	font-family: serif;
 	font-size: 25px;
-	text-align: center;
 	font-weight: bold;
-	color: #191970;
+	color: white;
 }
 
-/* NAV */
-#navDiv {
-	position: fixed;
-	height: 20px;
-	top: 70px;
-	width: 100%;
-	text-align: center;
-	background-color: #191970;
-	z-index: 1;
+/* INGREDIENT MENU */
+#menuIngredientsDiv {
+	height: 92vh;
+	top: 60px;
+	background-color: #66b562;
 }
 
-.navBar-text {
-	font-family: serif;
-	color: white !important;
+.ingredientsComponent {
+	color: white;
+}
+
+/* FILTER MENU */
+#menuFilterDiv {
+	height: 92vh;
+	top: 60px;
+	background-color: #66b562;
+}
+
+.filterComponent {
+	color: white;
 }
 
 /* CONTENT */
 #contentDisplayDiv {
-	height: 120vh;
-	margin-top: 80px;
+	height: 92vh;
+	top: 60px;
 }
 
 .btn-submit {
@@ -50,42 +57,21 @@
 	color: black;
 }
 
-/* SOCIAL */
-#socialDiv {
-	left: 0px;
-	height: 37px;
-	width: 100%;
-	text-align: center;
-	background-color: #696969;
-	padding-top: 2px;
-	padding-left: 10px;
-	text-align: right;
-}
-
-.btn {
-	border: 0px !important;
-}
-
-.btn-social-icon {
-	background-color: transparent !important;
-	border-color: transparent !important;
-	margin-right: 10px;
-}
-
-/* SITE MAP */
-#siteMapDiv {
+/* FOOTER */
+#footerDiv {
+	position: fixed;
 	left: 0px;
 	bottom: 0px;
 	height: 60px;
 	width: 100%;
-	padding-top: 20px;
-	text-align: center;
 	background-color: #474747;
-	text-align: center;
+	left: 0px;
 }
 
-.footer-text {
+#footerContent {
 	font-family: serif;
-	color: darkgrey !important;
-	margin-left: 50px;
+	font-size: 20px;
+	color: white;
+	margin-left: 20px;
+	margin-top: 10px;
 }
