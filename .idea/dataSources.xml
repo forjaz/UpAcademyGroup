@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="upacademygroupdb" uuid="ac293169-0914-4e54-bf67-d1b66f3eb0df">
+    <data-source source="LOCAL" name="upacademygroupdb@localhost" uuid="a190d62e-481b-4a83-b4be-1e377bca693e">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>

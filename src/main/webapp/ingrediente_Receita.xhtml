@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	template="/template/default/defaultLayout.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+	</h:head>
+
+	<ui:define name="contentDisplay">
+		<h:form>
+			
+			<div class="row">
+			
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			
+				<p:dataTable var="listaidreceitas" value="1" scrollable="true">
+
+				    <p:column headerText="Id Receita">
+				        <p:inputNumber value="1" />
+				    </p:column>
+			    
+				</p:dataTable>
+			</div>
+			
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			
+				<p:dataTable var="listaidingredientes" value="1" scrollable="true">
+
+				    <p:column headerText="Id Ingrediente">
+				        <p:inputNumber value="1" />
+				    </p:column>
+			    
+				</p:dataTable>
+			</div>
+			
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			
+				<h5>Quantidade (gr.)</h5>
+		
+					<p:inputNumber value="1" />
+					
+			</div>
+			
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
+			
+			</div>
+			
+			<div class="row">
+			
+			<p></p>	
+				<h:commandButton value="Submeter" action="1"/>
+			<p></p>
+				<h:commandButton value = "Voltar ecra anterior" action = "ingredientes" />
+				
+				
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,40 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition 
-	xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jstl/core"
 	template="/template/default/defaultLayout.xhtml"
-    xmlns:p="http://primefaces.org/ui">
-    
-	    
-	    <ui:define name="contentDisplay"> 
-	   
-	    	
-<div class="carousel"
-  data-flickity='{ "imagesLoaded": true }'>
-  <img src="https://motaen.com/upload/wallpapers/source/2016/07/26/13/00/49335/mota.ru_2016072627.jpg" alt="orange tree" />
-  <img src="https://wallpaperscraft.com/image/hotel_room_bed_stylish_modern_39745_2560x1080.jpg" alt="submerged" />
-  <img src="https://wallpaperscraft.com/image/house_paradise_beautiful_palm_trees_balcony_nature_97173_2560x1080.jpg" alt="look-out" />
-  <img src="https://wallpaperscraft.com/image/interior_design_style_town_city_apartment_bathroom_kitchen_75529_2560x1080.jpg" alt="One World Trade" />
-  <img src="https://wallpaperscraft.com/image/maldives_tropical_bungalows_90625_2560x1080.jpg" alt="drizzle" />
-  <img src="https://wallpaperscraft.com/image/hotel_room_bed_canopy_table_chairs_lamps_74950_2560x1080.jpg" alt="cat nose" />
-</div>
+	xmlns:p="http://primefaces.org/ui">
 
-  				
-			
-	    
-	    
-	    </ui:define>
 
-    </ui:composition>
+	<ui:define name="menuIngredientsTitle">Ingredientes</ui:define>
 
-    
-   
+	<ui:define name="menuIngredientsInstructions">Por favor seleccione os seus Ingredientes</ui:define>
 
-    
+	<ui:define name="menuIngredientsInput">
+		<p:inputText />
+	</ui:define>
 
-    
-    
-    
+	<ui:define name="menuIngredientsOutput">
+		<h:outputText value="Batatas" />
+		<h:outputText value="Bacalhau" />
+		<h:outputText value="Azeitonas" />
+	</ui:define>
+	
+	<ui:define name="menuIngredientsSubmit">
+		<p:button value="Submit"/>
+	</ui:define>
+
+	<ui:define name="contentDisplay">contentDisplay</ui:define>
+
+	<ui:define name="menuFilterTitle">menuFilterTitle</ui:define>
+	<ui:define name="menuFilterInstructions">menuFilterInstructions</ui:define>
+	<ui:define name="menuFilterSubMenu1">menuFilterSubMenu1</ui:define>
+	<ui:define name="menuFilterOptions1">menuFilterOptions1</ui:define>
+	<ui:define name="menuFilterSubMenu2">menuFilterSubMenu2</ui:define>
+	<ui:define name="menuFilterOptions2">menuFilterOptions2</ui:define>
+	<ui:define name="menuFilterSubMenu3">menuFilterSubMenu3</ui:define>
+	<ui:define name="menuFilterOptions3">menuFilterOptions3</ui:define>
+	<ui:define name="menuFilterSubmit">menuFilterSubmit</ui:define>
+
+
+</ui:composition>
+
+
+
+
+
+
+
+
