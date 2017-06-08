@@ -20,9 +20,9 @@ public class ReceitaService extends EntityService implements Serializable {
 	}
 
 	// DB Methods
-	public String newReceita(Receita receita, String nextPage) {
+	public String newReceita(Receita receita) {
 		em.persist(receita);
-		return nextPage;
+		return "receitas";
 	}
 
 	// Getters and Setters

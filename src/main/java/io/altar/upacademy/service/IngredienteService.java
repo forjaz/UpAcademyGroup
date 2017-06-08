@@ -20,9 +20,9 @@ public class IngredienteService extends EntityService implements Serializable {
 	}
 
 	// DB Methods
-	public String newIngrediente(Ingrediente ingrediente, String nextPage) {
+	public String newIngrediente(Ingrediente ingrediente) {
 		em.persist(ingrediente);
-		return nextPage;
+		return "ingredientes";
 	}
 
 	// Getters and Setters
