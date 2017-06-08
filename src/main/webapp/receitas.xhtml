@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	template="/template/default/defaultLayout.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+	</h:head>
+	
+	<ui:define name="contentDisplay">
+	
+		<h:form>
+		
+		<h4>Nome da Receita</h4>
+		
+			<h:inputText value="1"/>
+			
+		<h4>Imagem da Receita (url)</h4>
+		
+			<h:inputText value="1" />
+			
+		<h4>Preparacao da Receita</h4>
+		
+			<h:inputText value="1" />
+		
+		<p></p>	
+			<h:commandButton value="Submeter" action="1"/>
+	<p></p>
+		<h:commandButton value = "Ir ecra Ingredientes" action = "ingredientes" />
+	<p></p>
+		<h:commandButton value = "Voltar ecra anterior" action = "index" />
+		
+		
+		</h:form>
+	</ui:define>
+	
+</ui:composition>

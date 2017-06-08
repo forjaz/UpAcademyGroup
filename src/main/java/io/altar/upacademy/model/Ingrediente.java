@@ -16,7 +16,7 @@ public class Ingrediente implements Serializable {
     private String nome;
     private double proteina;
     private double hidratos;
-    private double gordurat;
+    private double gorduras;
     private int calorias;
 
 
@@ -62,12 +62,12 @@ public class Ingrediente implements Serializable {
         this.hidratos = hidratos;
     }
 
-    public double getGordurat() {
-        return gordurat;
+    public double getGorduras() {
+        return gorduras;
     }
 
-    public void setGordurat(double gordurat) {
-        this.gordurat = gordurat;
+    public void setGorduras(double gorduras) {
+        this.gorduras = gorduras;
     }
 
     public int getCalorias() {
