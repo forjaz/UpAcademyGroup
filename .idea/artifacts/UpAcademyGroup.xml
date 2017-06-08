@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="UpAcademyGroup">
+    <output-path>$PROJECT_DIR$/out/artifacts/UpAcademyGroup</output-path>
+    <root id="archive" name="UpAcademyGroup.war">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="UpAcademyGroup" />
+          <element id="jpa-descriptors" facet="UpAcademyGroup/jpa/JPA" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:4.0.0-b05" />
+          <element id="library" level="project" name="Maven: org.primefaces:primefaces:6.1" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="UpAcademyGroup/web/Web" />
+    </root>
+  </artifact>
+</component>
