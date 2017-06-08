@@ -17,26 +17,26 @@
 		
 		<h4>Nome do Ingrediente (frito, cozido, grelhado)</h4>
 		
-			<h:inputText value="1"/>
+			<h:inputText value="#{ingredienteBean.ingrediente.nome}"/>
 			
 		<h4>Proteina/100gr</h4>
 		
-			<p:inputNumber value="1" />
+			<p:inputNumber value="#{ingredienteBean.ingrediente.proteina}" />
 			
 		<h4>Hidratos/100gr</h4>
 		
-			<p:inputNumber value="1" />
+			<p:inputNumber value="#{ingredienteBean.ingrediente.hidratos}" />
 			
 		<h4>Gorduras/100gr</h4>
 		
-			<p:inputNumber value="1" />
+			<p:inputNumber value="#{ingredienteBean.ingrediente.gorduras}" />
 			
 		<h4>Kcal/100gr</h4>
 		
-			<p:inputNumber value="1" />
+			<p:inputNumber value="#{ingredienteBean.ingrediente.calorias}" />
 		
 		<p></p>	
-			<h:commandButton value="Submeter" action="1"/>
+			<h:commandButton value="Submeter" action="#{ingredienteService.newIngrediente(ingredienteBean.ingrediente)}"/>
 		<p></p>
 			<h:commandButton value = "Ir ecra Ingredientes_Receita" action = "ingrediente_Receita" />
 		<p></p>
