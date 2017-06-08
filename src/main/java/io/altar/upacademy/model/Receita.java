@@ -1,68 +1,65 @@
 package io.altar.upacademy.model;
-import javax.persistence.*;
+
 import java.io.Serializable;
-import java.util.Collection;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 public class Receita implements Serializable {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue
-    private Long id;
-    private String nome;
-    private String imagem;
-    private String preparacao;
-    @ManyToMany
-    private Collection<Ingrediente> ingredientes;
+	@Id
+	@GeneratedValue
+	private Long id;
+	private String nome;
+	private String imagem;
+	private String preparacao;
 
-    // Constructor
-    public Receita() {
-    }
+	// Constructor
+	public Receita() {
+	}
 
-    // Getters and Setters
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
+	// Getters and Setters
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Collection<Ingrediente> getIngredientes() {
-        return ingredientes;
-    }
+	public String getImagem() {
+		return imagem;
+	}
 
-    public void setIngredientes(Collection<Ingrediente> ingredientes) {
-        this.ingredientes = ingredientes;
-    }
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public String getPreparacao() {
+		return preparacao;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public void setPreparacao(String preparacao) {
+		this.preparacao = preparacao;
+	}
 
-    public String getImagem() {
-        return imagem;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public void setImagem(String imagem) {
-        this.imagem = imagem;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public String getPreparacao() {
-        return preparacao;
-    }
-
-    public void setPreparacao(String preparacao) {
-        this.preparacao = preparacao;
-    }
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 }

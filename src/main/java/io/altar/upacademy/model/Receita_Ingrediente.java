@@ -1,7 +1,10 @@
 package io.altar.upacademy.model;
-import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Collection;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Receita_Ingrediente implements Serializable {

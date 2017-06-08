@@ -1,9 +1,10 @@
 package io.altar.upacademy.model;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 public class Ingrediente implements Serializable {
