@@ -2,9 +2,11 @@ package io.altar.upacademy.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 @Entity
 public class Receita implements Serializable {
@@ -15,6 +17,8 @@ public class Receita implements Serializable {
 	private Long id;
 	private String nome;
 	private String imagem;
+	@Lob
+	@Column
 	private String preparacao;
 
 	// Constructor
