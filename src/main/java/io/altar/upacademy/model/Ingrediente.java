@@ -20,6 +20,8 @@ public class Ingrediente implements Serializable {
     private int calorias;
 
 
+    
+
 	// Constructor
 	public Ingrediente() {
 

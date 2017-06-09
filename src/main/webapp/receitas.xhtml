@@ -17,18 +17,18 @@
 		
 		<h4>Nome da Receita</h4>
 		
-			<h:inputText value="1"/>
+			<h:inputText value="#{receitaBean.receita.nome}"/>
 			
 		<h4>Imagem da Receita (url)</h4>
 		
-			<h:inputText value="1" />
+			<h:inputText value="#{receitaBean.receita.imagem}" />
 			
 		<h4>Preparacao da Receita</h4>
 		
-			<h:inputText value="1" />
+			<h:inputText value="#{receitaBean.receita.preparacao}" />
 		
 		<p></p>	
-			<h:commandButton value="Submeter" action="1"/>
+			<h:commandButton value="Submeter" action="#{receitaService.newReceita(receitaBean.receita)}"/>
 	<p></p>
 		<h:commandButton value = "Ir ecra Ingredientes" action = "ingredientes" />
 	<p></p>
