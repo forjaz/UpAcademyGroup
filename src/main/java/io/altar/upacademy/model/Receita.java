@@ -16,6 +16,8 @@ public class Receita implements Serializable {
 	@GeneratedValue
 	private Long id;
 	private String nome;
+	@Lob
+	@Column
 	private String imagem;
 	@Lob
 	@Column
