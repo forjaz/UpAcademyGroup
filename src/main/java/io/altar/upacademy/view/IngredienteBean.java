@@ -1,7 +1,6 @@
 package io.altar.upacademy.view;
 
 import java.io.Serializable;
-
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -24,7 +23,7 @@ public class IngredienteBean implements Serializable {
 	// Injector
 	@Inject
 	private IngredienteService ingredienteService;
-
+	
 	// Getters and Setters
 	public static long getSerialversionuid() {
 		return serialVersionUID;

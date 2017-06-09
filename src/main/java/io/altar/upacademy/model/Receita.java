@@ -18,6 +18,8 @@ public class Receita implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
+	@Lob
+	@Column
 	private String imagem;
 	@Lob
 	@Column
