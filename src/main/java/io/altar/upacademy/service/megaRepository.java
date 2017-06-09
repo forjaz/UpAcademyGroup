@@ -6,6 +6,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import javax.transaction.Transactional;
 
+import io.altar.upacademy.model.Ingrediente;
 import io.altar.upacademy.model.Receita;
 
 
@@ -17,7 +18,7 @@ public class megaRepository extends EntityService implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	
-	public void InitReceitas() {
+	public void initReceitas() {
 		
 		Receita receita1 = new Receita();
 		receita1.setImagem("https://www.pingodoce.pt/wp-content/uploads/2015/12/1449085327");
@@ -60,7 +61,32 @@ public class megaRepository extends EntityService implements Serializable{
 	}
 	
 	public String megaInit(){
-		InitReceitas();
+		initReceitas();
+		initIng1();
 		return "receitas";
 	}
+	
+	public void initIng1() {
+		Ingrediente ing1 = new Ingrediente();
+		ing1.setNome("bróculos cozidos");
+		
+		Ingrediente ing2 = new Ingrediente();
+		ing2.setNome("esparguete cozido");
+		
+		Ingrediente ing3 = new Ingrediente();
+		ing3.setNome("cebola frita");
+		
+		Ingrediente ing4 = new Ingrediente();
+		ing4.setNome("alho frito");
+		
+		Ingrediente ing5 = new Ingrediente();
+		ing5.setNome("aipo frito");
+		
+		Ingrediente ing6 = new Ingrediente();
+		ing6.setNome("azeite");
+		
+		Ingrediente ing7 = new Ingrediente();
+		ing7.setNome("azeite");
+	}
+		
 }
