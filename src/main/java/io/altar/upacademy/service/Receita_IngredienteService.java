@@ -1,6 +1,6 @@
 package io.altar.upacademy.service;
 
-import java.awt.List;
+import java.util.List;
 import java.io.Serializable;
 
 import javax.enterprise.context.RequestScoped;
@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 
 import io.altar.upacademy.model.Ingrediente;
 import io.altar.upacademy.model.Receita;
+import io.altar.upacademy.model.Receita_Ingrediente;
 
 @Named("receitaIngredienteService")
 @RequestScoped
@@ -23,19 +24,20 @@ public class Receita_IngredienteService extends EntityService implements Seriali
 	}
 
 	// DB Methods
-	public String newReceita_Ingrediente(Ingrediente ingrediente, Receita receita) {
-		em.persist(ingrediente);
-		em.persist(receita);
+	public String newReceita_Ingrediente(Receita_Ingrediente ir) {
+		em.persist(ir);
 		return "ingrediente_Receita" ;
 	}
 	
-	/*
-	public List returnIds(String entity){
-	return em.createQuery("SELECT c FROM Ingrediente c WHERE c.id LIKE :custId")
-			.setParameter("custId", id)
-			.getResultList();
+	public List<Ingrediente> returnIdIngrediente(){
+		List<Ingrediente> lista = em.createQuery("SELECT e FROM Ingrediente e").getResultList();
+		return lista;
 	}
-	*/
+	
+	public List<Receita> returnIdReceita(){
+		List<Receita> lista = em.createQuery("SELECT e FROM Receita e").getResultList();
+		return lista;
+	}
 	
 	// Getters and Setters
 	public static long getSerialversionuid() {
