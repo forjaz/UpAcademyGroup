@@ -19,12 +19,13 @@ body {
 }
 
 #background {
-	width: 1920px;
-    height: 1080px;
-    background: url(https://s15.postimg.org/9pcrwcltl/Food_Board5.jpg) no-repeat;
-    background-attachment: fixed;
-    background-position: center center;
-	background-size: cover;
+	width: auto;
+	height: 1080px;
+	margin: auto;
+	background: url(https://s15.postimg.org/9pcrwcltl/Food_Board5.jpg)
+		no-repeat;
+	background-attachment: fixed;
+	background-position: 0 center;
 }
 
 /* PALLETE */
