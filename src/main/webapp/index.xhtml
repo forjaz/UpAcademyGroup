@@ -13,7 +13,16 @@
 	<ui:define name="menuIngredientsInstructions">Por favor seleccione os seus Ingredientes</ui:define>
 
 	<ui:define name="menuIngredientsInput">
-		<p:inputText />
+		<h:panelGrid columns="2">
+		
+	   		<p><p:chips id="chips" /></p>
+	   		<p><p:autoComplete for="chips" id="acSimple" value="#{Ingrediente.nome}" completeMethod="#{autoCompleteView.completeText}" /></p>
+	 		
+	 	
+			
+			
+			
+		</h:panelGrid>
 	</ui:define>
 
 	<ui:define name="menuIngredientsOutput">
