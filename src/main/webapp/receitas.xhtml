@@ -4,8 +4,39 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jstl/core"
-	template="/template/default/receitaLayout.xhtml"
+	template="/template/default/defaultLayout2.xhtml"
 	xmlns:p="http://primefaces.org/ui">
 
-
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+	</h:head>
+	
+	<ui:define name="contentDisplay">
+	
+		<h:form>
+		
+		<h4>Nome da Receita</h4>
+		
+			<h:inputText value="#{receitaBean.receita.nome}"/>
+			
+		<h4>Imagem da Receita (url)</h4>
+		
+			<h:inputText value="#{receitaBean.receita.imagem}" />
+			
+		<h4>Preparacao da Receita</h4>
+		
+			<h:inputText value="#{receitaBean.receita.preparacao}" />
+		
+		<p></p>	
+			<h:commandButton value="Submeter" action="#{receitaService.newReceita(receitaBean.receita)}"/>
+		<p></p>
+			<h:commandButton value = "Ir ecra Ingredientes" action = "ingredientes" />
+		<p></p>
+			<h:commandButton value = "Voltar ecra anterior" action = "index" />
+		<p></p>	
+			<h:commandButton value="Mega" action="#{megaBean.megaInit()}"/>
+		
+		</h:form>
+	</ui:define>
+	
 </ui:composition>
