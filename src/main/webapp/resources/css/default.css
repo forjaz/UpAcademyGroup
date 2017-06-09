@@ -1,27 +1,109 @@
-/* HEADER */
-#headerDiv {
-	position: fixed;
-	height: 60px;
-	top: 0px;
-	width: 100%;
-	background-color: #007167;
-	z-index: 1;
-	/* darkgreen #007167 */
-	/*  lightgreen #66b562 */
+/*-----------------------------------------------------------------------------------*/
+/* GLOBAL */
+/*-----------------------------------------------------------------------------------*/
+.col-md-4, .col-md-8, .col-md-12 {
+	padding-right: 0px;
+	padding-left: 0px;
 }
 
-#headerTitle {
-	font-family: serif;
-	font-size: 25px;
-	font-weight: bold;
+/* PALLETE */
+/* darkgreen #004900 */
+/* midgreen #126C12*/
+/* lightgreen #2D8B2D */
+/* lightergreen #52AB52 */
+/* superlightgreen #85CD85 */
+
+/*-----------------------------------------------------------------------------------*/
+/* HEADER */
+/*-----------------------------------------------------------------------------------*/
+#headerDiv {
+	position: fixed;
+	height: 200px;
+	top: 0px;
+	width: 100%;
+	z-index: 1;
+}
+
+/* HEADER - SOCIAL */
+#headerSocialDiv {
+	height: 40px;
+	box-shadow: inset 0px -1px 1px 0px rgba(0, 0, 0, 0.8);
+	background-color: #85CD85;
+}
+
+/* HEADER - LOGO + NAV + SLOGAN */
+#headerLogoNavSlogan {
+	height: 120px;
+}
+
+/* HEADER - LOGO */
+#headerLogoDiv {
+	background-color: #2D8B2D;
+	height: 120px;
+	padding-top: 20px;
+	padding-left: 30px;
+	letter-spacing: 26px;
 	color: white;
+}
+
+.logoText {
+	font-size: 38px !important;
+	font-weight: 100 !important;
+}
+
+/* HEADER - NAV + SLOGAN */
+#headerNavSloganDiv {
+	height: 120px;
+}
+
+/* HEADER - NAV */
+#headerNavDiv {
+	text-align: center;
+	padding-top: 5px;
+	height: 60px;
+	background-color: #126C12;
+	box-shadow: inset 1px -1px 1px 0px rgba(0, 0, 0, 0.8);
+}
+
+.navbar-btn {
+	width: 110px;
+	margin: 8px 7px 8px 7px;
+	font-size: 14px;
+	letter-spacing: 1px;
+	line-height: 1.4em;
+	padding: 6px 0px;
+	border-radius: 5px;
+	border-color: #002522;
+	color: white;
+	box-shadow: inset 1px 1px 1px 0px rgba(0, 0, 0, 0.8);
+	background-color: #004900;
+}
+
+/* HEADER - SLOGAN */
+#headerSloganDiv {
+	height: 60px;
+	padding-top: 19px;
+	font-size: 15px;
+	text-align: right;
+	padding-right: 28px;
+	background-color: #2D8B2D;
+	letter-spacing: 5px;
+	color: white;
+}
+
+/* HEADER - SEARCH */
+#headerSearchDiv {
+	height: 40px;
+	background-color: #52AB52;
+	box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, 0.8);
 }
 
 /* INGREDIENT MENU */
 #menuIngredientsDiv {
-	height: 92vh;
-	top: 60px;
-	background-color: #66b562;
+	height: 80vh;
+	top: 200px;
+	background-color: #004900;
+	box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, 0.8);
 }
 
 .ingredientsComponent {
@@ -29,9 +111,10 @@
 
 /* FILTER MENU */
 #menuFilterDiv {
-	height: 92vh;
-	top: 60px;
-	background-color: #66b562;
+	height: 80vh;
+	top: 200px;
+	background-color: #004900;
+	box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, 0.8);
 }
 
 .filterComponent {
@@ -40,8 +123,9 @@
 
 /* CONTENT */
 #contentDisplayDiv {
-	height: 92vh;
-	top: 60px;
+	height: 80vh;
+	top: 200px;
+	box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, 0.8);
 }
 
 .btn-submit {
@@ -61,7 +145,7 @@
 	position: fixed;
 	left: 0px;
 	bottom: 0px;
-	height: 60px;
+	height: 40px;
 	width: 100%;
 	background-color: #474747;
 	left: 0px;
@@ -69,7 +153,7 @@
 
 #footerContent {
 	font-family: serif;
-	font-size: 20px;
+	font-size: 14px;
 	color: white;
 	margin-left: 20px;
 	margin-top: 10px;

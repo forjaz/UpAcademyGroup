@@ -4,49 +4,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jstl/core"
-	template="/template/default/defaultLayout.xhtml"
+	template="/template/default/defaultLayout2.xhtml"
 	xmlns:p="http://primefaces.org/ui">
-
-
-	<ui:define name="menuIngredientsTitle">Ingredientes</ui:define>
-
-	<ui:define name="menuIngredientsInstructions">Por favor seleccione os seus Ingredientes</ui:define>
-
-	<ui:define name="menuIngredientsInput">
-		<h:panelGrid columns="2">
-		
-	   		<p><p:chips id="chips" /></p>
-	   		<p><p:autoComplete for="chips" id="acSimple" value="#{Ingrediente.nome}" completeMethod="#{autoCompleteView.completeText}" /></p>
-	 		
-	 	
-			
-			
-			
-		</h:panelGrid>
-	</ui:define>
-
-	<ui:define name="menuIngredientsOutput">
-		<h:outputText value="Batatas" />
-		<h:outputText value="Bacalhau" />
-		<h:outputText value="Azeitonas" />
-	</ui:define>
-	
-	<ui:define name="menuIngredientsSubmit">
-		<p:button value="Submit"/>
-	</ui:define>
-
-	<ui:define name="contentDisplay">contentDisplay</ui:define>
-
-	<ui:define name="menuFilterTitle">menuFilterTitle</ui:define>
-	<ui:define name="menuFilterInstructions">menuFilterInstructions</ui:define>
-	<ui:define name="menuFilterSubMenu1">menuFilterSubMenu1</ui:define>
-	<ui:define name="menuFilterOptions1">menuFilterOptions1</ui:define>
-	<ui:define name="menuFilterSubMenu2">menuFilterSubMenu2</ui:define>
-	<ui:define name="menuFilterOptions2">menuFilterOptions2</ui:define>
-	<ui:define name="menuFilterSubMenu3">menuFilterSubMenu3</ui:define>
-	<ui:define name="menuFilterOptions3">menuFilterOptions3</ui:define>
-	<ui:define name="menuFilterSubmit">menuFilterSubmit</ui:define>
-
 
 </ui:composition>
 
