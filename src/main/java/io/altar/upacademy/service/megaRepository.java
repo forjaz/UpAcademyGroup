@@ -69,24 +69,52 @@ public class megaRepository extends EntityService implements Serializable{
 	public void initIng1() {
 		Ingrediente ing1 = new Ingrediente();
 		ing1.setNome("bróculos cozidos");
+		ing1.setCalorias(25);
+		ing1.setGorduras(0.5);
+		ing1.setHidratos(4.4);
+		ing1.setProteina(3.2);
+		em.persist(ing1);
 		
 		Ingrediente ing2 = new Ingrediente();
 		ing2.setNome("esparguete cozido");
+		ing2.setCalorias(101);
+		ing2.setGorduras(0.6);
+		ing2.setHidratos(19.9);
+		ing2.setProteina(3.4);
+		em.persist(ing2);
 		
 		Ingrediente ing3 = new Ingrediente();
 		ing3.setNome("cebola frita");
+		ing3.setCalorias(132);
+		ing3.setGorduras(11.2);
+		ing3.setHidratos(6.2);
+		ing3.setProteina(1.9);
+		em.persist(ing3);
 		
 		Ingrediente ing4 = new Ingrediente();
-		ing4.setNome("alho frito");
+		ing4.setNome("alho");
+		ing4.setCalorias(67);
+		ing4.setGorduras(0.6);
+		ing4.setHidratos(11.3);
+		ing4.setProteina(3.8);
+		em.persist(ing4);
 		
 		Ingrediente ing5 = new Ingrediente();
-		ing5.setNome("aipo frito");
+		ing5.setNome("aipo ");
+		ing5.setCalorias(11);
+		ing5.setGorduras(0.1);
+		ing5.setHidratos(1.5);
+		ing5.setProteina(1.1);
+		em.persist(ing5);
 		
 		Ingrediente ing6 = new Ingrediente();
 		ing6.setNome("azeite");
+		ing6.setCalorias(900);
+		ing6.setGorduras(99.9);
+		ing6.setHidratos(0);
+		ing6.setProteina(0);
+		em.persist(ing6);
 		
-		Ingrediente ing7 = new Ingrediente();
-		ing7.setNome("azeite");
 	}
 		
 }
