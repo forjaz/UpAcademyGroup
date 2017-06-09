@@ -1,7 +1,7 @@
 /*-----------------------------------------------------------------------------------*/
 /* GLOBAL */
 /*-----------------------------------------------------------------------------------*/
-.col-md-4, .col-md-8, .col-md-12 {
+.col-md-1, .col-md-4, .col-md-6, .col-md-8, .col-md-10, .col-md-12 {
 	padding-right: 0px;
 	padding-left: 0px;
 }
@@ -19,9 +19,13 @@ body {
 }
 
 #background {
-	background: url('https://s15.postimg.org/9pcrwcltl/Food_Board5.jpg')
-		no-repeat scroll top;
-	height: 100vh;
+	width: auto;
+	height: 1080px;
+	margin: auto;
+	background: url(https://s15.postimg.org/9pcrwcltl/Food_Board5.jpg)
+		no-repeat;
+	background-attachment: fixed;
+	background-position: 0 center;
 }
 
 /* PALLETE */
@@ -115,24 +119,45 @@ body {
 /*-----------------------------------------------------------------------------------*/
 /* CONTENT */
 /*-----------------------------------------------------------------------------------*/
-#cursorLeft {
+#contentDisplayDiv {
 	outline: 1px outset #FFFFFF;
+	position: fixed;
+	top: 249px;
+	height: 610px;
+	width: 1035px;
+	left: 76px;
+}
+
+.cursor {
+	outline: 1px outset #FFFFFF;
+	height: 610px;
+	width: 86px;
+}
+
+.receita {
+	outline: 1px outset #FFFFFF;
+	width: 431px;
+	height: 305px;
 }
 
 #receitaGrid {
 	outline: 1px outset #FFFFFF;
-}
-
-#cursorRight {
-	outline: 1px outset #FFFFFF;
+	height: 305px;
+	width: 862px;
 }
 
 .receita-imagem {
 	outline: 1px outset #FFFFFF;
+	width: 400px;
+	height: 235px;
+	left: 15.5px;
+	top: 10px;
 }
 
 .receita-nome {
 	outline: 1px outset #FFFFFF;
+	top: 20px;
+	height: 50px;
 }
 
 /*-----------------------------------------------------------------------------------*/
