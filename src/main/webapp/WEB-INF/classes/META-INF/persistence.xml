@@ -3,8 +3,8 @@
 <persistence version="2.1">
     <persistence-unit name="UpAcademyGroupPU"
                       transaction-type="JTA">
-        <description>Repositories for entities</description>
-        <jta-data-source>java:/datasources/UpAcademyGroupDS</jta-data-source>
+        <description>UpAcademyGroup Persistence Unit</description>
+        <jta-data-source>java:jboss/datasources/UpAcademyGroupDS</jta-data-source>
         <properties>
             <property name="javax.persistence.schema-generation.database.action"
                       value="drop-and-create"/>
