@@ -20,6 +20,7 @@
 				    <p:column headerText="Id Receita">
 				        <h:outputText value="#{listaidreceitas.id}" />
 				    </p:column>
+				    
 				    <p:column headerText="Nome Receita">
 				        <h:outputText value="#{listaidreceitas.nome}" />
 				    </p:column>
@@ -35,7 +36,7 @@
 				    <p:column headerText="Id Ingrediente">
 				        <h:outputText value="#{listaidingredientes.id}" />
 				    </p:column>
-				    <p:column headerText="Nome Ingrediente">
+				    <p:column headerText="Id Ingrediente">
 				        <h:outputText value="#{listaidingredientes.nome}" />
 				    </p:column>
 			    
@@ -55,7 +56,29 @@
 			<p></p>	
 				<h:commandButton value="Submeter" action="#{receitaIngredienteService.newReceita_Ingrediente(receitaIngredienteBean.receitaIngrediente)}"/>
 			<p></p>
-				<h:commandButton value = "Voltar ecra anterior" action = "ingredientes" />
+				 <!-- <p:dataTable var="ingredientereceita" value="#{receitaIngredienteBean.receitaIngredienteService.returnIdReceitaIngrediente()}" selection="#{receitaIngredienteBean.receitaIngredienteService.returnIdReceitaIngrediente()}" rowKey="#{ingredientereceita.id}" scrollable="true">
+					<p:column selectionMode="single" style="width:16px ;text-align:center">
+					</p:column>
+				    <p:column headerText="Id Receita_Ingrediente">
+				        <h:outputText value="#{ingredientereceita}" />
+				 	</p:column>
+				 	
+		 	   <p:column headerText="Id Ingredientes">
+				        <h:outputText value="#{listaidingredientereceita.ingrediente.id}" />
+				 	</p:column>
+				 	<p:column headerText="Nome Ingredientes">
+				        <h:outputText value="#{listaidingredientereceita.ingrediente.nome}" />
+				 	</p:column>
+				 	<p:column headerText="Id Receitas">
+				        <h:outputText value="#{listaidingredientereceita.receita.id}" />
+				 	</p:column>
+				 	<p:column headerText="Nome receitas">
+				        <h:outputText value="#{listaidingredientereceita.receita.nome}" />
+				 	</p:column> 
+			    
+				</p:dataTable>-->
+			<p></p>
+				<h:commandButton value = "ir search" action = "search" />
 				
 		</h:form>
 	</ui:define>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	template="/template/default/defaultLayout.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="contentDisplay">
+		<h:form>
+			
+			<div class="row">
+			
+			 	<p:dataTable var="ingredientereceita" value="#{receitaIngredienteBean.receitaIngredienteService.returnIdReceitaIngrediente()}" selection="#{receitaIngredienteBean.receitaIngrediente}" rowKey="#{ingredientereceita.id}" scrollable="true">
+					<p:column selectionMode="single" style="width:16px ;text-align:center">
+					</p:column>
+			 	    <p:column headerText="Id Receita_Ingrediente">
+				        <h:outputText value="#{ingredientereceita.id}" />
+				 	</p:column> 
+				 	
+		 	   		<p:column headerText="Id Ingredientes">
+				        <h:outputText value="#{ingredientereceita.quantidade}" />
+				 	</p:column>
+				 	<p:column headerText="Nome Ingredientes">
+				        <h:outputText value="#{ingredientereceita.ingrediente.nome}" />
+				 	</p:column>
+				 	<p:column headerText="Id Receitas">
+				        <h:outputText value="#{ingredientereceita.receita.id}" />
+				 	</p:column>
+				 	<p:column headerText="Nome receitas">
+				        <h:outputText value="#{ingredientereceita.receita.nome}" />
+				 	</p:column>  
+			    
+				</p:dataTable>
+			</div>
+			<p></p>
+				<h:commandButton value = "Voltar ecra anterior" action = "ingrediente_Receita" />
+				
+		</h:form>
+	</ui:define>
+</ui:composition>
