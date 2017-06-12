@@ -7,6 +7,29 @@
 	template="/template/default/receitaLayout.xhtml"
 	xmlns:p="http://primefaces.org/ui">
 
+	<ui:define name="searchBar">
+	
+	<h:form>
+
+		<h:panelGrid columns="2">
+			<p:outputLabel for="search" value="Procurar por Ingredientes: " />
+			<p:chips id="search" />
+			<p:autoComplete id="search_2" value="#{ReceitaService.testString}" completeMethod="#{ReceitaService.testList}" />
+		</h:panelGrid>
+
+</h:form>
+
+	</ui:define>
+
+
+
+
+
+
+
+
+
+
 </ui:composition>
 
 
