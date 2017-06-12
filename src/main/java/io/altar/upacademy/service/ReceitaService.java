@@ -3,6 +3,7 @@ package io.altar.upacademy.service;
 import io.altar.upacademy.model.Receita;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -26,11 +27,12 @@ public class ReceitaService extends EntityService implements Serializable {
 		
 		return "receitas";
 	}
+	
+	
 
 	// Getters and Setters
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 	
-
 }

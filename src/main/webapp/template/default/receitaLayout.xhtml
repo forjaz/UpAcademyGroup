@@ -3,7 +3,9 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
 
 
 <h:head>
@@ -50,7 +52,13 @@
 							<button type="button" class="btn btn-default navbar-btn">Home</button>
 							<button type="button" class="btn btn-default navbar-btn">Procurar</button>
 							<button type="button" class="btn btn-default navbar-btn">Receitas</button>
-							<button type="button" class="btn btn-default navbar-btn">Ingredientes</button>
+							
+							<p:button outcome="detalhe-receita" value="Ingredientes" class="btn btn-default navbar-btn">
+    							<f:param name="id" value="1" ></f:param>
+							</p:button>
+
+							<!--  <button type="button" class="btn btn-default navbar-btn">Ingredientes</button> -->
+							
 							<button type="button" class="btn btn-default navbar-btn">Quantidades</button>
 							<button type="button" class="btn btn-default navbar-btn">Sobre
 								Nós</button>

@@ -1,6 +1,9 @@
 package io.altar.upacademy.view;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -14,6 +17,7 @@ public class IngredienteBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Ingrediente ingrediente = new Ingrediente();
+	
 
 	// Constructor
 	public IngredienteBean() {
