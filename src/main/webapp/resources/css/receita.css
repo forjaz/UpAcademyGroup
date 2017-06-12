@@ -28,7 +28,7 @@ body {
 /* darkgreen #004900 */
 /* midgreen #126C12*/
 /* lightgreen #2D8B2D */
-/* lightergreen #52AB52 */
+/* lightergreen #78c378 */
 /* superlightgreen #85CD85 */
 
 /*-----------------------------------------------------------------------------------*/
@@ -40,7 +40,7 @@ body {
 	top: 20px;
 	width: 100%;
 	z-index: 2;
-	box-shadow: 0px 5px 30px 0px rgba(0, 0, 0, 0.8), 0px -1px 1px 0px
+	box-shadow: 0px 1px 30px 0px rgba(0, 0, 0, 0.8), 0px -1px 1px 0px
 		rgba(0, 0, 0, 0.4);
 	outline: 1px outset #000000;
 }
@@ -113,10 +113,21 @@ body {
 }
 
 /*-----------------------------------------------------------------------------------*/
+/* HEADER - SEARCH */
+/*-----------------------------------------------------------------------------------*/
+#headerSearchDiv {
+	height: 55px;
+	background-color: #78c378;
+	top: 140px;
+	box-shadow: 0px 5px 30px 0px rgba(0, 0, 0, 0.8), 0px -1px 1px 0px
+		rgba(0, 0, 0, 0.4);
+	outline: 1px outset #000000;
+}
+
+/*-----------------------------------------------------------------------------------*/
 /* CONTENT */
 /*-----------------------------------------------------------------------------------*/
 #contentDisplayDiv {
-	outline: 1px outset #FFFFFF;
 	position: fixed;
 	top: 20vh;
 	height: 791px;
@@ -129,7 +140,6 @@ body {
 }
 
 .cursor {
-	outline: 1px outset #FFFFFF;
 	height: 100px;
 	width: 100px;
 	top: 320px;
@@ -144,13 +154,11 @@ body {
 }
 
 .receita {
-	outline: 1px outset #FFFFFF;
 	width: 50%;
 	height: 50%;
 }
 
 #receitaGrid {
-	outline: 1px outset #FFFFFF;
 	height: 576px;
 	width: 900px;
 	left: 150px;
@@ -158,7 +166,6 @@ body {
 }
 
 .receita-imagem {
-	outline: 1px outset #FFFFFF;
 	width: 92%;
 	height: 70%;
 	left: 4%;
@@ -167,9 +174,10 @@ body {
 }
 
 .receita-nome {
-	outline: 1px outset #FFFFFF;
 	top: 8%;
 	height: 19%;
+	width: 92%;
+	left: 4%;
 }
 
 /*-----------------------------------------------------------------------------------*/
