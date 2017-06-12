@@ -19,13 +19,9 @@ body {
 }
 
 #background {
-	width: auto;
-	height: 1080px;
-	margin: auto;
-	background: url(https://s15.postimg.org/9pcrwcltl/Food_Board5.jpg)
-		no-repeat;
-	background-attachment: fixed;
-	background-position: 0 center;
+	height: 100vh;
+	background: url(https://s3.postimg.org/9qln0xrj5/Background_big.jpg)
+		no-repeat scroll top;
 }
 
 /* PALLETE */
@@ -122,42 +118,58 @@ body {
 #contentDisplayDiv {
 	outline: 1px outset #FFFFFF;
 	position: fixed;
-	top: 249px;
-	height: 610px;
-	width: 1035px;
-	left: 76px;
+	top: 20vh;
+	height: 791px;
+	width: 1355px;
+	left: 10vh;
+	background:
+		url(https://s24.postimg.org/w73d4usyr/white_blackboard_shadow.png)
+		no-repeat;
+	background-size: cover;
 }
 
 .cursor {
 	outline: 1px outset #FFFFFF;
-	height: 610px;
-	width: 86px;
+	height: 100px;
+	width: 100px;
+	top: 320px;
+}
+
+#cursorLeft {
+	left: 74px;
+}
+
+#cursorRight {
+	left: 220px;
 }
 
 .receita {
 	outline: 1px outset #FFFFFF;
-	width: 431px;
-	height: 305px;
+	width: 50%;
+	height: 50%;
 }
 
 #receitaGrid {
 	outline: 1px outset #FFFFFF;
-	height: 305px;
-	width: 862px;
+	height: 576px;
+	width: 900px;
+	left: 150px;
+	top: 85px;
 }
 
 .receita-imagem {
 	outline: 1px outset #FFFFFF;
-	width: 400px;
-	height: 235px;
-	left: 15.5px;
-	top: 10px;
+	width: 92%;
+	height: 70%;
+	left: 4%;
+	top: 4%;
+	right: 4%;
 }
 
 .receita-nome {
 	outline: 1px outset #FFFFFF;
-	top: 20px;
-	height: 50px;
+	top: 8%;
+	height: 19%;
 }
 
 /*-----------------------------------------------------------------------------------*/
