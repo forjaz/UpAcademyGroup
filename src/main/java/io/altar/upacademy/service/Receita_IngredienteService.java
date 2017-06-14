@@ -35,7 +35,7 @@ public class Receita_IngredienteService extends EntityService implements Seriali
 	}
 	
 	public List<Receita> returnIdReceita(){
-		List<Receita> lista = em.createQuery("SELECT e FROM Receita e").getResultList();
+		List<Receita> lista = em.createQuery("SELECT e FROM Receita e WHERE id=1").getResultList();
 		return lista;
 	}
 	

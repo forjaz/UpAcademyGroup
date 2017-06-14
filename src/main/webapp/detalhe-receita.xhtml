@@ -15,24 +15,30 @@
 		<ui:define name="contentDisplay">
 	
 			<h:form>
-			
-				<f:metadata>
-				    <f:viewParam name="id" value="#{receitaBean.receita.id}" />
-				</f:metadata>
-				
-				
-				<p:dataTable var="listaidingredientes" value="#{receitaIngredienteBean.receitaIngredienteService.returnIdIngrediente()}" selection="#{receitaIngredienteBean.receitaIngrediente.ingrediente}" rowKey="#{listaidingredientes.id}" scrollable="true">
 	
-					</p:column>
-				    <p:column headerText="Id Ingrediente">
+				<f:metadata>
+				    <f:viewParam name="receitaId" value="#{receitaBean.receita.id}" />
+				</f:metadata>
+				 
+				
+				<p:dataTable var="listaidingredientes" value="#{receitaService.receitaActual.r}" 
+				selection="#{receitaService.receitaActual.r}" rowKey="#{listaidingredientes.id}" scrollable="true">
+			
+					<p:column headerText="Id">
 				        <h:outputText value="#{listaidingredientes.id}" />
 				    </p:column>
-				    <p:column headerText="Id Ingrediente">
+				    <p:column headerText="Imagem">
+				        <h:outputText value="#{listaidingredientes.imagem}" />
+				    </p:column>
+				    <p:column headerText="Nome">
 				        <h:outputText value="#{listaidingredientes.nome}" />
+				    </p:column>
+				    <p:column headerText="Modo de Preparacao">
+				        <h:outputText value="#{listaidingredientes.preparacao}" />
 				    </p:column>
 			    
 				</p:dataTable>
-			
+			 
 			</h:form>
 			
 			
