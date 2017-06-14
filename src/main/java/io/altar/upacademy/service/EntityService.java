@@ -23,5 +23,7 @@ public abstract class EntityService implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
+	
 
 }
