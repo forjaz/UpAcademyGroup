@@ -8,16 +8,33 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="searchBar">
-	
-	<h:form>
 
-		<h:panelGrid columns="2">
-			<p:outputLabel for="search" value="Procurar por Ingredientes: " />
-			<p:chips id="search" />
-			<p:autoComplete id="search_2" value="#{ReceitaService.testString}" completeMethod="#{ReceitaService.testList}" />
-		</h:panelGrid>
+		<h:form>
 
-</h:form>
+			<h:panelGrid columns="4" cellpadding="5">
+
+				<h:selectManyListbox value="#{ingredienteActual.searchQuery}"
+					styleClass="select2">
+					<f:selectItems var="ing"
+						value="#{ingredienteActual.returnIngredientes()}"
+						itemLabel="#{ing.nome}" itemValue="#{ing.id}" />
+				</h:selectManyListbox>
+
+				<p:commandButton value="Procurar" update="display"
+					icon="ui-icon-check" />
+				<h:outputText id="display"
+					value="searchQuery: #{ingredienteActual.searchQuery}" />
+					<h:outputText id="display1"
+					value="receitasID: #{ingredienteActual.convertIngredienteIDToReceitaID(searchQuery)}" />
+
+			</h:panelGrid>
+
+			<script type="text/javascript">
+$(".select2").select2();
+</script>
+		</h:form>
+
+
 
 	</ui:define>
 

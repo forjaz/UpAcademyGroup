@@ -52,4 +52,6 @@ public class IngredienteBean implements Serializable {
     public void setIngrediente(Ingrediente ingrediente) {
         this.ingrediente = ingrediente;
     }
+
+	
 }
