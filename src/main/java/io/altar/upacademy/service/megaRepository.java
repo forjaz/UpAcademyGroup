@@ -18,6 +18,15 @@ import io.altar.upacademy.model.Receita_Ingrediente;
 public class megaRepository extends EntityService implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	private String procura;
+
+	public String getProcura() {
+		return procura;
+	}
+
+	public void setProcura(String procura) {
+		this.procura = procura;
+	}
 	
 	public void initReceitas() {
 		
