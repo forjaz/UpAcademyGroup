@@ -55,6 +55,11 @@ public class ReceitaService extends EntityService implements Serializable {
 		return "detalhe-receita";
 	}
 
+	public Receita getReceitaFromID(int receitaID) {
+	    List list = em.createQuery("SELECT e FROM Receita e").getResultList();
+	    return (Receita) list.get(receitaID - 1);
+    }
+
 	// Getters and Setters
 	public static long getSerialversionuid() {
 		return serialVersionUID;

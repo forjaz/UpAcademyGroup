@@ -32,4 +32,9 @@ public class IngredienteService extends EntityService implements Serializable {
 		return serialVersionUID;
 	}
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+
 }
