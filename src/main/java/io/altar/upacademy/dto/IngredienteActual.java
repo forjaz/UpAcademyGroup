@@ -16,7 +16,9 @@ public class IngredienteActual extends EntityService implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private List<Long> searchQuery;
-    private List<Long> renderedResult;
+    private List<Long> receitaIDListDebug = new ArrayList<>();
+    private List<Long> uniqueReceitaIDListDebug = new ArrayList<>();
+    private List<Long> renderedResult = new ArrayList<>();
 
     private int startGridIndex = 0;
 
@@ -28,8 +30,9 @@ public class IngredienteActual extends EntityService implements Serializable {
     @PostConstruct
     public void renderResultInit() {
         renderedResult.add(1L);
-        renderedResult.add(2L);
-        renderedResult.add(3L);
+        renderedResult.add(1L);
+        renderedResult.add(1L);
+        renderedResult.add(1L);
     }
 
     // Methods
@@ -37,7 +40,16 @@ public class IngredienteActual extends EntityService implements Serializable {
         return em.createQuery("SELECT e FROM Ingrediente e").getResultList();
     }
 
-    public List convertIngredienteIDToReceitaID(List<Long> inputList) {
+    public void searchIngredientes() {
+        List<Long> receitaIDList = convertIngredienteIDToReceitaID(searchQuery);
+        receitaIDListDebug = receitaIDList;
+        List<Long> uniqueReceitaIDList = removeReceitaIDDuplicates(receitaIDList);
+        uniqueReceitaIDListDebug = uniqueReceitaIDList;
+        List<Long> listMultipleOfFour = ensureLengthMultipleOfFour(uniqueReceitaIDList);
+        renderedResult = listMultipleOfFour;
+    }
+
+    public List<Long> convertIngredienteIDToReceitaID(List<Long> inputList) {
         String query = "SELECT e.receita.id FROM Receita_Ingrediente e WHERE ";
         List<Long> resultList = new ArrayList<>();
         if (inputList == null) {
@@ -61,13 +73,25 @@ public class IngredienteActual extends EntityService implements Serializable {
                 resultList.add(id);
             }
         }
-        renderedResult = resultList;
         return resultList;
     }
 
-    public void renderReceita(List<Long> inputList) {
-        for (int i = 0; i < inputList.size(); i++) {
+    public List<Long> ensureLengthMultipleOfFour(List<Long> inputList) {
+        if (inputList.size() % 4 != 0) {
+            inputList.add(1L);
+        }
+        return inputList;
+    }
 
+    public void renderLeft() {
+        if (startGridIndex > 3) {
+            startGridIndex -= 4;
+        }
+    }
+
+    public void renderRight() {
+        if (renderedResult.size() > startGridIndex + 4) {
+            startGridIndex += 4;
         }
     }
 
@@ -104,5 +128,21 @@ public class IngredienteActual extends EntityService implements Serializable {
 
     public void setStartGridIndex(int startGridIndex) {
         this.startGridIndex = startGridIndex;
+    }
+
+    public List<Long> getReceitaIDListDebug() {
+        return receitaIDListDebug;
+    }
+
+    public void setReceitaIDListDebug(List<Long> receitaIDListDebug) {
+        this.receitaIDListDebug = receitaIDListDebug;
+    }
+
+    public List<Long> getUniqueReceitaIDListDebug() {
+        return uniqueReceitaIDListDebug;
+    }
+
+    public void setUniqueReceitaIDListDebug(List<Long> uniqueReceitaIDListDebug) {
+        this.uniqueReceitaIDListDebug = uniqueReceitaIDListDebug;
     }
 }
