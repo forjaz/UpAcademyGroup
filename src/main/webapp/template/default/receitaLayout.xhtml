@@ -4,8 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:p="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
 
 
 <h:head>
@@ -19,7 +19,7 @@
 	<h:outputStylesheet name="css/receita.css" />
 	<h:outputStylesheet name="css/select2/select2.min.css" />
 	<h:outputStylesheet name="css/boostrap-social/bootstrap-social.css" />
-    <h:outputStylesheet name="css/fontawesome/font-awesome.min.css" />
+	<h:outputStylesheet name="css/fontawesome/font-awesome.min.css" />
 	<h:outputScript name="js/jquery/jquery-3.2.1.min.js" />
 	<h:outputScript name="bootstrap/js/bootstrap.js" />
 	<h:outputScript name="js/select2/select2.min.js" />
@@ -53,10 +53,16 @@
 
 								<button type="button" class="btn btn-default navbar-btn">Home</button>
 								<button type="button" class="btn btn-default navbar-btn">Procurar</button>
-								<button type="button" class="btn btn-default navbar-btn">Receitas</button>
+
+								<p:button outcome="#{receitaService.selectRecipe()}"
+									class="btn btn-default navbar-btn" value="Receitas">
+
+								</p:button>
+
 								<button type="button" class="btn btn-default navbar-btn">Ingredientes</button>
 								<button type="button" class="btn btn-default navbar-btn">Quantidades</button>
-								<button type="button" class="btn btn-default navbar-btn">Sobre Nós</button>
+								<button type="button" class="btn btn-default navbar-btn">Sobre
+									Nós</button>
 
 							</div>
 
@@ -87,79 +93,136 @@
 
 
 			<!-- CONTENT DISPLAY -->
-			<div id="contentDisplayDiv" class="col-md-8">
+			<div class="row">
+				<div id="contentDisplayDiv" class="col-md-8">
 
-				<!-- CURSOR LEFT -->
-				<div id="cursorLeft" class="col-md-1 cursor">
-                    <ui:insert name="cursorLeft"/>
-                </div>
-
-				<!-- RECEITA GRID -->
-				<div id="receitaGrid" class="col-md-10">
-
-					<!-- RECEITA 1 -->
-					<div class="col-md-6 receita">
-
-						<div class="col-md-12 receita-imagem">
-							<ui:insert name="receitaImagem1">
-							</ui:insert>
-						</div>
-
-						<div class="col-md-12 receita-nome">
-							<ui:insert name="receitaNome1">
-							</ui:insert>
-						</div>
+					<!-- CURSOR LEFT -->
+					<div id="cursorLeft" class="col-md-1 cursor">
+						<ui:insert name="cursorLeft" />
 					</div>
 
-					<!-- RECEITA 2 -->
-					<div class="col-md-6 receita">
+					<!-- RECEITA GRID -->
+					<div id="receitaGrid" class="col-md-10">
 
-						<div class="col-md-12 receita-imagem">
-							<ui:insert name="receitaImagem2">
-							</ui:insert>
+						<!-- RECEITA 1 -->
+						<div class="col-md-6 receita">
+
+							<div class="col-md-12 receita-imagem">
+								<ui:insert name="receitaImagem1">
+								</ui:insert>
+							</div>
+
+							<div class="col-md-12 receita-nome">
+								<ui:insert name="receitaNome1">
+								</ui:insert>
+							</div>
 						</div>
 
-						<div class="col-md-12 receita-nome">
-							<ui:insert name="receitaNome2">
-							</ui:insert>
+						<!-- RECEITA 2 -->
+						<div class="col-md-6 receita">
+
+							<div class="col-md-12 receita-imagem">
+								<ui:insert name="receitaImagem2">
+								</ui:insert>
+							</div>
+
+							<div class="col-md-12 receita-nome">
+								<ui:insert name="receitaNome2">
+								</ui:insert>
+							</div>
 						</div>
+
+						<!-- RECEITA 3 -->
+						<div class="col-md-6 receita">
+
+							<div class="col-md-12 receita-imagem">
+								<ui:insert name="receitaImagem3">
+								</ui:insert>
+							</div>
+
+							<div class="col-md-12 receita-nome">
+								<ui:insert name="receitaNome3">
+								</ui:insert>
+							</div>
+						</div>
+
+						<!-- RECEITA 4 -->
+						<div class="col-md-6 receita">
+
+							<div class="col-md-12 receita-imagem">
+								<ui:insert name="receitaImagem4">
+								</ui:insert>
+							</div>
+
+							<div class="col-md-12 receita-nome">
+								<ui:insert name="receitaNome4">
+								</ui:insert>
+							</div>
+						</div>
+
 					</div>
+					<!-- END RECEITA GRID -->
 
-					<!-- RECEITA 3 -->
-					<div class="col-md-6 receita">
-
-						<div class="col-md-12 receita-imagem">
-							<ui:insert name="receitaImagem3">
-							</ui:insert>
-						</div>
-
-						<div class="col-md-12 receita-nome">
-							<ui:insert name="receitaNome3">
-							</ui:insert>
-						</div>
-					</div>
-
-					<!-- RECEITA 4 -->
-					<div class="col-md-6 receita">
-
-						<div class="col-md-12 receita-imagem">
-							<ui:insert name="receitaImagem4">
-							</ui:insert>
-						</div>
-
-						<div class="col-md-12 receita-nome">
-							<ui:insert name="receitaNome4">
-							</ui:insert>
-						</div>
+					<!-- CURSOR RIGHT -->
+					<div id="cursorRight" class="col-md-1 cursor">
+						<ui:insert name="cursorRight" />
 					</div>
 
 				</div>
-				<!-- END RECEITA GRID -->
+			</div>
 
-				<!-- CURSOR RIGHT -->
-				<div id="cursorRight" class="col-md-1 cursor">
-                    <ui:insert name="cursorRight"/>
-                </div>
+			<!-- UNIQUE RECEITA PAGE -->
+			<div class="row">
+				<div id="uniqueReceita" class="uniqueReceita">
+
+					<div id="uniqueReceitaImagem" class="receita-imagem-unique">
+						<ui:insert name="uniqueReceitaImagem" />
+					</div>
+
+					<div class="table-ingredientes">
+						<div id="uniqueReceitaIngredientes" class="receita-column-ingredientes">
+							<ui:insert name="uniqueReceitaIngredientes" />
+						</div>
+						<div id="uniqueReceitaQuantidades" class="receita-column">
+							<ui:insert name="uniqueReceitaQuantidades" />
+						</div>
+						<div id="uniqueReceitaUnidades" class="receita-column">
+							<ui:insert name="uniqueReceitaUnidades" />
+						</div>
+					</div>
+
+					<div class="table-nome-nutricao">
+
+						<div id="uniqueReceitaNome" class="receita-nome-unique">
+							<ui:insert name="uniqueReceitaNome" />
+						</div>
+
+						<div class="table-nutricao">
+
+							<div id="uniqueReceitaCalorias" class="receita-nutricao-label">
+								<ui:insert name="uniqueReceitaCalorias" />
+							</div>
+
+							<div id="uniqueReceitaProteinas" class="receita-nutricao-label">
+								<ui:insert name="uniqueReceitaProteinas" />
+							</div>
+
+							<div id="uniqueReceitaHidratos" class="receita-nutricao-label">
+								<ui:insert name="uniqueReceitaHidratos" />
+							</div>
+
+							<div id="uniqueReceitaGorduras" class="receita-nutricao-label">
+								<ui:insert name="uniqueReceitaGorduras" />
+							</div>
+
+						</div>
+					</div>
+
+					<div id="uniqueReceitaPreparacao" class="receita-preparacao">
+						<ui:insert name="uniqueReceitaPreparacao" />
+					</div>
+
+				</div>
 
 			</div>
 

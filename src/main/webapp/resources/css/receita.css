@@ -131,6 +131,9 @@ body {
 /*-----------------------------------------------------------------------------------*/
 /* CONTENT */
 /*-----------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------*/
+/* CONTENT - GRID */
+/*-----------------------------------------------------------------------------------*/
 #contentDisplayDiv {
 	position: fixed;
 	top: 20vh;
@@ -171,11 +174,11 @@ body {
 
 .receita-imagem {
 	width: 92%;
-    height: 230px;
+	height: 230px;
 	left: 4%;
 	top: 4%;
 	right: 4%;
-    text-align: center;
+	text-align: center;
 }
 
 .receita-nome {
@@ -183,8 +186,76 @@ body {
 	height: 19%;
 	width: 92%;
 	left: 4%;
-    color: white;
-    text-align: center;
+	color: white;
+	text-align: center;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/* CONTENT - UNIQUE */
+/*-----------------------------------------------------------------------------------*/
+#uniqueReceita {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	height: 576px;
+	width: 900px;
+	margin-left: 346px;
+	margin-top: 227px;
+	padding: 10px;
+}
+
+.table-nome-nutricao {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	width: 435px;
+	height: 273px;
+}
+
+.table-nutricao {
+	display: flex;
+	flex-wrap: wrap;
+	height: 50%;
+	width: 100%;
+}
+
+.table-ingredientes {
+	display: flex;
+	flex-wrap: wrap;
+	height: 273px;
+	width: 435px;
+	margin-bottom: 10px;
+}
+
+.receita-imagem-unique {
+	width: 435px;
+	height: 273px;
+	margin-bottom: 10px;
+}
+
+.receita-nome-unique {
+	height: 131.5px;
+	width: 100%;
+	margin-bottom: 5px;
+}
+
+.receita-nutricao-label {
+	width: 50%;
+	height: 50%;
+}
+
+.receita-column {
+	width: 30%;
+}
+
+.receita-column-ingredientes {
+	width: 40%;
+}
+
+.receita-preparacao {
+	height: 273px;
+	width: 435px;
 }
 
 /*-----------------------------------------------------------------------------------*/

@@ -42,13 +42,13 @@ public class Receita_IngredienteService extends EntityService implements Seriali
 		return "ingrediente_Receita" ;
 	}
 	
-	public List<Ingrediente> returnIdIngrediente(){
-		List<Ingrediente> lista = em.createQuery("SELECT e FROM Ingrediente e").getResultList();
+	public List<Long> returnIdIngrediente(){
+		List<Long> lista = em.createQuery("SELECT e FROM Ingrediente e").getResultList();
 		return lista;
 	}
 	
 	public List<Receita> returnIdReceita(){
-		List<Receita> lista = em.createQuery("SELECT e FROM Receita e WHERE id=1").getResultList();
+		List<Receita> lista = em.createQuery("SELECT nome FROM Receita e WHERE id=3").getResultList();
 		return lista;
 	}
 	
@@ -58,28 +58,57 @@ public class Receita_IngredienteService extends EntityService implements Seriali
 	}
 	
 	// GERADOR DE RECEITAS
-	public List<Ingrediente> returnIdReceitaIngrediente(){
+	public List<Long> returnIdI(){
 		String var = megaBean.getProcura();
-		List<Ingrediente> lista = em.createQuery("SELECT id FROM Ingrediente e WHERE nome='"+var+"'").getResultList();
+		List<Long> lista1 = em.createQuery("SELECT id FROM Ingrediente e WHERE nome='"+var+"'").getResultList();
+		if(lista1.size()==0){
+			return returnIdIngrediente();
+		}else{
+			
+			String query = "SELECT e.receita.id FROM Receita_Ingrediente e WHERE ";
+			long a = lista1.get(0);
+			query = query + "ingrediente_id=" + a;
+			List<Long> lista2 = em.createQuery(query).getResultList();
+			
+			List<Long> lista3 = em.createQuery("SELECT nome FROM Receita e").getResultList();
+			for(int i=0; i<lista2.size(); i++){
+				if(lista2.size()==1){
+					query = "SELECT nome FROM Receita e WHERE ";
+					long b = lista2.get(i);
+					query = query + "id=" + b;
+					lista3 = em.createQuery(query).getResultList();
+				}else if(lista2.size()==2){
+					query = "SELECT nome FROM Receita e WHERE ";
+					long b = lista2.get(i);
+					long c = lista2.get(i+1);
+					query = query + "id=" + b + " or id="+c;
+					lista3 = em.createQuery(query).getResultList();
+					break;
+				}
+					
+			}
+			return lista3;
+		}
+	}
+	
+	public List<Long> returnIdRI(){
+		long a = returnIdI().get(0);
+		List<Long> lista = em.createQuery("SELECT e.receita.id FROM Receita_Ingrediente e WHERE ingrediente_id="+a).getResultList();
 		return lista;
 	}
 	
-//	public List<Receita_Ingrediente> idReceita(){
-//		String a = returnIdReceitaIngrediente().toString();
-//		List<Receita_Ingrediente> lista = em.createQuery("SELECT receita.id FROM Receita_Ingrediente e WHERE ingrediente.id='"+a+"'").getResultList();
-//		return lista;
-//	}
+	public List<Long> returnNomeR(){	
+		String b = returnIdRI().toString();
+		int b1 = Integer.parseInt(b);
+		List<Long> lista = em.createQuery("SELECT nome FROM Receita e WHERE id="+b1+"").getResultList();
+		return lista;
+	}
 	
 	// Getters and Setters
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-
 	
-	
-	
-
 }
 
 	
