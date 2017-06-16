@@ -3,7 +3,9 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
 
 
 <h:head>
@@ -15,11 +17,13 @@
 
 	<h:outputStylesheet name="bootstrap/css/bootstrap.css" />
 	<h:outputStylesheet name="css/receita.css" />
+	<h:outputStylesheet name="css/select2/select2.min.css" />
+	<h:outputStylesheet name="css/boostrap-social/bootstrap-social.css" />
+    <h:outputStylesheet name="css/fontawesome/font-awesome.min.css" />
+	<h:outputScript name="js/jquery/jquery-3.2.1.min.js" />
 	<h:outputScript name="bootstrap/js/bootstrap.js" />
-	<link rel="stylesheet"
-		href="resources/css/font-awesome-4.7.0/css/font-awesome.min.css" />
-	<h:outputStylesheet
-		name="css/bootstrap-social-gh-pages/bootstrap-social.css" />
+	<h:outputScript name="js/select2/select2.min.js" />
+
 </h:head>
 
 <h:body>
@@ -49,7 +53,11 @@
 
 								<button type="button" class="btn btn-default navbar-btn">Home</button>
 								<button type="button" class="btn btn-default navbar-btn">Procurar</button>
-								<button type="button" class="btn btn-default navbar-btn">Receitas</button>
+								
+								<p:button outcome="#{receitaService.selectRecipe()}" class="btn btn-default navbar-btn" value="Receitas">
+							
+								</p:button>
+								
 								<button type="button" class="btn btn-default navbar-btn">Ingredientes</button>
 								<button type="button" class="btn btn-default navbar-btn">Quantidades</button>
 								<button type="button" class="btn btn-default navbar-btn">Sobre
@@ -87,7 +95,9 @@
 			<div id="contentDisplayDiv" class="col-md-8">
 
 				<!-- CURSOR LEFT -->
-				<div id="cursorLeft" class="col-md-1 cursor"></div>
+				<div id="cursorLeft" class="col-md-1 cursor">
+                    <ui:insert name="cursorLeft"/>
+                </div>
 
 				<!-- RECEITA GRID -->
 				<div id="receitaGrid" class="col-md-10">
@@ -152,7 +162,9 @@
 				<!-- END RECEITA GRID -->
 
 				<!-- CURSOR RIGHT -->
-				<div id="cursorRight" class="col-md-1 cursor"></div>
+				<div id="cursorRight" class="col-md-1 cursor">
+                    <ui:insert name="cursorRight"/>
+                </div>
 
 			</div>
 

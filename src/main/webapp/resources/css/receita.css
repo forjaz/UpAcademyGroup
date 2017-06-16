@@ -124,6 +124,10 @@ body {
 	outline: 1px outset #000000;
 }
 
+.select2-container {
+	width: 500px !important;
+}
+
 /*-----------------------------------------------------------------------------------*/
 /* CONTENT */
 /*-----------------------------------------------------------------------------------*/
@@ -167,10 +171,11 @@ body {
 
 .receita-imagem {
 	width: 92%;
-	height: 70%;
+    height: 230px;
 	left: 4%;
 	top: 4%;
 	right: 4%;
+    text-align: center;
 }
 
 .receita-nome {
@@ -178,6 +183,8 @@ body {
 	height: 19%;
 	width: 92%;
 	left: 4%;
+    color: white;
+    text-align: center;
 }
 
 /*-----------------------------------------------------------------------------------*/
