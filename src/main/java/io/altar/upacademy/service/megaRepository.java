@@ -10,8 +10,6 @@ import io.altar.upacademy.model.Ingrediente;
 import io.altar.upacademy.model.Receita;
 import io.altar.upacademy.model.Receita_Ingrediente;
 
-
-
 @Named("megaBean")
 @ApplicationScoped
 @Transactional
@@ -42,6 +40,10 @@ public class megaRepository extends EntityService implements Serializable{
 				"Tempere com sal e pimenta e deixe ferver um pouco até apurar. Adicione 4 a 5 folhas de manjericão fresco, retire do lume e triture com a varinha mágica. "+
 				"Adicione o frango desfiado e leve de novo ao lume até levantar fervura."+
 				"Escora o esparguete e sirva-o com o frango em molho de tomate, enfeitado com as azeitonas pretas e folhas frescas de manjericão. Acompanhe com os brócolos cozidos.");
+		receita1.setCalorias(3356);
+		receita1.setProteina(131.736);
+		receita1.setHidratos(121.356);
+		receita1.setGorduras(118.907);
 		em.persist(receita1);
 	
 		Receita receita2 = new Receita();
@@ -54,7 +56,10 @@ public class megaRepository extends EntityService implements Serializable{
 				"Adicione o açúcar e a água a ferver. Quando os legumes estiverem macios triture-os com a varinha mágica e retifique os temperos se necessário."+
 				"Descasque o ovo e pique-o finamente."+
 				"Deite a sopa nos pratos de serviço, salpique com o ovo picado e as folhinhas de funcho e o cebolinho.");
-				
+		receita2.setCalorias(3028);
+		receita2.setProteina(45.7);
+		receita2.setHidratos(130.8);
+		receita2.setGorduras(70.636);		
 		em.persist(receita2);
 	
 		
@@ -65,8 +70,11 @@ public class megaRepository extends EntityService implements Serializable{
 								"Pré-aqueça o forno a 170ºC. Lave as batatas, corte-as em gomos e coloque-as num tabuleiro de forno. Tempere com uma colher de sobremesa de sal, o tomilho, o mel e duas colheres de sopa de azeite. Misture bem. Leve ao forno durante cerca de 50 minutos ou até as batatas estarem tenras. Mexa-as de vez em quando."+
 				"Ao mesmo tempo, frite os pedaços de borrego no restante azeite bem quente até a carne alourar. Reduza o lume e junte a cebola picada e as rodelas de alho-francês. Tape e deixe cozinhar sobre lume brando cerca de 40 minutos."+
 				"Lave o tomate, limpe-o de sementes e pique-o em pedaços. Junte o tomate e a maçã reineta, previamente pelada e ralada, ao borrego e tempere com uma colher de chá de sal. Volte a tapar e cozinhe sobre lume muito brando mais 20 minutos ou até a carne estar tenra. Retire do lume, salpique com os coentros picados e sirva com as batatas assadas.");
-				
-		em.persist(receita3);
+		receita3.setCalorias(3310);
+		receita3.setProteina(134.16);
+		receita3.setHidratos(188.71);
+		receita3.setGorduras(118.435);		
+		em.persist(receita3);		
 
 	}
 	
