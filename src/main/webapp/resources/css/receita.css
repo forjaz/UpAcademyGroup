@@ -134,7 +134,7 @@ body {
 /*-----------------------------------------------------------------------------------*/
 /* CONTENT - GRID */
 /*-----------------------------------------------------------------------------------*/
-#contentDisplayDiv {
+.content-display {
 	position: fixed;
 	top: 20vh;
 	height: 791px;
@@ -149,27 +149,39 @@ body {
 .cursor {
 	height: 100px;
 	width: 100px;
-	top: 320px;
 }
 
 #cursorLeft {
-	left: 74px;
+	position: fixed;
+	margin-top: 360px;
+	margin-left: 90px;
 }
 
 #cursorRight {
-	left: 220px;
+	position: fixed;
+	margin-top: 360px;
+	margin-left: 1240px;
 }
 
 .receita {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
 	width: 50%;
 	height: 50%;
 }
 
-#receitaGrid {
+.receita-grid {
+	position: fixed;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
 	height: 576px;
 	width: 900px;
-	left: 150px;
-	top: 85px;
+	margin-left: 250px;
+	margin-top: 90px;
+	padding: 10px;
 }
 
 .receita-imagem {
