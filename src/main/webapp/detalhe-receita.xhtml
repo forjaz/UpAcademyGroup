@@ -20,9 +20,9 @@
 				    <f:viewParam name="receitaId" value="#{receitaBean.receita.id}" />
 				</f:metadata>
 				 
-				
+				<h:commandButton action="index" value="" />
 				<p:dataTable var="listaidingredientes" value="#{receitaService.receitaActual.r}" 
-				selection="#{receitaService.receitaActual.r}" rowKey="#{listaidingredientes.id}" scrollable="true">
+				scrollable="true">
 			
 					<p:column headerText="Id">
 				        <h:outputText value="#{listaidingredientes.id}" />
@@ -38,6 +38,8 @@
 				    </p:column>
 			    
 				</p:dataTable>
+				
+				
 			 
 			</h:form>
 			

@@ -3,7 +3,11 @@ import io.altar.upacademy.service.EntityService;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.NoneScoped;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,7 +15,7 @@ import java.util.List;
 
 @ManagedBean(eager = true)
 @Named("ingredienteActual")
-@ApplicationScoped
+@SessionScoped
 public class IngredienteActual extends EntityService implements Serializable {
 
     private static final long serialVersionUID = 1L;

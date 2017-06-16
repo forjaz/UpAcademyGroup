@@ -41,15 +41,11 @@ public class ReceitaService extends EntityService implements Serializable {
 		return "receitas";
 	}
 	
-	public String selectRecipe() {
+	public String selectRecipe(int id) {
 		
 		List<Receita> receitaL = em.createQuery("Select e FROM Receita e").getResultList();
 		if (receitaL != null && receitaL.size()>0) {
-			Random random = new Random();
-			int min = 0;
-			int max = receitaL.size();
-			int index = random.nextInt(max - min + 1) + min;
-			Receita r = receitaL.get(2);
+			Receita r = receitaL.get(id-1);
 			this.loadReceita(r);
 		}
 		return "detalhe-receita";

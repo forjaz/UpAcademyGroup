@@ -40,8 +40,12 @@
 
     <!-- IMAGE 1 -->
     <ui:define name="receitaImagem1">
-        <h:graphicImage id="imagem1" styleClass="receita-imagem"
-                        url="#{receitaService.getReceitaFromID(ingredienteActual.renderedResult.get(ingredienteActual.startGridIndex)).imagem}"/>
+	    <h:form id="imagem1">
+		    <h:commandLink action="#{receitaService.selectRecipe(receitaService.getReceitaFromID(ingredienteActual.renderedResult.get(ingredienteActual.startGridIndex)).id)}">
+				<h:graphicImage styleClass="receita-imagem"
+		   					    url="#{receitaService.getReceitaFromID(ingredienteActual.renderedResult.get(ingredienteActual.startGridIndex)).imagem}"/>
+		    </h:commandLink>
+	    </h:form>
     </ui:define>
 
     <ui:define name="receitaNome1">
@@ -51,8 +55,13 @@
 
     <!-- IMAGE 2 -->
     <ui:define name="receitaImagem2">
-        <h:graphicImage id="imagem2" styleClass="receita-imagem"
-                        url="#{receitaService.getReceitaFromID(ingredienteActual.renderedResult.get(ingredienteActual.startGridIndex + 1)).imagem}"/>
+	    <h:form id="imagem2">
+		    <h:commandLink action="#{receitaService.selectRecipe(receitaService.getReceitaFromID(ingredienteActual.renderedResult.get(ingredienteActual.startGridIndex)).id)}">
+	        <h:graphicImage styleClass="receita-imagem"
+	                        url="#{receitaService.getReceitaFromID(ingredienteActual.renderedResult.get(ingredienteActual.startGridIndex + 1)).imagem}"/>
+	        </h:commandLink>
+	    </h:form>
+        
     </ui:define>
 
     <ui:define name="receitaNome2">
@@ -62,8 +71,13 @@
 
     <!-- IMAGE 3 -->
     <ui:define name="receitaImagem3">
-        <h:graphicImage id="imagem3" styleClass="receita-imagem"
-                        url="#{receitaService.getReceitaFromID(ingredienteActual.renderedResult.get(ingredienteActual.startGridIndex + 2)).imagem}"/>
+	    <h:form id="imagem3">
+		    <h:commandLink action="#{receitaService.selectRecipe(receitaService.getReceitaFromID(ingredienteActual.renderedResult.get(ingredienteActual.startGridIndex)).id)}">
+	        <h:graphicImage styleClass="receita-imagem"
+	                        url="#{receitaService.getReceitaFromID(ingredienteActual.renderedResult.get(ingredienteActual.startGridIndex + 2)).imagem}"/>
+	        </h:commandLink>
+	    </h:form>
+                       
     </ui:define>
 
     <ui:define name="receitaNome3">
@@ -73,8 +87,12 @@
 
     <!-- IMAGE 4 -->
     <ui:define name="receitaImagem4">
-        <h:graphicImage id="imagem4" styleClass="receita-imagem"
+	    <h:form id="imagem4">
+		    <h:commandLink action="#{receitaService.selectRecipe(receitaService.getReceitaFromID(ingredienteActual.renderedResult.get(ingredienteActual.startGridIndex)).id)}">
+        	<h:graphicImage styleClass="receita-imagem"
                         url="#{receitaService.getReceitaFromID(ingredienteActual.renderedResult.get(ingredienteActual.startGridIndex + 3)).imagem}"/>
+            </h:commandLink>
+        </h:form>            
     </ui:define>
 
     <ui:define name="receitaNome4">
