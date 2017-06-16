@@ -18,10 +18,13 @@ import io.altar.upacademy.model.Receita_Ingrediente;
 public class megaRepository extends EntityService implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	public void initReceitas2() {
+		em.createNativeQuery("INSERT INTO `Receita` (`id`,`nome`,`imagem`,`preparacao`) VALUES (1,'Esparguete com Frango do Campo em Molho de Tomate','https://www.pingodoce.pt/wp-content/uploads/2015/12/1449085327','Separe os brócolos em raminhos, lave e escorra.Encha 1 tacho com água e leve ao lume. Quando a água ferver, tempere com sal e introduza os raminhos de brócolos. Deixe cozer destapados até estarem macios.Retire os brócolos com uma escumadeira e introduza na mesma água o esparguete. Deixe cozer até estar al-dente.Descasque a cebola e pique-a finamente. Esborrache os dentes de alho e pique-os. Lave o talo de aipo, tire-lhe os fios e corte em fatias finas. Deite o azeite num tacho,leve ao lume e adicione os dentes de alho, depois a cebola picada, o aipo e a folha de louro. Deixe cozinhar sobre lume moderado, mexendo de vez em quando. Limpe o tomate de pele e sementes, pique-o em pedaços e junte ao cozinhado. Deixe o tomate cozinhar até estar macio e regue com o vinho branco. Tempere com sal e pimenta e deixe ferver um pouco até apurar. Adicione 4 a 5 folhas de manjericão fresco, retire do lume e triture com a varinha mágica. Adicione o frango desfiado e leve de novo ao lume até levantar fervura.Escora o esparguete e sirva-o com o frango em molho de tomate, enfeitado com as azeitonas pretas e folhas frescas de manjericão. Acompanhe com os brócolos cozidos.');").executeUpdate();
+	}
 	
 	public void initReceitas() {
 		
-		Receita receita1 = new Receita();
+		/*Receita receita1 = new Receita();
 		receita1.setImagem("https://www.pingodoce.pt/wp-content/uploads/2015/12/1449085327");
 		receita1.setNome("Esparguete com Frango do Campo em Molho de Tomate");
 		receita1.setPreparacao("Separe os brócolos em raminhos, lave e escorra."+
@@ -33,7 +36,7 @@ public class megaRepository extends EntityService implements Serializable{
 				"Tempere com sal e pimenta e deixe ferver um pouco até apurar. Adicione 4 a 5 folhas de manjericão fresco, retire do lume e triture com a varinha mágica. "+
 				"Adicione o frango desfiado e leve de novo ao lume até levantar fervura."+
 				"Escora o esparguete e sirva-o com o frango em molho de tomate, enfeitado com as azeitonas pretas e folhas frescas de manjericão. Acompanhe com os brócolos cozidos.");
-		em.persist(receita1);
+		em.persist(receita1);*/
 	
 		Receita receita2 = new Receita();
 		receita2.setImagem("https://www.google.pt/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwj5762t_rDUAhXLVRoKHZ0ADf4QjRwIBw&url=http%3A%2F%2Fwww.pittuka.com%2Fculinaria%2Fsopas-caldos-e-cremes%2Fcreme-de-tomate%2F&psig=AFQjCNGkpMQXAKjdR1YJmQl1GiOmce9fPw&ust=1497105384243358");
@@ -62,7 +65,7 @@ public class megaRepository extends EntityService implements Serializable{
 	}
 	
 	public String megaInit(){
-		initReceitas();
+		initReceitas2();
 		initIng1();
 		initIng2();
 		initIng3();
