@@ -48,7 +48,7 @@ public class Receita_IngredienteService extends EntityService implements Seriali
 	}
 	
 	public List<Receita> returnIdReceita(){
-		List<Receita> lista = em.createQuery("SELECT e FROM Receita e WHERE id=1").getResultList();
+		List<Receita> lista = em.createQuery("SELECT nome FROM Receita e WHERE id=3").getResultList();
 		return lista;
 	}
 	
@@ -58,28 +58,30 @@ public class Receita_IngredienteService extends EntityService implements Seriali
 	}
 	
 	// GERADOR DE RECEITAS
-	public List<Ingrediente> returnIdReceitaIngrediente(){
+	public List<Long> returnIdI(){
 		String var = megaBean.getProcura();
-		List<Ingrediente> lista = em.createQuery("SELECT id FROM Ingrediente e WHERE nome='"+var+"'").getResultList();
+		List<Long> lista = em.createQuery("SELECT id FROM Ingrediente e WHERE nome='"+var+"'").getResultList();
 		return lista;
 	}
 	
-//	public List<Receita_Ingrediente> idReceita(){
-//		String a = returnIdReceitaIngrediente().toString();
-//		List<Receita_Ingrediente> lista = em.createQuery("SELECT receita.id FROM Receita_Ingrediente e WHERE ingrediente.id='"+a+"'").getResultList();
-//		return lista;
-//	}
+	public List<Receita_Ingrediente> returnIdRI(){
+		long a = returnIdI().get(0);
+		List<Receita_Ingrediente> lista = em.createQuery("SELECT e.receita.id FROM Receita_Ingrediente e WHERE ingrediente_id="+a).getResultList();
+		return lista;
+	}
+	
+	public List<Receita> returnNomeR(){	
+		String b = returnIdRI().toString();
+		int b1 = Integer.parseInt(b);
+		List<Receita> lista = em.createQuery("SELECT nome FROM Receita e WHERE id="+b1+"").getResultList();
+		return lista;
+	}
 	
 	// Getters and Setters
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-
 	
-	
-	
-
 }
 
 	

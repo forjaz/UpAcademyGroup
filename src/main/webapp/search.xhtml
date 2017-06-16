@@ -15,36 +15,17 @@
 				
 				<h:inputText value="#{receitaIngredienteBean.receitaIngredienteService.megaBean.procura}" />
 				
-				<p:dataTable var="ingredientereceita" value="#{receitaIngredienteBean.receitaIngredienteService.returnIdReceitaIngrediente()}" scrollable="true">
-				    <p:column headerText="Id Ingrediente">
+				<p:dataTable var="ingredientereceita" value="#{receitaIngredienteBean.receitaIngredienteService.returnIdI()}" scrollable="true">
+				    <p:column headerText="Nome da Receita">
 				        <h:outputText value="#{ingredientereceita}" />
 				 	</p:column>
-<!--  				 	<p:column headerText="Id Receita_Ingrediente">
-				        <h:outputText value="#{ingredientereceita}" />
-				 	</p:column>  --> 
-				 	
-<!-- 		 	   		<p:column headerText="Id Ingredientes">
-				        <h:outputText value="#{ingredientereceita.ingrediente.id}" />
-				 	</p:column>
-				 	<p:column headerText="Nome Ingredientes">
-				        <h:outputText value="#{ingredientereceita.ingrediente.nome}" />
-				 	</p:column>
-				 	<p:column headerText="Id Receitas">
-				        <h:outputText value="#{ingredientereceita.receita.id}" />
-				 	</p:column>
-				 	<p:column headerText="Nome receitas">
-				        <h:outputText value="#{ingredientereceita.receita.nome}" />
-				 	</p:column> --> 
-			    
-				</p:dataTable>
+				</p:dataTable> 
 				
-				<p></p>
-				
-<!-- 				<p:dataTable var="ingredientereceita2" value="#{receitaIngredienteBean.receitaIngredienteService.idReceita()}" scrollable="true">
-				    <p:column headerText="Id Receita">
+				<p:dataTable var="ingredientereceita2" value="#{receitaIngredienteBean.receitaIngredienteService.returnIdRI()}" scrollable="true">
+				    <p:column headerText="Id da Receita">
 				        <h:outputText value="#{ingredientereceita2}" />
 				 	</p:column>
-				 </p:dataTable> -->
+				</p:dataTable> 
 			</div>
 			<p></p>
 				<h:commandButton value = "Voltar ecra anterior" action = "ingrediente_Receita" />

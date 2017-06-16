@@ -16,8 +16,10 @@ public class Receita_Ingrediente implements Serializable {
     private Long id;
     
     private int Quantidade;
-    
-    @ManyToOne
+    private String medidas;
+    private int quantidadeCliente; 
+
+	@ManyToOne
     private Receita receita;
     
     @ManyToOne
@@ -48,6 +50,22 @@ public class Receita_Ingrediente implements Serializable {
     public void setQuantidade(int quantidade) {
         Quantidade = quantidade;
     }
+    
+    public String getMedidas() {
+		return medidas;
+	}
+
+	public void setMedidas(String medidas) {
+		this.medidas = medidas;
+	}
+
+	public int getQuantidadeCliente() {
+		return quantidadeCliente;
+	}
+
+	public void setQuantidadeCliente(int quantidadeCliente) {
+		this.quantidadeCliente = quantidadeCliente;
+	}
 
     public Receita getReceita() {
         return receita;
