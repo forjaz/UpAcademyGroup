@@ -18,6 +18,10 @@ public class Receita implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
+	private double proteina;
+	private double hidratos;
+	private double gorduras;
+	private int calorias;
 	@Lob
 	@Column
 	private String imagem;
@@ -64,6 +68,38 @@ public class Receita implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	public double getProteina() {
+		return proteina;
+	}
+
+	public void setProteina(double proteina) {
+		this.proteina = proteina;
+	}
+
+	public double getHidratos() {
+		return hidratos;
+	}
+
+	public void setHidratos(double hidratos) {
+		this.hidratos = hidratos;
+	}
+
+	public double getGorduras() {
+		return gorduras;
+	}
+
+	public void setGorduras(double gorduras) {
+		this.gorduras = gorduras;
+	}
+
+	public int getCalorias() {
+		return calorias;
+	}
+
+	public void setCalorias(int calorias) {
+		this.calorias = calorias;
 	}
 
 	public static long getSerialversionuid() {
