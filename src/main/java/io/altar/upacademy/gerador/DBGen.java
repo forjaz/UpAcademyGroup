@@ -25,6 +25,7 @@ public class DBGen implements Serializable{
 	
 	@PostConstruct
 	public void initDB(){
+		megaRep.basedados();
 		
 	}
 }
