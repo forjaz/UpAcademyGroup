@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ManagedBean(eager = true)
-@Named("ingredienteActual")
+@Named("global")
 @SessionScoped
-public class IngredienteActual extends EntityService implements Serializable {
+public class Global extends EntityService implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private List<Long> searchQuery;
@@ -28,7 +28,7 @@ public class IngredienteActual extends EntityService implements Serializable {
 
 
     // Constructor
-    public IngredienteActual() {
+    public Global() {
     }
 
     @PostConstruct
