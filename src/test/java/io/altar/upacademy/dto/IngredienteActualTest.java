@@ -11,7 +11,7 @@ public class IngredienteActualTest {
     @Test
     public void testRemoveReceitaIDDuplicatesWithIntegerList() {
         // Class tested
-        IngredienteActual tester = new IngredienteActual();
+        Global tester = new Global();
 
         // Setup
         List<Long> integerList = new ArrayList<>();

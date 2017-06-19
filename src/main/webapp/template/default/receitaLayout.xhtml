@@ -53,12 +53,7 @@
 
 								<button type="button" class="btn btn-default navbar-btn">Home</button>
 								<button type="button" class="btn btn-default navbar-btn">Procurar</button>
-
-								<p:button outcome="#{receitaService.selectRecipe()}"
-									class="btn btn-default navbar-btn" value="Receitas">
-
-								</p:button>
-
+								<button type="button" class="btn btn-default navbar-btn">Receitas</button>
 								<button type="button" class="btn btn-default navbar-btn">Ingredientes</button>
 								<button type="button" class="btn btn-default navbar-btn">Quantidades</button>
 								<button type="button" class="btn btn-default navbar-btn">Sobre
@@ -180,7 +175,8 @@
 					</div>
 
 					<div class="table-ingredientes">
-						<div id="uniqueReceitaIngredientes" class="receita-column-ingredientes">
+						<div id="uniqueReceitaIngredientes"
+							class="receita-column-ingredientes">
 							<ui:insert name="uniqueReceitaIngredientes" />
 						</div>
 						<div id="uniqueReceitaQuantidades" class="receita-column">
