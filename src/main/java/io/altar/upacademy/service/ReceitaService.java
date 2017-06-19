@@ -1,6 +1,6 @@
 package io.altar.upacademy.service;
 
-import io.altar.upacademy.dto.ReceitaActual;
+
 import io.altar.upacademy.model.Ingrediente;
 import io.altar.upacademy.model.Receita;
 
@@ -20,14 +20,9 @@ import javax.transaction.Transactional;
 public class ReceitaService extends EntityService implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	@Inject
-	ReceitaActual receitaActual;
+
 	
-	public void loadReceita(Receita r) {
-		
-		this.receitaActual.setR(r);
-		
-	}
+	
 	
 	// Constructor
 	public ReceitaService() {
@@ -43,10 +38,10 @@ public class ReceitaService extends EntityService implements Serializable {
 	
 	public String selectRecipe(int id) {
 		
-		List<Receita> receitaL = em.createQuery("Select e FROM Receita e").getResultList();
+		List<Long> receitaL = global.getRenderedResult();
 		if (receitaL != null && receitaL.size()>0) {
-			Receita r = receitaL.get(id-1);
-			this.loadReceita(r);
+			Long l = global.getRenderedResult().get(id);
+			//this.loadReceita(l);
 		}
 		return "detalhe-receita";
 	}
@@ -61,13 +56,6 @@ public class ReceitaService extends EntityService implements Serializable {
 		return serialVersionUID;
 	}
 
-	public ReceitaActual getReceitaActual() {
-		return receitaActual;
-	}
 
-	public void setReceitaActual(ReceitaActual receitaActual) {
-		this.receitaActual = receitaActual;
-	}
-	
 	
 }

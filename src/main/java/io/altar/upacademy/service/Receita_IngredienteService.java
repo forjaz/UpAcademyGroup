@@ -42,8 +42,10 @@ public class Receita_IngredienteService extends EntityService implements Seriali
 		return "ingrediente_Receita" ;
 	}
 	
+	
+	// DB QUERIES EXAMPLES
 	public List<Long> returnIdIngrediente(){
-		List<Long> lista = em.createQuery("SELECT e FROM Ingrediente e").getResultList();
+		List<Long> lista = em.createQuery("SELECT nome FROM Ingrediente e").getResultList();
 		return lista;
 	}
 	
@@ -57,7 +59,7 @@ public class Receita_IngredienteService extends EntityService implements Seriali
 		return lista;
 	}
 	
-	// GERADOR DE RECEITAS
+	// GERADOR DE RECEITAS APENAS COM UM INGREDIENTE 
 	public List<Long> returnIdI(){
 		String var = megaBean.getProcura();
 		List<Long> lista1 = em.createQuery("SELECT id FROM Ingrediente e WHERE nome='"+var+"'").getResultList();
@@ -65,32 +67,38 @@ public class Receita_IngredienteService extends EntityService implements Seriali
 			return returnIdIngrediente();
 		}else{
 			
-			String query = "SELECT e.receita.id FROM Receita_Ingrediente e WHERE ";
-			long a = lista1.get(0);
-			query = query + "ingrediente_id=" + a;
-			List<Long> lista2 = em.createQuery(query).getResultList();
+			String query1 = "SELECT e.receita.id FROM Receita_Ingrediente e WHERE ";
+			for(int i=0; i<lista1.size(); i++){
+				if(i+1<lista1.size()){
+					long a = lista1.get(0);
+					query1 = query1 + "ingrediente_id=" + a + " or ";
+				}else{
+					long a = lista1.get(0);
+					query1 = query1 + "ingrediente_id=" + a;
+				}
+			}
 			
-			List<Long> lista3 = em.createQuery("SELECT nome FROM Receita e").getResultList();
+			List<Long> lista2 = em.createQuery(query1).getResultList();
+			
+			String query2 = "SELECT nome FROM Receita e WHERE ";
+			
 			for(int i=0; i<lista2.size(); i++){
-				if(lista2.size()==1){
-					query = "SELECT nome FROM Receita e WHERE ";
+				if(i+1<lista2.size()){
 					long b = lista2.get(i);
-					query = query + "id=" + b;
-					lista3 = em.createQuery(query).getResultList();
-				}else if(lista2.size()==2){
-					query = "SELECT nome FROM Receita e WHERE ";
-					long b = lista2.get(i);
-					long c = lista2.get(i+1);
-					query = query + "id=" + b + " or id="+c;
-					lista3 = em.createQuery(query).getResultList();
-					break;
+					query2 = query2 + "id=" + b + " or ";
+					
+				}else{
+					long c = lista2.get(i);
+					query2 = query2 + "id=" + c;
 				}
 					
 			}
+			List<Long> lista3 = em.createQuery(query2).getResultList();
 			return lista3;
 		}
 	}
 	
+	// DB QUERIES TESTE 
 	public List<Long> returnIdRI(){
 		long a = returnIdI().get(0);
 		List<Long> lista = em.createQuery("SELECT e.receita.id FROM Receita_Ingrediente e WHERE ingrediente_id="+a).getResultList();
