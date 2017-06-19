@@ -41,7 +41,7 @@
     <!-- IMAGE 1 -->
     <ui:define name="receitaImagem1">
 	    <h:form id="imagem1">
-		    <h:commandLink action="#{receitaService.selectRecipe(receitaService.getReceitaFromID(global.renderedResult.get(global.startGridIndex)).id)}">
+		    <h:commandLink action="#{receitaService.selectRecipe(global.queryGetRecipe(global.findUniqueRecipeId(global.startGridIndex)).id)}">
 				<h:graphicImage styleClass="receita-imagem"
 		   					    url="#{receitaService.getReceitaFromID(global.renderedResult.get(global.startGridIndex)).imagem}"/>
 		    </h:commandLink>
@@ -78,7 +78,7 @@
 	        </h:commandLink>
 	    </h:form>
                        
-    </ui:define>
+    </ui:define> 
 
     <ui:define name="receitaNome3">
         <h:outputText id="nome3" styleClass="receita-nome"

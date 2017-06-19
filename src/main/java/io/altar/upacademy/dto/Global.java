@@ -1,4 +1,5 @@
 package io.altar.upacademy.dto;
+import io.altar.upacademy.model.Receita;
 import io.altar.upacademy.service.EntityService;
 
 import javax.annotation.PostConstruct;
@@ -99,6 +100,18 @@ public class Global extends EntityService implements Serializable {
         }
     }
 
+    public Long findUniqueRecipeId(int index) {
+		
+		Long rId = renderedResult.get(index);
+		
+		return rId;
+	}
+    
+    public void queryGetRecipe (Long id) {
+    	
+    	Receita r =  (Receita) em.createQuery("SELECT e FROM Receita WHERE id="+ id).getResultList();
+    	
+    }
 
     // Getters and Setters
 
