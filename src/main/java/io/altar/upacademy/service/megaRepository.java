@@ -17,15 +17,34 @@ public class megaRepository extends EntityService implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private String procura;
+	private String procura2;
+	private String procura3;
 
 	public String getProcura() {
 		return procura;
 	}
 
-	public void setProcura(String procura) {
-		this.procura = procura;
+	public void setProcura(String procura1) {
+		this.procura = procura1;
 	}
+
 	
+	public String getProcura2() {
+		return procura2;
+	}
+
+	public void setProcura2(String procura) {
+		this.procura2 = procura;
+	}
+
+	public String getProcura3() {
+		return procura3;
+	}
+
+	public void setProcura3(String procura) {
+		this.procura3 = procura;
+	}
+
 	public void initReceitas() {
 		
 		Receita receita1 = new Receita();
