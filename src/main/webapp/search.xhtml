@@ -14,7 +14,9 @@
 				<h:commandButton action = "search"/><p></p>
 				
 				<h:inputText value="#{receitaIngredienteBean.receitaIngredienteService.megaBean.procura}" />
-				
+				<h:inputText value="#{receitaIngredienteBean.receitaIngredienteService.megaBean.procura2}" />
+				<h:inputText value="#{receitaIngredienteBean.receitaIngredienteService.megaBean.procura3}" />
+				<h:commandButton action = "search"/><p></p>
 				<p:dataTable var="ingredientereceita" value="#{receitaIngredienteBean.receitaIngredienteService.returnIdI()}" scrollable="true">
 				    <p:column headerText="Nome das Receitas">
 				        <h:outputText value="#{ingredientereceita}" />
