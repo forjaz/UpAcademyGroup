@@ -3,12 +3,8 @@ import io.altar.upacademy.model.Receita;
 import io.altar.upacademy.service.EntityService;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.NoneScoped;
-import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,12 +17,10 @@ public class Global extends EntityService implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private List<Long> searchQuery;
-    private List<Long> receitaIDListDebug = new ArrayList<>();
-    private List<Long> uniqueReceitaIDListDebug = new ArrayList<>();
+    private List<Long> receitaIDList;
+    private List<Long> uniqueReceitaIDList;
     private List<Long> renderedResult = new ArrayList<>();
-
     private int startGridIndex = 0;
-
 
     // Constructor
     public Global() {
@@ -46,22 +40,21 @@ public class Global extends EntityService implements Serializable {
     }
 
     public void searchIngredientes() {
-        List<Long> receitaIDList = convertIngredienteIDToReceitaID(searchQuery);
-        receitaIDListDebug = receitaIDList;
-        List<Long> uniqueReceitaIDList = removeReceitaIDDuplicates(receitaIDList);
-        uniqueReceitaIDListDebug = uniqueReceitaIDList;
-        List<Long> listMultipleOfFour = ensureLengthMultipleOfFour(uniqueReceitaIDList);
-        renderedResult = listMultipleOfFour;
+        receitaIDList = convertIngredienteIDToReceitaID(searchQuery);
+        uniqueReceitaIDList = removeReceitaIDDuplicates(receitaIDList);
+        renderedResult = ensureLengthMultipleOfFour(uniqueReceitaIDList);
     }
 
     public List<Long> convertIngredienteIDToReceitaID(List<Long> inputList) {
         String query = "SELECT e.receita.id FROM Receita_Ingrediente e WHERE ";
-        List<Long> resultList = new ArrayList<>();
-        if (inputList == null) {
-            return resultList;
+        int inputSize = inputList.size();
+        List<Long> placeholder = new ArrayList<>();
+        placeholder.add(1L);
+        if (inputList.isEmpty()) {
+            return placeholder;
         } else {
-            for (int i = 0; i < inputList.size(); i++) {
-                if (i == inputList.size() - 1) {
+            for (int i = 0; i < inputSize; i++) {
+                if (i == inputSize - 1) {
                     query = query + "ingrediente_id=" + inputList.get(i);
                 } else {
                     query = query + "ingrediente_id=" + inputList.get(i) + " or ";
@@ -73,16 +66,17 @@ public class Global extends EntityService implements Serializable {
 
     public List<Long> removeReceitaIDDuplicates(List<Long> inputList) {
         List<Long> resultList = new ArrayList<>();
-        for (Long id : inputList) {
-            if (!resultList.contains(id)) {
-                resultList.add(id);
+        int inputSize = inputList.size();
+        for (int i = 0; i < inputSize; i++) {
+            if (!resultList.contains(inputList.get(i))) {
+                resultList.add(inputList.get(i));
             }
         }
         return resultList;
     }
 
     public List<Long> ensureLengthMultipleOfFour(List<Long> inputList) {
-        if (inputList.size() % 4 != 0) {
+        while (inputList.size() % 4 != 0) {
             inputList.add(1L);
         }
         return inputList;
@@ -101,18 +95,13 @@ public class Global extends EntityService implements Serializable {
     }
 
     public Long findUniqueRecipeId(int index) {
-		
-		Long rId = renderedResult.get(index);
-		
-		return rId;
-	}
-    
-    public void queryGetRecipe (Long id) {
-    	
-    	Receita r =  (Receita) em.createQuery("SELECT e FROM Receita WHERE id="+ id).getResultList();
-    	
+        Long rId = renderedResult.get(index);
+        return rId;
     }
 
+    public void queryGetRecipe(Long id) {
+        Receita r = (Receita) em.createQuery("SELECT e FROM Receita WHERE id=" + id).getResultList();
+    }
     // Getters and Setters
 
     public static long getSerialversionuid() {
@@ -147,19 +136,19 @@ public class Global extends EntityService implements Serializable {
         this.startGridIndex = startGridIndex;
     }
 
-    public List<Long> getReceitaIDListDebug() {
-        return receitaIDListDebug;
+    public List<Long> getReceitaIDList() {
+        return receitaIDList;
     }
 
-    public void setReceitaIDListDebug(List<Long> receitaIDListDebug) {
-        this.receitaIDListDebug = receitaIDListDebug;
+    public void setReceitaIDList(List<Long> receitaIDListDebug) {
+        this.receitaIDList = receitaIDListDebug;
     }
 
-    public List<Long> getUniqueReceitaIDListDebug() {
-        return uniqueReceitaIDListDebug;
+    public List<Long> getUniqueReceitaIDList() {
+        return uniqueReceitaIDList;
     }
 
-    public void setUniqueReceitaIDListDebug(List<Long> uniqueReceitaIDListDebug) {
-        this.uniqueReceitaIDListDebug = uniqueReceitaIDListDebug;
+    public void setUniqueReceitaIDList(List<Long> uniqueReceitaIDListDebug) {
+        this.uniqueReceitaIDList = uniqueReceitaIDListDebug;
     }
 }
