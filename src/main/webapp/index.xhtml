@@ -3,7 +3,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
-                template="/template/default/receitaLayout.xhtml"
+                template="/template/default/GridLayout.xhtml"
                 xmlns:p="http://primefaces.org/ui">
 
     <!-- SEARCH BAR -->
@@ -21,13 +21,15 @@
                 </h:selectManyListbox>
 
                 <p:commandButton value="Procurar" action="#{global.searchIngredientes()}"
-                                 update="searchQuery receitaID uniqueReceitaID renderList imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"
+                                 update="searchQuery receitaID uniqueReceitaIDList renderList uniqueReceitaID uniqueReceita imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"
                                  icon="ui-icon-check"/>
                 <h:outputText id="searchQuery" value="ingredienteID = #{global.searchQuery}"/>
-                <h:outputText id="receitaID" value="receitaID = #{global.receitaIDListDebug}"/>
-                <h:outputText id="uniqueReceitaID"
-                              value="uniqueReceitaID = #{global.uniqueReceitaIDListDebug}"/>
+                <h:outputText id="receitaID" value="receitaID = #{global.receitaIDList}"/>
+                <h:outputText id="uniqueReceitaIDList"
+                              value="uniqueReceitaIDList = #{global.uniqueReceitaIDList}"/>
                 <h:outputText id="renderList" value="renderList = #{global.renderedResult}"/>
+                <h:outputText id="uniqueReceitaID" value="uniqueReceitaID = #{global.uniqueReceitaID}"/>
+                <h:outputText id="uniqueReceita" value="uniqueReceita = #{global.uniqueReceita}"/>
 
             </h:panelGrid>
 
@@ -38,79 +40,90 @@
 
     </ui:define>
 
-    <!-- IMAGE 1 -->
-    <ui:define name="receitaImagem1">
-	    <h:form id="imagem1">
-		    <h:commandLink action="#{receitaService.selectRecipe(global.queryGetRecipe(global.findUniqueRecipeId(global.startGridIndex)).id)}">
-				<h:graphicImage styleClass="receita-imagem"
-		   					    url="#{receitaService.getReceitaFromID(global.renderedResult.get(global.startGridIndex)).imagem}"/>
-		    </h:commandLink>
-	    </h:form>
-    </ui:define>
+            <!-- GRID -->
+            <!-- IMAGE 1 -->
+            <ui:define name="receitaImagem1">
 
-    <ui:define name="receitaNome1">
-        <h:outputText id="nome1" styleClass="receita-nome"
-                      value="#{receitaService.getReceitaFromID(global.renderedResult.get(global.startGridIndex)).nome}"/>
-    </ui:define>
+                <h:form id="imagem1">
+                    <h:graphicImage styleClass="receita-imagem"
+                                    url="#{receitaService.getReceitaFromID(global.renderedResult.get(global.startGridIndex)).imagem}">
+                        <p:commandButton action="#{global.showUniqueReceita(global.startGridIndex)}"/>
+                    </h:graphicImage>
+                </h:form>
+            </ui:define>
 
-    <!-- IMAGE 2 -->
-    <ui:define name="receitaImagem2">
-	    <h:form id="imagem2">
-		    <h:commandLink action="#{receitaService.selectRecipe(receitaService.getReceitaFromID(global.renderedResult.get(global.startGridIndex)).id)}">
-	        <h:graphicImage styleClass="receita-imagem"
-	                        url="#{receitaService.getReceitaFromID(global.renderedResult.get(global.startGridIndex + 1)).imagem}"/>
-	        </h:commandLink>
-	    </h:form>
-        
-    </ui:define>
+            <ui:define name="receitaNome1">
+                <h:form id="nome1">
+                    <h:outputText styleClass="receita-nome"
+                                  value="#{receitaService.getReceitaFromID(global.renderedResult.get(global.startGridIndex)).nome}"/>
+                </h:form>
+            </ui:define>
 
-    <ui:define name="receitaNome2">
-        <h:outputText id="nome2" styleClass="receita-nome"
-                      value="#{receitaService.getReceitaFromID(global.renderedResult.get(global.startGridIndex + 1)).nome}"/>
-    </ui:define>
+            <!-- IMAGE 2 -->
+            <ui:define name="receitaImagem2">
+                <h:form id="imagem2">
+                    <h:graphicImage styleClass="receita-imagem"
+                                    url="#{receitaService.getReceitaFromID(global.renderedResult.get(global.startGridIndex + 1)).imagem}">
+                        <p:commandButton action="#{global.showUniqueReceita(global.startGridIndex + 1)}"/>
+                    </h:graphicImage>
+                </h:form>
+            </ui:define>
 
-    <!-- IMAGE 3 -->
-    <ui:define name="receitaImagem3">
-	    <h:form id="imagem3">
-		    <h:commandLink action="#{receitaService.selectRecipe(receitaService.getReceitaFromID(global.renderedResult.get(global.startGridIndex)).id)}">
-	        <h:graphicImage styleClass="receita-imagem"
-	                        url="#{receitaService.getReceitaFromID(global.renderedResult.get(global.startGridIndex + 2)).imagem}"/>
-	        </h:commandLink>
-	    </h:form>
-                       
-    </ui:define> 
+            <ui:define name="receitaNome2">
+                <h:form id="nome2">
+                    <h:outputText styleClass="receita-nome"
+                                  value="#{receitaService.getReceitaFromID(global.renderedResult.get(global.startGridIndex + 1)).nome}"/>
+                </h:form>
+            </ui:define>
 
-    <ui:define name="receitaNome3">
-        <h:outputText id="nome3" styleClass="receita-nome"
-                      value="#{receitaService.getReceitaFromID(global.renderedResult.get(global.startGridIndex + 2)).nome}"/>
-    </ui:define>
+            <!-- IMAGE 3 -->
+            <ui:define name="receitaImagem3">
+                <h:form id="imagem3">
+                    <h:graphicImage styleClass="receita-imagem"
+                                    url="#{receitaService.getReceitaFromID(global.renderedResult.get(global.startGridIndex + 2)).imagem}">
+                        <p:commandButton action="#{global.showUniqueReceita(global.startGridIndex + 2)}"
+                                       />
+                    </h:graphicImage>
+                </h:form>
+            </ui:define>
 
-    <!-- IMAGE 4 -->
-    <ui:define name="receitaImagem4">
-	    <h:form id="imagem4">
-		    <h:commandLink action="#{receitaService.selectRecipe(receitaService.getReceitaFromID(global.renderedResult.get(global.startGridIndex)).id)}">
-        	<h:graphicImage styleClass="receita-imagem"
-                        url="#{receitaService.getReceitaFromID(global.renderedResult.get(global.startGridIndex + 3)).imagem}"/>
-            </h:commandLink>
-        </h:form>            
-    </ui:define>
+            <ui:define name="receitaNome3">
+                <h:form id="nome3">
+                    <h:outputText styleClass="receita-nome"
+                                  value="#{receitaService.getReceitaFromID(global.renderedResult.get(global.startGridIndex + 2)).nome}"/>
+                </h:form>
+            </ui:define>
 
-    <ui:define name="receitaNome4">
-        <h:outputText id="nome4" styleClass="receita-nome"
-                      value="#{receitaService.getReceitaFromID(global.renderedResult.get(global.startGridIndex + 3)).nome}"/>
-    </ui:define>
+            <!-- IMAGE 4 -->
+            <ui:define name="receitaImagem4">
+                <h:form id="imagem4">
+                    <h:graphicImage styleClass="receita-imagem"
+                                    url="#{receitaService.getReceitaFromID(global.renderedResult.get(global.startGridIndex + 3)).imagem}">
+                        <p:commandButton action="#{global.showUniqueReceita(global.startGridIndex + 3)}"
+                                      />
+                    </h:graphicImage>
+                </h:form>
+            </ui:define>
 
-    <!-- BUTTON LEFT -->
-    <ui:define name="cursorLeft">
-        <p:commandButton action="#{global.renderLeft()}"
-                         update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"/>
-    </ui:define>
+            <ui:define name="receitaNome4">
+                <h:form id="nome4">
+                    <h:outputText styleClass="receita-nome"
+                                  value="#{receitaService.getReceitaFromID(global.renderedResult.get(global.startGridIndex + 3)).nome}"/>
+                </h:form>
+            </ui:define>
 
-    <!-- BUTTON RIGHT -->
-    <ui:define name="cursorRight">
-        <p:commandButton action="#{global.renderRight()}"
-                         update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"/>
-    </ui:define>
+            <!-- BUTTON LEFT -->
+            <ui:define name="cursorLeft">
+                <p:commandButton action="#{global.renderLeft()}"
+                                 update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"/>
+            </ui:define>
+
+            <!-- BUTTON RIGHT -->
+            <ui:define name="cursorRight">
+                <p:commandButton action="#{global.renderRight()}"
+                                 update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"/>
+            </ui:define>
+
 
 
 </ui:composition>
