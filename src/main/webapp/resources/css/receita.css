@@ -215,6 +215,9 @@ body {
 	margin-left: 346px;
 	margin-top: 227px;
 	padding: 10px;
+    z-index: 1;
+    color: white;
+    font-size: 11px;
 }
 
 .table-nome-nutricao {
@@ -223,6 +226,7 @@ body {
 	justify-content: space-between;
 	width: 435px;
 	height: 273px;
+    z-index: 1;
 }
 
 .table-nutricao {
@@ -230,6 +234,7 @@ body {
 	flex-wrap: wrap;
 	height: 50%;
 	width: 100%;
+    z-index: 1;
 }
 
 .table-ingredientes {
@@ -238,36 +243,43 @@ body {
 	height: 273px;
 	width: 435px;
 	margin-bottom: 10px;
+    z-index: 1;
 }
 
 .receita-imagem-unique {
 	width: 435px;
 	height: 273px;
 	margin-bottom: 10px;
+    z-index: 1;
 }
 
 .receita-nome-unique {
 	height: 131.5px;
 	width: 100%;
 	margin-bottom: 5px;
+    z-index: 1;
 }
 
 .receita-nutricao-label {
 	width: 50%;
 	height: 50%;
+    z-index: 1;
 }
 
 .receita-column {
 	width: 30%;
+    z-index: 1;
 }
 
 .receita-column-ingredientes {
 	width: 40%;
+    z-index: 1;
 }
 
 .receita-preparacao {
 	height: 273px;
 	width: 435px;
+    z-index: 1;
 }
 
 /*-----------------------------------------------------------------------------------*/
