@@ -31,8 +31,7 @@ public class megaRepository extends EntityService implements Serializable{
 		this.procura = procura1;
 	}
 
-	
-<<<<<<< HEAD
+
     public void basedados() {
     	em.createNativeQuery("INSERT INTO `Receita` (`id`,`nome`,`imagem`,`preparacao`,`calorias`,`gorduras`,`hidratos`,`proteina`) VALUES (1,' ','https://s1.postimg.org/hrazrqni7/transparent.png',' ',0,0,0,0);").executeUpdate();
     	em.createNativeQuery("INSERT INTO `Receita` (`id`,`nome`,`imagem`,`preparacao`,`calorias`,`gorduras`,`hidratos`,`proteina`) VALUES (2,'Esparguete com Frango do Campo em Molho de Tomate','https://www.pingodoce.pt/wp-content/uploads/2015/12/1449085327','Separe os brócolos em raminhos, lave e escorra.Encha 1 tacho com água e leve ao lume. Quando a água ferver, tempere com sal e introduza os raminhos de brócolos. Deixe cozer destapados até estarem macios.Retire os brócolos com uma escumadeira e introduza na mesma água o esparguete. Deixe cozer até estar al-dente.Descasque a cebola e pique-a finamente. Esborrache os dentes de alho e pique-os. Lave o talo de aipo, tire-lhe os fios e corte em fatias finas. Deite o azeite num tacho,leve ao lume e adicione os dentes de alho, depois a cebola picada, o aipo e a folha de louro. Deixe cozinhar sobre lume moderado, mexendo de vez em quando. Limpe o tomate de pele e sementes, pique-o em pedaços e junte ao cozinhado. Deixe o tomate cozinhar até estar macio e regue com o vinho branco. Tempere com sal e pimenta e deixe ferver um pouco até apurar. Adicione 4 a 5 folhas de manjericão fresco, retire do lume e triture com a varinha mágica. Adicione o frango desfiado e leve de novo ao lume até levantar fervura.Escora o esparguete e sirva-o com o frango em molho de tomate, enfeitado com as azeitonas pretas e folhas frescas de manjericão. Acompanhe com os brócolos cozidos.',3356,118.907,121.356,131.736);").executeUpdate();
@@ -41,7 +40,7 @@ public class megaRepository extends EntityService implements Serializable{
     	em.createNativeQuery("INSERT INTO `Receita` (`id`,`nome`,`imagem`,`preparacao`,`calorias`,`gorduras`,`hidratos`,`proteina`) VALUES (5,'Frango Assado','http://www.pittuka.com/wp-content/uploads/2014/05/creme-de-tomate-300x180.jpg','',0,0,0,0);").executeUpdate();
 		
     }
-=======
+
 	public String getProcura2() {
 		return procura2;
 	}
@@ -58,42 +57,7 @@ public class megaRepository extends EntityService implements Serializable{
 		this.procura3 = procura;
 	}
 
-	public void initReceitas() {
-		
-		Receita receita1 = new Receita();
-		receita1.setImagem("https://www.pingodoce.pt/wp-content/uploads/2015/12/1449085327");
-		receita1.setNome("Esparguete com Frango do Campo em Molho de Tomate");
-		receita1.setPreparacao("Separe os brócolos em raminhos, lave e escorra."+
-								"Encha 1 tacho com água e leve ao lume. Quando a água ferver, tempere com sal e introduza os raminhos de brócolos. Deixe cozer destapados até estarem macios."+
-				"Retire os brócolos com uma escumadeira e introduza na mesma água o esparguete. Deixe cozer até estar al-dente."+
-				"Descasque a cebola e pique-a finamente. Esborrache os dentes de alho e pique-os. Lave o talo de aipo, tire-lhe os fios e corte em fatias finas. Deite o azeite num tacho,"+
-				"leve ao lume e adicione os dentes de alho, depois a cebola picada, o aipo e a folha de louro. Deixe cozinhar sobre lume moderado, mexendo de vez em quando. "+
-				"Limpe o tomate de pele e sementes, pique-o em pedaços e junte ao cozinhado. Deixe o tomate cozinhar até estar macio e regue com o vinho branco. "+
-				"Tempere com sal e pimenta e deixe ferver um pouco até apurar. Adicione 4 a 5 folhas de manjericão fresco, retire do lume e triture com a varinha mágica. "+
-				"Adicione o frango desfiado e leve de novo ao lume até levantar fervura."+
-				"Escora o esparguete e sirva-o com o frango em molho de tomate, enfeitado com as azeitonas pretas e folhas frescas de manjericão. Acompanhe com os brócolos cozidos.");
-		receita1.setCalorias(3356);
-		receita1.setProteina(131.736);
-		receita1.setHidratos(121.356);
-		receita1.setGorduras(118.907);
-		em.persist(receita1);
-	
-		Receita receita2 = new Receita();
-		receita2.setImagem("https://www.google.pt/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwj5762t_rDUAhXLVRoKHZ0ADf4QjRwIBw&url=http%3A%2F%2Fwww.pittuka.com%2Fculinaria%2Fsopas-caldos-e-cremes%2Fcreme-de-tomate%2F&psig=AFQjCNGkpMQXAKjdR1YJmQl1GiOmce9fPw&ust=1497105384243358");
-		receita2.setNome("Creme de Tomate");
-		receita2.setPreparacao("Descasque a cebola e pique-a finamente, elimine os talos rijos do bolbo de funcho, reserve as folhinhas verdes e pique a parte restante. Pele a cenoura e corte-a em cubinhos pequenos."+
-								"Deite o azeite e os legumes numa panela, tape e leve a cozinhar sobre lume muito brando."+
-				"Entretanto, pele o tomate, corte-o ao meio e limpe-o de sementes. Pique o tomate em pedaços e junte-o aos restantes legumes. Salpique com cerca de 1 colher de sobremesa de sal, volte a tapar e deixe cozinhar durante cerca de 10 minutos, mexendo de vez em quando."+
-				"Ao mesmo tempo coza o ovo em água temperada com sal durante 10 minutos."+
-				"Adicione o açúcar e a água a ferver. Quando os legumes estiverem macios triture-os com a varinha mágica e retifique os temperos se necessário."+
-				"Descasque o ovo e pique-o finamente."+
-				"Deite a sopa nos pratos de serviço, salpique com o ovo picado e as folhinhas de funcho e o cebolinho.");
-		receita2.setCalorias(3028);
-		receita2.setProteina(45.7);
-		receita2.setHidratos(130.8);
-		receita2.setGorduras(70.636);		
-		em.persist(receita2);
->>>>>>> 0d74cff0b8d8630ec3166be06229e804654fc69c
+
 	
 	public void initRct() {
 		
