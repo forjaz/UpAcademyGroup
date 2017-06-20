@@ -22,6 +22,8 @@ public class Receita implements Serializable {
 	private double hidratos;
 	private double gorduras;
 	private int calorias;
+	private String tipo;
+	private int nPessoas;
 	@Lob
 	@Column
 	private String imagem;
@@ -104,6 +106,22 @@ public class Receita implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public int getnPessoas() {
+		return nPessoas;
+	}
+
+	public void setnPessoas(int nPessoas) {
+		this.nPessoas = nPessoas;
 	}
 
 }
