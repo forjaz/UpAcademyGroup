@@ -74,16 +74,42 @@ public class Global extends EntityService implements Serializable {
 	}
 
 	// 1.2 REMOVE DUPLICATE IDs FROM RECEITA ID
-	public List<Long> removeReceitaIDDuplicates(List<Long> inputList) {
-		List<Long> resultList = new ArrayList<>();
-		int inputSize = inputList.size();
-		for (int i = 0; i < inputSize; i++) {
-			if (!resultList.contains(inputList.get(i))) {
-				resultList.add(inputList.get(i));
-			}
-		}
-		return resultList;
-	}
+    public List<Long> removeReceitaIDDuplicates(List<Long> inputList) {
+    	long contador = 1;
+    	List<Long> contadores = new ArrayList<>();
+        List<Long> resultList = new ArrayList<>();
+        int inputSize = inputList.size();
+        for (int i = 1; i <= inputSize; i++) {
+        	if(i==1){
+    			contadores.add((long) contador);	
+    		}
+        	if(i < inputSize && inputList.get(i-1)!=inputList.get(i)){
+        		contadores.add((long) contador);
+        	}
+        	
+            if (!resultList.contains(inputList.get(i-1))) {
+                resultList.add(inputList.get(i-1));
+            }
+        }
+        
+        int i = 1;
+    	for(int j = 1; j <= contadores.size() ; j++){
+        	while(i < inputSize && inputList.get(i-1)==inputList.get(i)){
+        		contadores.set(j-1, ++contador);
+        		i++;
+        		if(i < inputSize && inputList.get(i-1)!=inputList.get(i)){
+            		contador=1;
+                    i++;
+            		break;
+        		}
+        		
+        	}
+    	
+    	}
+    	System.out.println(contadores);
+    	return resultList;
+    }
+
 
 	// 1.3 ENSURE MULTIPLES OF FOUR IN RENDERED LIST FOR NAVIGATION
 	public List<Long> ensureLengthMultipleOfFour(List<Long> inputList) {
