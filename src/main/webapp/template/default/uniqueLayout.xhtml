@@ -85,8 +85,6 @@
 			</div>
 
 
-
-
 			<!-- CONTENT DISPLAY -->
 			<div class="row">
 				<div id="contentDisplayDiv" class="content-display">
@@ -107,50 +105,22 @@
 			<!-- UNIQUE RECEITA PAGE -->
 			<div class="row">
 				<div id="uniqueReceita" class="uniqueReceita">
-                    <ui:insert name="uniqueReceitaPage"/>
 
 					<div id="uniqueReceitaImagem" class="receita-imagem-unique">
 						<ui:insert name="uniqueReceitaImagem" />
 					</div>
 
-					<div class="table-ingredientes">
-						<div id="uniqueReceitaIngredientes"
-							class="receita-column-ingredientes">
-							<ui:insert name="uniqueReceitaIngredientes" />
-						</div>
-						<div id="uniqueReceitaQuantidades" class="receita-column">
-							<ui:insert name="uniqueReceitaQuantidades" />
-						</div>
-						<div id="uniqueReceitaMedidas" class="receita-column">
-							<ui:insert name="uniqueReceitaMedidas" />
-						</div>
+					<div class="table-nutricao">
+					<ui:insert name="uniqueReceitaNutricao" />
+
 					</div>
 
-					<div class="table-nome-nutricao">
+					<div id="uniqueReceitaIngredientes" class="table-ingredientes">
+						<ui:insert name="uniqueReceitaIngredientes" />
+					</div>
 
-						<div id="uniqueReceitaNome" class="receita-nome-unique">
-							<ui:insert name="uniqueReceitaNome" />
-						</div>
-
-						<div class="table-nutricao">
-
-							<div id="uniqueReceitaCalorias" class="receita-nutricao-label">
-								<ui:insert name="uniqueReceitaCalorias" />
-							</div>
-
-							<div id="uniqueReceitaProteinas" class="receita-nutricao-label">
-								<ui:insert name="uniqueReceitaProteinas" />
-							</div>
-
-							<div id="uniqueReceitaHidratos" class="receita-nutricao-label">
-								<ui:insert name="uniqueReceitaHidratos" />
-							</div>
-
-							<div id="uniqueReceitaGorduras" class="receita-nutricao-label">
-								<ui:insert name="uniqueReceitaGorduras" />
-							</div>
-
-						</div>
+					<div id="uniqueReceitaNome" class="receita-nome-unique">
+						<ui:insert name="uniqueReceitaNome" />
 					</div>
 
 					<div id="uniqueReceitaPreparacao" class="receita-preparacao">
