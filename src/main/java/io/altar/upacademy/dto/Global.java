@@ -137,7 +137,7 @@ public class Global extends EntityService implements Serializable {
 	public String showUniqueReceita(int index) {
 		findReceitaID(index);
 		uniqueReceita = getReceitaFromID(uniqueReceitaID);
-		return "receita";
+		return "receita-detalhe";
 	}
 
 	// 2.1 GET RECEITA IN RENDERED LIST FROM IMAGE INDEX
