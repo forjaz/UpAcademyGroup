@@ -33,7 +33,7 @@ public class ReceitaService extends EntityService implements Serializable {
 	public String newReceita(Receita receita) {
 		em.persist(receita);
 		
-		return "receitas";
+		return "ingrediente_Receita";
 	}
 	
 	public String selectRecipe(int id) {
