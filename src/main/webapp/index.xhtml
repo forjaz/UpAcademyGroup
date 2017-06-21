@@ -11,7 +11,10 @@
 
 		<h:form id="searchBox">
 
-			<h:panelGrid columns="2" cellpadding="5">
+			<h:panelGrid columns="3" cellpadding="5">
+
+				<h:outputLabel class="label-procurar"
+					value="Por favor introduza os Ingredientes" />
 
 				<h:selectManyListbox value="#{global.searchQuery}"
 					styleClass="select2">
@@ -19,10 +22,10 @@
 						itemLabel="#{ing.nome}" itemValue="#{ing.id}" />
 				</h:selectManyListbox>
 
-				<p:commandButton value="Procurar"
+				<p:commandButton value="Procurar Receitas"
 					action="#{global.searchIngredientes()}"
 					update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"
-					icon="ui-icon-check" />
+					icon="ui-icon-search" />
 
 
 			</h:panelGrid>
@@ -109,14 +112,18 @@
 
 	<!-- BUTTON LEFT -->
 	<ui:define name="cursorLeft">
-		<p:commandButton action="#{global.renderLeft()}"
-			update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4" />
+		<h:form id="cursor-left-click">
+			<h:commandLink action="#{global.renderLeft()}"
+				update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4" />
+		</h:form>
 	</ui:define>
 
 	<!-- BUTTON RIGHT -->
 	<ui:define name="cursorRight">
-		<p:commandButton action="#{global.renderRight()}"
-			update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4" />
+		<h:form id="cursor-right-click">
+			<h:commandLink action="#{global.renderRight()}"
+				update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4" />
+		</h:form>
 	</ui:define>
 
 

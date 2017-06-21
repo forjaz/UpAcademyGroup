@@ -45,11 +45,32 @@ public class Global extends EntityService implements Serializable {
 	public List returnIngredientes() {
 		return em.createQuery("SELECT e FROM Ingrediente e ORDER BY e.nome").getResultList();
 	}
+	
+	public List<Receita> returnReceitasOrderByHit(){
+		List<Long> lista2 = searchQuery;
+		String var = "(";
+		for(int i = 0; i <= lista2.size() - 1; i++){
+			if(i<lista2.size()-1){
+				 var += lista2.get(i)+",";
+			}else{
+				var += lista2.get(i)+")";
+			}
+		}
+		
+		
+
+		String query = "SELECT R.*, (SELECT COUNT(*) FROM Receita_Ingrediente WHERE receita_id = R.id && ingrediente_id IN "
+						+var+") as 'Relevancia' FROM Receita R INNER JOIN Receita_Ingrediente RI ON R.id = RI.receita_id "
+						+"WHERE RI.ingrediente_id IN "+var+" GROUP BY receita_id ORDER BY Relevancia DESC";
+
+		
+		List<Receita> listaOrdenada = em.createNativeQuery(query,Receita.class).getResultList();
+		return listaOrdenada;
+	}
 
 	// 1 SEARCH INGREDIENTES IN SEARCH BAR
 	public void searchIngredientes() {
-		List<Long> receitaIDList = convertIngredienteIDToReceitaID(searchQuery);
-		List<Receita> receitaList = getReceitaFromReceitaID(receitaIDList);
+		List<Receita> receitaList = returnReceitasOrderByHit();
 		receitaResult = ensureLengthMultipleOfFour(receitaList);
 	}
 
@@ -267,5 +288,7 @@ public class Global extends EntityService implements Serializable {
 	public void setReceitaPlaceholder(Receita receitaPlaceholder) {
 		this.receitaPlaceholder = receitaPlaceholder;
 	}
+	
+	
 
 }

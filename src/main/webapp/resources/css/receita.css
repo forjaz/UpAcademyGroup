@@ -86,7 +86,7 @@ body {
 }
 
 .navbar-btn {
-	width: 15%;
+	width: 30%;
 	margin: 8px 7px 8px 7px;
 	font-size: 14px;
 	letter-spacing: 1px;
@@ -125,12 +125,21 @@ body {
 }
 
 #searchBox {
-	margin-left: 50vh;
-    margin-top: 11px;
+	margin-left: 33vh;
+	margin-top: 11px;
 }
 
 .select2-container {
 	width: 500px !important;
+}
+
+.label-procurar {
+	margin-right: 10px;
+	font-size: 16px;
+}
+
+.ui-button {
+	padding: 1.5px 0px !important;
 }
 
 /*-----------------------------------------------------------------------------------*/
