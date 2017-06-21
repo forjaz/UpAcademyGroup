@@ -42,8 +42,27 @@ public class Global extends EntityService implements Serializable {
 	}
 
 	// Methods
+	public List<Long> returnReceitasOrderByHit(){
+		List<Long> lista2 = searchQuery;
+		String var="(";
+		for(int i = 0; i <= lista2.size() - 1; i++){
+			if(i<lista2.size()-1){
+				var = var + lista2.get(i)+",";
+			}else{
+				var = var + lista2.get(i)+")";
+			}
+		}
+		String query = "SELECT R.*, (SELECT COUNT(*) FROM Receita_Ingrediente WHERE receita_id = R.id && ingrediente_id IN "
+						+var+") as 'Relevancia' FROM Receita R INNER JOIN Receita_Ingrediente RI ON R.id = RI.receita_id "
+						+"WHERE RI.ingrediente_id IN "+var+" GROUP BY receita_id ORDER BY Relevancia DESC";
+		
+		List<Long> listaOrdenada = em.createNativeQuery(query).getResultList();
+		return listaOrdenada;
+	}
+	
 	public List returnIngredientes() {
-		return em.createQuery("SELECT e FROM Ingrediente e").getResultList();
+		List lista = em.createQuery("SELECT e FROM Ingrediente e").getResultList();
+		return lista;
 	}
 
 	// 1 SEARCH INGREDIENTES IN SEARCH BAR
@@ -51,6 +70,7 @@ public class Global extends EntityService implements Serializable {
 		receitaIDList = convertIngredienteIDToReceitaID(searchQuery);
 		uniqueReceitaIDList = removeReceitaIDDuplicates(receitaIDList);
 		renderedResult = ensureLengthMultipleOfFour(uniqueReceitaIDList);
+		returnReceitasOrderByHit();
 	}
 
 	// 1.1 CONVERT INGREDIENTE ID --> RECEITA ID
@@ -81,10 +101,10 @@ public class Global extends EntityService implements Serializable {
         int inputSize = inputList.size();
         for (int i = 1; i <= inputSize; i++) {
         	if(i==1){
-    			contadores.add((long) contador);	
+    			contadores.add(contador);	
     		}
         	if(i < inputSize && inputList.get(i-1)!=inputList.get(i)){
-        		contadores.add((long) contador);
+        		contadores.add(contador);
         	}
         	
             if (!resultList.contains(inputList.get(i-1))) {
