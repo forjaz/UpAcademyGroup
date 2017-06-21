@@ -1,6 +1,5 @@
 package io.altar.upacademy.service;
 
-
 import io.altar.upacademy.model.Ingrediente;
 import io.altar.upacademy.model.Receita;
 
@@ -19,7 +18,6 @@ import javax.transaction.Transactional;
 @Transactional
 public class ReceitaService extends EntityService implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
 
 	// Constructor
 	public ReceitaService() {
@@ -29,30 +27,18 @@ public class ReceitaService extends EntityService implements Serializable {
 	// DB Methods
 	public String newReceita(Receita receita) {
 		em.persist(receita);
-		
-		return "ingrediente_Receita";
-	}
-	
-	public String selectRecipe(int id) {
-		
-		List<Long> receitaL = global.getRenderedResult();
-		if (receitaL != null && receitaL.size()>0) {
-			Long l = global.getRenderedResult().get(id);
-			//this.loadReceita(l);z
-		}
-		System.out.println(id);
-		return "index";
+
+		return "receitas";
 	}
 
 	public Receita getReceitaFromID(int receitaID) {
-	    List list = em.createQuery("SELECT e FROM Receita e").getResultList();
-	    return (Receita) list.get(receitaID - 1);
-    }
+		List list = em.createQuery("SELECT e FROM Receita e").getResultList();
+		return (Receita) list.get(receitaID - 1);
+	}
 
 	// Getters and Setters
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
 
 }

@@ -8,6 +8,8 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.inject.Named;
+import javax.transaction.Transactional;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,15 +20,11 @@ import java.util.List;
 public class Global extends EntityService implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	private Receita receitaPlaceholder;
 	private List<Long> searchQuery;
-	private List<Long> receitaIDList;
-	private List<Long> uniqueReceitaIDList;
-	private List<Long> renderedResult = new ArrayList<>();
-	private Long uniqueReceitaID = 1L;
+	private List<Receita> receitaResult = new ArrayList<>();
 	private Receita uniqueReceita;
 	private List<Receita_Ingrediente> uniqueReceitaIngredienteList;
-	private List<String> uniqueIngredienteNomeList;
-	private String displayIngrediente;
 	private int startGridIndex = 0;
 
 	// Constructor
@@ -34,61 +32,68 @@ public class Global extends EntityService implements Serializable {
 	}
 
 	@PostConstruct
+	@Transactional
 	public void renderResultInit() {
-		renderedResult.add(1L);
-		renderedResult.add(1L);
-		renderedResult.add(1L);
-		renderedResult.add(1L);
+		receitaPlaceholder = (Receita) em.createQuery("SELECT e FROM Receita e WHERE id=1").getResultList().get(0);
+		receitaResult.add(receitaPlaceholder);
+		receitaResult.add(receitaPlaceholder);
+		receitaResult.add(receitaPlaceholder);
+		receitaResult.add(receitaPlaceholder);
 	}
 
 	// Methods
 	public List returnIngredientes() {
-		return em.createQuery("SELECT e FROM Ingrediente e").getResultList();
+		return em.createQuery("SELECT e FROM Ingrediente e ORDER BY e.nome").getResultList();
 	}
 
 	// 1 SEARCH INGREDIENTES IN SEARCH BAR
 	public void searchIngredientes() {
-		receitaIDList = convertIngredienteIDToReceitaID(searchQuery);
-		uniqueReceitaIDList = removeReceitaIDDuplicates(receitaIDList);
-		renderedResult = ensureLengthMultipleOfFour(uniqueReceitaIDList);
+		List<Long> receitaIDList = convertIngredienteIDToReceitaID(searchQuery);
+		List<Receita> receitaList = getReceitaFromReceitaID(receitaIDList);
+		receitaResult = ensureLengthMultipleOfFour(receitaList);
 	}
 
 	// 1.1 CONVERT INGREDIENTE ID --> RECEITA ID
 	public List<Long> convertIngredienteIDToReceitaID(List<Long> inputList) {
-		String query = "SELECT e.receita.id FROM Receita_Ingrediente e WHERE ";
+		StringBuilder query = new StringBuilder("SELECT e.receita.id FROM Receita_Ingrediente e WHERE ");
 		int inputSize = inputList.size();
+
+		// Field for Empty Input
 		List<Long> placeholder = new ArrayList<>();
 		placeholder.add(1L);
+
 		if (inputList.isEmpty()) {
 			return placeholder;
 		} else {
 			for (int i = 0; i < inputSize; i++) {
 				if (i == inputSize - 1) {
-					query = query + "ingrediente_id=" + inputList.get(i);
+					query.append("ingrediente_id=").append(inputList.get(i)).append(" GROUP BY receita_id");
 				} else {
-					query = query + "ingrediente_id=" + inputList.get(i) + " or ";
+					query.append("ingrediente_id=").append(inputList.get(i)).append(" or ");
 				}
 			}
-			return em.createQuery(query).getResultList();
+			return em.createQuery(query.toString()).getResultList();
 		}
 	}
 
-	// 1.2 REMOVE DUPLICATE IDs FROM RECEITA ID
-	public List<Long> removeReceitaIDDuplicates(List<Long> inputList) {
-		List<Long> resultList = new ArrayList<>();
+	// 1.3 CONVERT RECEITAID LIST TO RECEITA
+	public List<Receita> getReceitaFromReceitaID(List<Long> inputList) {
+		StringBuilder query = new StringBuilder("SELECT e FROM Receita e WHERE ");
 		int inputSize = inputList.size();
 		for (int i = 0; i < inputSize; i++) {
-			if (!resultList.contains(inputList.get(i))) {
-				resultList.add(inputList.get(i));
+			if (i == inputSize - 1) {
+				query.append("id=").append(inputList.get(i));
+			} else {
+				query.append("id=").append(inputList.get(i)).append(" or ");
 			}
 		}
-		return resultList;
+		return em.createQuery(query.toString()).getResultList();
 	}
 
-	// 1.3 ENSURE MULTIPLES OF FOUR IN RENDERED LIST FOR NAVIGATION
-	public List<Long> ensureLengthMultipleOfFour(List<Long> inputList) {
+	// 1.2 ENSURE MULTIPLES OF FOUR IN RENDERED LIST FOR NAVIGATION
+	public List<Receita> ensureLengthMultipleOfFour(List<Receita> inputList) {
 		while (inputList.size() % 4 != 0) {
-			inputList.add(1L);
+			inputList.add(receitaPlaceholder);
 		}
 		return inputList;
 	}
@@ -102,34 +107,23 @@ public class Global extends EntityService implements Serializable {
 
 	// NAVIGATE RIGHT
 	public void renderRight() {
-		if (renderedResult.size() > startGridIndex + 4) {
+		if (receitaResult.size() > startGridIndex + 4) {
 			startGridIndex += 4;
 		}
 	}
 
 	// 2 GET RECEITA ID FROM CLICKABLE IMAGE
 	public String showUniqueReceita(int index) {
-		findReceitaID(index);
-		uniqueReceita = getReceitaFromID(uniqueReceitaID);
-		return "receita";
-	}
-
-	// 2.1 GET RECEITA IN RENDERED LIST FROM IMAGE INDEX
-	public void findReceitaID(int index) {
-		uniqueReceitaID = renderedResult.get(index);
-	}
-
-	// 2.2 GET RECEITA FRM RECEITA ID
-	public Receita getReceitaFromID(Long ID) {
-		return (Receita) em.createQuery("SELECT e FROM Receita e WHERE id=" + ID).getResultList().get(0);
+		uniqueReceita = receitaResult.get(index);
+		return "receita-detalhe";
 	}
 
 	// 3 GETS INGREDIETES FROM RECEITA ID AND RETURNS A COLUMN OF THEIR NAMES
 	public String showIngredientesColumnFromReceitaID(Long ID) {
 		uniqueReceitaIngredienteList = getReceitaIngredienteFromReceitaID(ID);
-		uniqueIngredienteNomeList = getIngredienteNomeFromReceitaIngredienteID(uniqueReceitaIngredienteList);
-		displayIngrediente = showIngredienteNomeList(uniqueIngredienteNomeList);
-		return displayIngrediente;
+		List<String> uniqueIngredienteNomeList = getIngredienteNomeFromReceitaIngredienteID(
+				uniqueReceitaIngredienteList);
+		return showIngredienteNomeList(uniqueIngredienteNomeList);
 	}
 
 	// 3.1 GET RECEITA_INGREDIENTE LIST FROM RECEITA ID
@@ -230,38 +224,6 @@ public class Global extends EntityService implements Serializable {
 		this.searchQuery = searchQuery;
 	}
 
-	public List<Long> getReceitaIDList() {
-		return receitaIDList;
-	}
-
-	public void setReceitaIDList(List<Long> receitaIDList) {
-		this.receitaIDList = receitaIDList;
-	}
-
-	public List<Long> getUniqueReceitaIDList() {
-		return uniqueReceitaIDList;
-	}
-
-	public void setUniqueReceitaIDList(List<Long> uniqueReceitaIDList) {
-		this.uniqueReceitaIDList = uniqueReceitaIDList;
-	}
-
-	public List<Long> getRenderedResult() {
-		return renderedResult;
-	}
-
-	public void setRenderedResult(List<Long> renderedResult) {
-		this.renderedResult = renderedResult;
-	}
-
-	public Long getUniqueReceitaID() {
-		return uniqueReceitaID;
-	}
-
-	public void setUniqueReceitaID(Long uniqueReceitaID) {
-		this.uniqueReceitaID = uniqueReceitaID;
-	}
-
 	public Receita getUniqueReceita() {
 		return uniqueReceita;
 	}
@@ -278,22 +240,6 @@ public class Global extends EntityService implements Serializable {
 		this.uniqueReceitaIngredienteList = uniqueReceitaIngredienteList;
 	}
 
-	public List<String> getUniqueIngredienteNomeList() {
-		return uniqueIngredienteNomeList;
-	}
-
-	public void setUniqueIngredienteNomeList(List<String> uniqueIngredienteNomeList) {
-		this.uniqueIngredienteNomeList = uniqueIngredienteNomeList;
-	}
-
-	public String getDisplayIngrediente() {
-		return displayIngrediente;
-	}
-
-	public void setDisplayIngrediente(String displayIngrediente) {
-		this.displayIngrediente = displayIngrediente;
-	}
-
 	public int getStartGridIndex() {
 		return startGridIndex;
 	}
@@ -301,4 +247,25 @@ public class Global extends EntityService implements Serializable {
 	public void setStartGridIndex(int startGridIndex) {
 		this.startGridIndex = startGridIndex;
 	}
+
+	public List<Receita> getReceitaResult() {
+		return receitaResult;
+	}
+
+	public void setReceitaResult(List<Receita> receitaResult) {
+		this.receitaResult = receitaResult;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public Receita getReceitaPlaceholder() {
+		return receitaPlaceholder;
+	}
+
+	public void setReceitaPlaceholder(Receita receitaPlaceholder) {
+		this.receitaPlaceholder = receitaPlaceholder;
+	}
+
 }
