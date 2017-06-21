@@ -21,9 +21,6 @@ public class ReceitaService extends EntityService implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 
-	
-	
-	
 	// Constructor
 	public ReceitaService() {
 
