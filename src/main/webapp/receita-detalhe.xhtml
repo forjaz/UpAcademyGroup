@@ -62,18 +62,18 @@
 
 	<!-- UNIQUE INGREDIENTES / QUANTIDADES / UNIDADES TABLE -->
 	<ui:define name="uniqueReceitaIngredientes">
-		<p:dataTable var="ing"
-			value="#{global.getReceitaIngredienteFromReceitaID(global.uniqueReceitaID)}">
+		<p:dataTable var="rec_ing"
+			value="#{global.getReceitaIngredienteFromReceitaID(global.uniqueReceita.id)}">
 			<p:column headerText="Ingrediente">
-				<h:outputText value="#{ing.ingrediente.nome}" />
+				<h:outputText value="#{rec_ing.ingrediente.nome}" />
 			</p:column>
 
 			<p:column headerText="Quantidade">
-				<h:outputText value="#{ing.quantidadeCliente}" />
+				<h:outputText value="#{rec_ing.quantidadeCliente}" />
 			</p:column>
 
 			<p:column headerText="Medida">
-				<h:outputText value="#{ing.medidas}" />
+				<h:outputText value="#{rec_ing.medidas}" />
 			</p:column>
 		</p:dataTable>
 	</ui:define>
