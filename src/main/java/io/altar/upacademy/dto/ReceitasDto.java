@@ -55,11 +55,13 @@ public class ReceitasDto extends EntityService implements Serializable {
 	}
 	
 	public String calcular() {
-		String id = Long.toString(receita.getId());
-		em.createNativeQuery("Select * From Receita_Ingrediente Where receita_id="+id+" Order by receita_id").getResultList();
-		Receita emp=em.find(Receita.class, id);
-		emp.setValidacao("valida");
-		em.remove(emp);
-		return "index";
+		//String id = Long.toString(receita.getId());
+		
+		int esc = ((Number)em.createNativeQuery("SELECT sum(calorias) FROM Ingrediente I "+
+				"INNER JOIN Receita_Ingrediente RI ON I.id = RI.ingrediente_id WHERE RI.receita_id=4").getSingleResult()).intValue();
+		
+				System.out.println("dsffdskfdskjfdjskfhdskfhsdkdsffdskfdskjfdjskfhdskfhsdkfhsdkfddsffdskfdskjfdjskfhdskfhsdkfhsdkfdfhsdkfdsf"+esc);
+	
+		return "receitas";
 	}
 }
