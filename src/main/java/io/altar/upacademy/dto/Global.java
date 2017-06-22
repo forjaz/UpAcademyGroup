@@ -1,5 +1,6 @@
 package io.altar.upacademy.dto;
 
+import io.altar.upacademy.model.Ingrediente;
 import io.altar.upacademy.model.Receita;
 import io.altar.upacademy.model.Receita_Ingrediente;
 import io.altar.upacademy.service.EntityService;
@@ -19,99 +20,96 @@ import java.util.List;
 @SessionScoped
 public class Global extends EntityService implements Serializable {
 
+	/*-----------------------------------------------------------------------------------*/
+	/* FIELDS */
+	/*-----------------------------------------------------------------------------------*/
 	private static final long serialVersionUID = 1L;
+
+	// Empty Receita Placeholder - Default
 	private Receita receitaPlaceholder;
+
+	// Search Bar Output Ingredientes -> Ingrediente ID
 	private List<Long> searchQuery;
+
+	// Receitas to Render in Grid
 	private List<Receita> receitaResult = new ArrayList<>();
+
+	// Receita to Render in Unique
 	private Receita uniqueReceita;
+
+	// Receita_Ingrediente to use in Ingrediente/Nutricao Table
 	private List<Receita_Ingrediente> uniqueReceitaIngredienteList;
+
+	// ReceitaResult Index that Renders 1st Image in Grid
 	private int startGridIndex = 0;
 
-	// Constructor
+	// Receita Results Non-Placeholders
+	private int receitaResultNumb = 0;
+
+	// Show Receita Result Text
+	private String receitaResultCounterOutput;
+
+	/*-----------------------------------------------------------------------------------*/
+	/* CONSTRUCTORS */
+	/*-----------------------------------------------------------------------------------*/
 	public Global() {
 	}
 
+	// Fills Grid With Empty Placeholder at Start
 	@PostConstruct
 	@Transactional
 	public void renderResultInit() {
-		receitaPlaceholder = (Receita) em.createQuery("SELECT e FROM Receita e WHERE id=1").getResultList().get(0);
+		receitaPlaceholder = (Receita) em
+				.createQuery("SELECT e FROM Receita e WHERE id=1")
+				.getResultList().get(0);
 		receitaResult.add(receitaPlaceholder);
 		receitaResult.add(receitaPlaceholder);
 		receitaResult.add(receitaPlaceholder);
 		receitaResult.add(receitaPlaceholder);
 	}
 
-	// Methods
-	public List returnIngredientes() {
-		return em.createQuery("SELECT e FROM Ingrediente e ORDER BY e.nome").getResultList();
-	}
-	
-	public List<Receita> returnReceitasOrderByHit(){
-		List<Long> lista2 = searchQuery;
-		String var = "(";
-		for(int i = 0; i <= lista2.size() - 1; i++){
-			if(i<lista2.size()-1){
-				 var += lista2.get(i)+",";
-			}else{
-				var += lista2.get(i)+")";
-			}
-		}
-		
-		
-
-		String query = "SELECT R.*, (SELECT COUNT(*) FROM Receita_Ingrediente WHERE receita_id = R.id && ingrediente_id IN "
-						+var+") as 'Relevancia' FROM Receita R INNER JOIN Receita_Ingrediente RI ON R.id = RI.receita_id "
-						+"WHERE RI.ingrediente_id IN "+var+" GROUP BY receita_id ORDER BY Relevancia DESC";
-
-		
-		List<Receita> listaOrdenada = em.createNativeQuery(query,Receita.class).getResultList();
-		return listaOrdenada;
+	/*-----------------------------------------------------------------------------------*/
+	/* METHODS */
+	/*-----------------------------------------------------------------------------------*/
+	// 1. SELECT2 DROPDOWN IN SEARCH BAR
+	@SuppressWarnings("unchecked")
+	public List<Ingrediente> returnIngredientes() {
+		return em.createQuery("SELECT e FROM Ingrediente e ORDER BY e.nome")
+				.getResultList();
 	}
 
-	// 1 SEARCH INGREDIENTES IN SEARCH BAR
+	// 2 SEARCH INGREDIENTES IN SEARCH BAR
 	public void searchIngredientes() {
 		List<Receita> receitaList = returnReceitasOrderByHit();
 		receitaResult = ensureLengthMultipleOfFour(receitaList);
+		showReceitaResultCounter();
 	}
 
-	// 1.1 CONVERT INGREDIENTE ID --> RECEITA ID
-	public List<Long> convertIngredienteIDToReceitaID(List<Long> inputList) {
-		StringBuilder query = new StringBuilder("SELECT e.receita.id FROM Receita_Ingrediente e WHERE ");
-		int inputSize = inputList.size();
-
-		// Field for Empty Input
-		List<Long> placeholder = new ArrayList<>();
-		placeholder.add(1L);
-
-		if (inputList.isEmpty()) {
-			return placeholder;
-		} else {
-			for (int i = 0; i < inputSize; i++) {
-				if (i == inputSize - 1) {
-					query.append("ingrediente_id=").append(inputList.get(i)).append(" GROUP BY receita_id");
-				} else {
-					query.append("ingrediente_id=").append(inputList.get(i)).append(" or ");
-				}
-			}
-			return em.createQuery(query.toString()).getResultList();
-		}
-	}
-
-	// 1.3 CONVERT RECEITAID LIST TO RECEITA
-	public List<Receita> getReceitaFromReceitaID(List<Long> inputList) {
-		StringBuilder query = new StringBuilder("SELECT e FROM Receita e WHERE ");
-		int inputSize = inputList.size();
-		for (int i = 0; i < inputSize; i++) {
-			if (i == inputSize - 1) {
-				query.append("id=").append(inputList.get(i));
+	// 2.1 Returns Receitas by Number of Ingredientes in Common
+	public List<Receita> returnReceitasOrderByHit() {
+		List<Long> lista2 = searchQuery;
+		String var = "(";
+		for (int i = 0; i <= lista2.size() - 1; i++) {
+			if (i < lista2.size() - 1) {
+				var += lista2.get(i) + ",";
 			} else {
-				query.append("id=").append(inputList.get(i)).append(" or ");
+				var += lista2.get(i) + ")";
 			}
 		}
-		return em.createQuery(query.toString()).getResultList();
+
+		String query = "SELECT R.*, (SELECT COUNT(*) FROM Receita_Ingrediente WHERE receita_id = R.id && ingrediente_id IN "
+				+ var
+				+ ") as 'Relevancia' FROM Receita R INNER JOIN Receita_Ingrediente RI ON R.id = RI.receita_id "
+				+ "WHERE RI.ingrediente_id IN " + var
+				+ " GROUP BY receita_id ORDER BY Relevancia DESC";
+
+		@SuppressWarnings("unchecked")
+		List<Receita> listaOrdenada = em.createNativeQuery(query, Receita.class)
+				.getResultList();
+		return listaOrdenada;
 	}
 
-	// 1.2 ENSURE MULTIPLES OF FOUR IN RENDERED LIST FOR NAVIGATION
+	// 2.2 Ensure ResultList is Multiple of Four to Enable Navigation
 	public List<Receita> ensureLengthMultipleOfFour(List<Receita> inputList) {
 		while (inputList.size() % 4 != 0) {
 			inputList.add(receitaPlaceholder);
@@ -119,119 +117,50 @@ public class Global extends EntityService implements Serializable {
 		return inputList;
 	}
 
-	// NAVIGATE LEFT
+	// 3. NAVIGATE LEFT
 	public void renderLeft() {
 		if (startGridIndex > 3) {
 			startGridIndex -= 4;
 		}
 	}
 
-	// NAVIGATE RIGHT
+	// 4. NAVIGATE RIGHT
 	public void renderRight() {
 		if (receitaResult.size() > startGridIndex + 4) {
 			startGridIndex += 4;
 		}
 	}
 
-	// 2 GET RECEITA ID FROM CLICKABLE IMAGE
+	// 5. GET RECEITA ID FROM CLICKABLE IMAGE
 	public String showUniqueReceita(int index) {
 		uniqueReceita = receitaResult.get(index);
 		return "receita-detalhe";
 	}
 
-	// 3 GETS INGREDIETES FROM RECEITA ID AND RETURNS A COLUMN OF THEIR NAMES
-	public String showIngredientesColumnFromReceitaID(Long ID) {
-		uniqueReceitaIngredienteList = getReceitaIngredienteFromReceitaID(ID);
-		List<String> uniqueIngredienteNomeList = getIngredienteNomeFromReceitaIngredienteID(
-				uniqueReceitaIngredienteList);
-		return showIngredienteNomeList(uniqueIngredienteNomeList);
+	// 6. GET RECEITA_INGREDIENTE LIST FROM RECEITA ID
+	@SuppressWarnings("unchecked")
+	public List<Receita_Ingrediente> getReceitaIngredienteFromReceitaID(
+			Long ID) {
+		return em.createQuery(
+				"SELECT e FROM Receita_Ingrediente e WHERE receita_id=" + ID)
+				.getResultList();
 	}
 
-	// 3.1 GET RECEITA_INGREDIENTE LIST FROM RECEITA ID
-	public List<Receita_Ingrediente> getReceitaIngredienteFromReceitaID(Long ID) {
-		return em.createQuery("SELECT e FROM Receita_Ingrediente e WHERE receita_id=" + ID).getResultList();
-	}
-
-	// 3.2 GET INGREDIENTE NOME LIST FROM RECEITA_INGREDIENTE ID
-	public List<String> getIngredienteNomeFromReceitaIngredienteID(List<Receita_Ingrediente> receitaIngredienteList) {
-		List<String> ingredienteNomeList = new ArrayList<>();
-		for (Receita_Ingrediente receitaIngrediente : receitaIngredienteList) {
-			ingredienteNomeList.add(receitaIngrediente.getIngrediente().getNome());
-		}
-		return ingredienteNomeList;
-	}
-
-	// 3.3 SEPARATE INGREDIENTE NOMES WITH NEWLINE FROM INGREDIENTE NOME LIST
-	public String showIngredienteNomeList(List<String> ingredienteNomeList) {
-		StringBuilder resultString = new StringBuilder();
-		for (int i = 0; i < ingredienteNomeList.size(); i++) {
-			if (i != ingredienteNomeList.size() - 1) {
-				resultString.append(ingredienteNomeList.get(i)).append("\n ");
-			} else {
-				resultString.append(ingredienteNomeList.get(i));
+	// 7. GET RECEITA RESULT NOT EMPTY NUMBER
+	public void showReceitaResultCounter() {
+		int receitasNotEmpty = 0;
+		for (Receita receita : receitaResult) {
+			if (receita.getId() != 1) {
+				receitasNotEmpty += 1;
 			}
 		}
-		return resultString.toString();
+		receitaResultNumb = receitasNotEmpty;
+		receitaResultCounterOutput = receitasNotEmpty + " Receitas Encontradas";
 	}
 
-	// 4 GETS QUANTIDADES FROM RECEITA ID AND RETURNS A COLUMN OF THEIR NAMES
-	public String showQuantidadeColumnFromReceitaID(Long ID) {
-		uniqueReceitaIngredienteList = getReceitaIngredienteFromReceitaID(ID);
-		List<Integer> uniqueIngredienteQuantidadeList = getIngredienteQuantidadeFromReceitaIngredienteID(
-				uniqueReceitaIngredienteList);
-		return showIngredienteQuantidadeList(uniqueIngredienteQuantidadeList);
-	}
-
-	public List<Integer> getIngredienteQuantidadeFromReceitaIngredienteID(
-			List<Receita_Ingrediente> receitaIngredienteList) {
-		List<Integer> ingredienteQuantidadeList = new ArrayList<>();
-		for (Receita_Ingrediente receitaIngrediente : receitaIngredienteList) {
-			ingredienteQuantidadeList.add(receitaIngrediente.getQuantidade());
-		}
-		return ingredienteQuantidadeList;
-	}
-
-	public String showIngredienteQuantidadeList(List<Integer> ingredienteQuantidadeList) {
-		StringBuilder resultString = new StringBuilder();
-		for (int i = 0; i < ingredienteQuantidadeList.size(); i++) {
-			if (i != ingredienteQuantidadeList.size() - 1) {
-				resultString.append(ingredienteQuantidadeList.get(i)).append("\n ");
-			} else {
-				resultString.append(ingredienteQuantidadeList.get(i));
-			}
-		}
-		return resultString.toString();
-	}
-
-	// 4 GETS MEDIDAS FROM RECEITA ID AND RETURNS A COLUMN OF THEIR NAMES
-	public String showMedidaColumnFromReceitaID(Long ID) {
-		uniqueReceitaIngredienteList = getReceitaIngredienteFromReceitaID(ID);
-		List<String> uniqueIngredienteMedidaList = getIngredienteMedidaFromReceitaIngredienteID(
-				uniqueReceitaIngredienteList);
-		return showIngredienteMedidaList(uniqueIngredienteMedidaList);
-	}
-
-	public List<String> getIngredienteMedidaFromReceitaIngredienteID(List<Receita_Ingrediente> receitaIngredienteList) {
-		List<String> ingredienteMedidaList = new ArrayList<>();
-		for (Receita_Ingrediente receitaIngrediente : receitaIngredienteList) {
-			ingredienteMedidaList.add(receitaIngrediente.getMedidas());
-		}
-		return ingredienteMedidaList;
-	}
-
-	public String showIngredienteMedidaList(List<String> ingredienteMedidaList) {
-		StringBuilder resultString = new StringBuilder();
-		for (int i = 0; i < ingredienteMedidaList.size(); i++) {
-			if (i != ingredienteMedidaList.size() - 1) {
-				resultString.append(ingredienteMedidaList.get(i)).append("\n ");
-			} else {
-				resultString.append(ingredienteMedidaList.get(i));
-			}
-		}
-		return resultString.toString();
-	}
-
-	// Getters and Setters
+	/*-----------------------------------------------------------------------------------*/
+	/* GETTERS AND SETTERS */
+	/*-----------------------------------------------------------------------------------*/
 
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
@@ -257,7 +186,8 @@ public class Global extends EntityService implements Serializable {
 		return uniqueReceitaIngredienteList;
 	}
 
-	public void setUniqueReceitaIngredienteList(List<Receita_Ingrediente> uniqueReceitaIngredienteList) {
+	public void setUniqueReceitaIngredienteList(
+			List<Receita_Ingrediente> uniqueReceitaIngredienteList) {
 		this.uniqueReceitaIngredienteList = uniqueReceitaIngredienteList;
 	}
 
@@ -288,7 +218,22 @@ public class Global extends EntityService implements Serializable {
 	public void setReceitaPlaceholder(Receita receitaPlaceholder) {
 		this.receitaPlaceholder = receitaPlaceholder;
 	}
-	
-	
+
+	public int getReceitaResultNumb() {
+		return receitaResultNumb;
+	}
+
+	public void setReceitaResultNumb(int receitaResultNumb) {
+		this.receitaResultNumb = receitaResultNumb;
+	}
+
+	public String getReceitaResultCounterOutput() {
+		return receitaResultCounterOutput;
+	}
+
+	public void setReceitaResultCounterOutput(
+			String receitaResultCounterOutput) {
+		this.receitaResultCounterOutput = receitaResultCounterOutput;
+	}
 
 }
