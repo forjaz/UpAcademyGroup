@@ -11,7 +11,10 @@
 
 		<h:form id="searchBox">
 
-			<h:panelGrid columns="2" cellpadding="5">
+			<h:panelGrid columns="5" cellpadding="5">
+
+				<h:outputLabel class="label-procurar"
+					value="Por favor introduza os Ingredientes" />
 
 				<h:selectManyListbox value="#{global.searchQuery}"
 					styleClass="select2">
@@ -19,17 +22,28 @@
 						itemLabel="#{ing.nome}" itemValue="#{ing.id}" />
 				</h:selectManyListbox>
 
-				<p:commandButton value="Procurar"
+				<p:commandButton value="Procurar Receitas"
 					action="#{global.searchIngredientes()}"
-					update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"
-					icon="ui-icon-check" />
+					update="counter imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"
+					icon="ui-icon-search" />
 
+				<h:outputText id="counter"
+					value="#{global.receitaResultCounterOutput}" />
+
+				<ul class="pagination">
+					<li><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">5</a></li>
+				</ul>
 
 			</h:panelGrid>
 
-			<script type="text/javascript">
+			<h:outputScript>
                 $(".select2").select2();
-            </script>
+            </h:outputScript>
+
 		</h:form>
 
 	</ui:define>
@@ -109,16 +123,25 @@
 
 	<!-- BUTTON LEFT -->
 	<ui:define name="cursorLeft">
-		<p:commandButton action="#{global.renderLeft()}"
-			update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4" />
+		<h:form>
+			<h:commandLink action="#{global.renderLeft()}"
+				update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4">
+				<h:graphicImage styleClass="cursor-left-click"
+					value="#{global.receitaPlaceholder.imagem}" />
+			</h:commandLink>
+		</h:form>
 	</ui:define>
 
 	<!-- BUTTON RIGHT -->
 	<ui:define name="cursorRight">
-		<p:commandButton action="#{global.renderRight()}"
-			update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4" />
+		<h:form>
+			<h:commandLink action="#{global.renderRight()}"
+				update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4">
+				<h:graphicImage styleClass="cursor-right-click"
+					value="#{global.receitaPlaceholder.imagem}" />
+			</h:commandLink>
+		</h:form>
 	</ui:define>
-
 
 
 </ui:composition>

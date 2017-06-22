@@ -24,6 +24,7 @@ public class Receita implements Serializable {
 	private int calorias;
 	private String tipo;
 	private int nPessoas;
+	private String validacao;
 	@Lob
 	@Column
 	private String imagem;
@@ -122,6 +123,14 @@ public class Receita implements Serializable {
 
 	public void setnPessoas(int nPessoas) {
 		this.nPessoas = nPessoas;
+	}
+
+	public String getValidacao() {
+		return validacao;
+	}
+
+	public void setValidacao(String validacao) {
+		this.validacao = validacao;
 	}
 
 }

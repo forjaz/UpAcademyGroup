@@ -86,7 +86,7 @@ body {
 }
 
 .navbar-btn {
-	width: 15%;
+	width: 30%;
 	margin: 8px 7px 8px 7px;
 	font-size: 14px;
 	letter-spacing: 1px;
@@ -125,14 +125,34 @@ body {
 }
 
 #searchBox {
-	margin-left: 50vh;
-    margin-top: 11px;
+	margin-left: 5vh;
+	margin-top: 11px;
 }
 
 .select2-container {
 	width: 500px !important;
 }
 
+.label-procurar {
+	margin-right: 20px;
+	font-size: 16px;
+	margin-top: 6px;
+}
+
+.ui-button {
+	height: 33px;
+}
+
+.select2-container .select2-selection--multiple {
+	height: 33px;
+}
+
+.pagination {
+	display: inline;
+	padding-left: 0;
+	margin: 0;
+	border-radius: 4px;
+}
 /*-----------------------------------------------------------------------------------*/
 /* CONTENT */
 /*-----------------------------------------------------------------------------------*/
@@ -146,26 +166,10 @@ body {
 	width: 1355px;
 	left: 10vh;
 	background:
-		url(https://s24.postimg.org/w73d4usyr/white_blackboard_shadow.png)
+		url('https://s24.postimg.org/w73d4usyr/white_blackboard_shadow.png')
 		no-repeat;
 	background-size: cover;
-}
-
-.cursor {
-	height: 100px;
-	width: 100px;
-}
-
-#cursorLeft {
-	position: fixed;
-	margin-top: 360px;
-	margin-left: 90px;
-}
-
-#cursorRight {
-	position: fixed;
-	margin-top: 360px;
-	margin-left: 1240px;
+	border-radius: 4px;
 }
 
 .receita {
@@ -184,8 +188,8 @@ body {
 	flex-wrap: wrap;
 	height: 576px;
 	width: 900px;
-	margin-left: 250px;
-	margin-top: 90px;
+	margin-left: 265px;
+	margin-top: 100px;
 	padding: 10px;
 }
 
@@ -205,69 +209,43 @@ body {
 	left: 4%;
 	color: white;
 	text-align: center;
+	margin-top: 12px;
 }
 
 /*-----------------------------------------------------------------------------------*/
-/* CONTENT - UNIQUE */
+/* CONTENT - CURSOR */
 /*-----------------------------------------------------------------------------------*/
-#uniqueReceita {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
-	flex-wrap: wrap;
-	height: 576px;
-	width: 900px;
-	margin-left: 346px;
-	margin-top: 227px;
-	padding: 10px;
-	z-index: 1;
-	color: white;
-	font-size: 11px;
+.cursor {
+	height: 100px;
+	width: 100px;
 }
 
-.receita-imagem-unique {
-	order: 1;
-	height: 200px;
-	width: auto;
-	z-index: 1;
-	margin-bottom: 10px;
+#cursorLeft {
+	position: fixed;
+	margin-top: 360px;
+	margin-left: 90px;
 }
 
-.table-nutricao {
-	order: 2;
-	height: 80px;
-	width: 50%;
-	z-index: 1;
+#cursorRight {
+	position: fixed;
+	margin-top: 360px;
+	margin-left: 1240px;
 }
 
-.table-ingredientes {
-	order: 3;
-	height: 256px;
-	width: 50%;
-	margin-bottom: 10px;
-	z-index: 1;
+.cursor-left-click {
+	height: 100px;
+	width: 100px;
+	position: fixed;
+	top: 522px;
+	left: 176px;
 }
 
-.receita-nome-unique {
-	order: 4;
-	height: 60px;
-	width: 50%;
-	margin-bottom: 5px;
-	z-index: 1;
-	text-align: center;
-}
-
-.receita-preparacao {
-	order: 5;
-	height: 486px;
-	width: 50%;
-	z-index: 1;
-	text-align: justify;
-}
-
-label {
-	display: inline;
+.cursor-right-click {
+	height: 100px;
+	width: 100px;
+	position: fixed;
+	top: 522px;
+	left: 1322px;
 }
 
 /*-----------------------------------------------------------------------------------*/

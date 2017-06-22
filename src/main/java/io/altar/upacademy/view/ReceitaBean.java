@@ -2,6 +2,7 @@ package io.altar.upacademy.view;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -18,10 +19,8 @@ public class ReceitaBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Receita receita = new Receita();
-	
-	
+	private List<String> tipos = Arrays.asList("Vegan","Carne/Peixe","Sobremesa","Vegetariano");
 
-	
 
 	// Constructor
 	public ReceitaBean() {
@@ -56,5 +55,13 @@ public class ReceitaBean implements Serializable {
     public void setReceita(Receita receita) {
         this.receita = receita;
     }
+
+	public List<String> getTipos() {
+		return tipos;
+	}
+
+	public void setTipos(List<String> tipos) {
+		this.tipos = tipos;
+	}
     
 }

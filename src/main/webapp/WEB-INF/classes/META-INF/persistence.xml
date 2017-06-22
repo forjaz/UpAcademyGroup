@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE xml>
 <persistence version="2.1">
     <persistence-unit name="UpAcademyGroupPU"
                       transaction-type="JTA">
@@ -13,7 +12,7 @@
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.use_sql_comments" value="true"/>
-            <property name="javax.persistence.sql-load-script-source" value="recepies.sql" />
+            <property name="javax.persistence.sql-load-script-source" value="receitas.sql" />
         </properties>
     </persistence-unit>
 </persistence>
