@@ -3,9 +3,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:h="http://java.sun.com/jsf/html">
 
 
 <h:head>
@@ -31,10 +29,63 @@
 	<div class="container-fluid">
 
 		<div id="background">
+			<div class="row">
+				<div id="headerDiv" class="col-md-12">
 
-			<ui:insert name="insertReceita"> 
-			
-			</ui:insert>
+					<!-- HEADER - LOGO + NAV + SLOGAN -->
+					<div id="headerLogoNavSloganDiv" class="col-md-12">
+
+						<!-- HEADER - LOGO -->
+						<div id="headerLogoDiv" class="col-md-8">
+							<h1 class="logoText">BANANAL</h1>
+						</div>
+
+						<!-- HEADER - NAV + SLOGAN -->
+						<div id="headerNavSloganDiv" class="col-md-4">
+
+
+							<!-- HEADER - NAV -->
+							<div id="headerNavDiv" class="col-md-12">
+
+								<h:form>
+									<h:commandLink action="index"
+										update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4">
+										<button type="button" class="btn btn-default navbar-btn">Procurar</button>
+									</h:commandLink>
+
+									<h:commandLink action="receitas">
+										<button type="button" class="btn btn-default navbar-btn">Receitas</button>
+									</h:commandLink>
+									<h:commandLink action="sobre-nos">
+										<button type="button" class="btn btn-default navbar-btn">Sobre
+											Nós</button>
+									</h:commandLink>
+								</h:form>
+
+							</div>
+
+							<!-- HEADER - SLOGAN -->
+							<div id="headerSloganDiv" class="col-md-12">
+								<p class="sloganText">A SUA ESCOLHA O NOSSO PRAZER</p>
+							</div>
+
+						</div>
+
+					</div>
+
+
+				</div>
+
+			</div>
+			<div class="row">
+				<div id="contentDisplayDiv" class="content-display">
+					<div class="insert-receita-grid">
+						<ui:insert name="insertReceita">
+
+						</ui:insert>
+					</div>
+				</div>
+			</div>
 
 		</div>
 	</div>

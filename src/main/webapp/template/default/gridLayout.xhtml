@@ -4,7 +4,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 
 
@@ -52,28 +51,19 @@
 							<div id="headerNavDiv" class="col-md-12">
 							
 							<h:form>
-								<!-- <h:commandLink action="index">
-									<button type="button" class="btn btn-default navbar-btn">Home</button>
-								</h:commandLink>
-								-->
-								 <h:commandLink action="index">
-									<button type="button" class="btn btn-default navbar-btn">Procurar</button>
-								</h:commandLink>
-								 
-								<h:commandLink action="nova-receita">
-									<button type="button" class="btn btn-default navbar-btn">Receitas</button>
-								</h:commandLink>
-								<!-- <h:commandLink action="index">
-									<button type="button" class="btn btn-default navbar-btn">Ingredientes</button>
-								</h:commandLink>
-								<h:commandLink action="index">
-									<button type="button" class="btn btn-default navbar-btn">Quantidades</button>
-								</h:commandLink>
-								-->
-								<h:commandLink action="sobre-nos">
-									<button type="button" class="btn btn-default navbar-btn">Sobre Nós</button>
-								</h:commandLink>
-							</h:form>
+									<h:commandLink action="index"
+										update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4">
+										<button type="button" class="btn btn-default navbar-btn">Procurar</button>
+									</h:commandLink>
+
+									<h:commandLink action="receitas">
+										<button type="button" class="btn btn-default navbar-btn">Receitas</button>
+									</h:commandLink>
+									<h:commandLink action="sobre-nos">
+										<button type="button" class="btn btn-default navbar-btn">Sobre
+											Nós</button>
+									</h:commandLink>
+								</h:form>
 
 							</div>
 

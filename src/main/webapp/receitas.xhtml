@@ -2,56 +2,75 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:c="http://java.sun.com/jstl/core"
-	template="/template/default/defaultLayout.xhtml"
-	xmlns:p="http://primefaces.org/ui">
+	template="/template/default/insertReceitaLayout.xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
 
-	<h:head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
-	</h:head>
-	
-	<ui:define name="contentDisplay">
-	
+	<ui:define name="insertReceita">
+
 		<h:form>
-		
-			<h4>Nome da Receita</h4>
-			
-				<h:inputText value="#{receitaBean.receita.nome}"/>
-				
-			<h4>Imagem da Receita (url)</h4>
-			
-				<h:inputText value="#{receitaBean.receita.imagem}" />
-			<p></p>
-		       <h:panelGrid columns="2" cellpadding="5">
-	            <p:outputLabel for="tipo" value="Tipo de Receita: " />
-	            <p:selectOneMenu id="tipo" value="#{receitaBean.receita.tipo}" style="width:150px">
-	                
-	                <f:selectItems value="#{receitaBean.tipos}" />
-	            </p:selectOneMenu>
-	 			</h:panelGrid>
+			<div class="row">
 
-			
+				<div class="col-md-4">Nome da Receita:</div>
+				<div class="col-md-8">
+					<h:inputText class="form-control" value="#{receitaBean.receita.nome}" style="width:500px" />
+				</div>
+			</div>
+			<br />
+			<div class="row">
+
+				<div class="col-md-4">Imagem da Receita (url):</div>
+				<div class="col-md-8">
+					<h:inputText class="form-control" value="#{receitaBean.receita.imagem}"
+						style="width:500px" />
+				</div>
+			</div>
+			<br />
+			<div class="row">
+
+				<div class="col-md-4">Tipo de Receita:</div>
+				<div class="col-md-8">
+				
+                	<h:selectOneListbox class="form-control" value="#{global.searchQuery}" styleClass="select2"  >
+	                    <f:selectItems var="ing" value="#{global.getTipoReceita()}"/>
+	                </h:selectOneListbox>
+					<h:outputScript>
+                		$(".select2").select2();
+            		</h:outputScript>
+				</div>
+			</div>
+
+
+
+
+			<p></p>
+
+			<p></p>
+			<h:panelGrid columns="2" cellpadding="5">
+
+
+			</h:panelGrid>
+
+
 			<p></p>
 			
-			<h4>Preparacao da Receita</h4>
-			
-			<p:editor id="editor" widgetVar="editorWidget" value="#{receitaBean.receita.preparacao}" wisth="600" />
-			
-			<p></p>		
-			
-				<h:commandButton value="Submeter" action="#{receitaService.newReceita(receitaBean.receita)}"/>
+			Preparacao da Receita:
 			<p></p>
-			<p></p>		
-			
-				<h:commandButton value="coco" action="#{receitaDto.calcular()}"/>
+			<p:inputTextarea rows="10" cols="104" class="form-control"
+				value="#{receitaBean.receita.preparacao}" />
+
 			<p></p>
-				<h:commandButton value = "Ir ecra Search" action = "search" />
+
+			<h:commandButton value="Submeter"
+				action="#{receitaService.newReceita(receitaBean.receita)}"
+				class="btn btn-default" />
+			<br />
+			<br />
+			<h:commandButton value="Ir ecra Search" action="search"
+				class="btn btn-default" />
 			<p></p>
-				<h:commandButton value = "Voltar ecra anterior" action = "index" />
-			<p></p>
-			
+
 		</h:form>
 	</ui:define>
-	
+
 </ui:composition>
