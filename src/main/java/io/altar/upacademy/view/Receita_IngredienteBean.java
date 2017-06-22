@@ -1,6 +1,8 @@
 package io.altar.upacademy.view;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -16,6 +18,7 @@ public class Receita_IngredienteBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Receita_Ingrediente receitaIngrediente = new Receita_Ingrediente();
+	private List<String> unidades = Arrays.asList("csp","chá","csb","ccf","xíc","xcf","l","ml","cp","kg","g");
 	
 	// Constructor
 	public Receita_IngredienteBean() {
@@ -45,6 +48,14 @@ public class Receita_IngredienteBean implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public List<String> getUnidades() {
+		return unidades;
+	}
+
+	public void setUnidades(List<String> unidades) {
+		this.unidades = unidades;
 	}
 	
 }

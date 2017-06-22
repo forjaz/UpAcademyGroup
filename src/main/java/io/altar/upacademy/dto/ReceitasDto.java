@@ -8,6 +8,8 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.inject.Named;
+import javax.transaction.Transactional;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,8 @@ import java.util.List;
 @ManagedBean(eager = true)
 @Named("receitaDto")
 @SessionScoped
+@Transactional
+
 public class ReceitasDto extends EntityService implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -38,7 +42,7 @@ public class ReceitasDto extends EntityService implements Serializable {
 		recipie.setValidacao("invalida");
 		setReceita(recipie);
 		em.persist(recipie);
-		return "ingrediente_Receita";
+		return "miguel";
 	}
 	
 	public String validar(Long id) {
@@ -49,19 +53,49 @@ public class ReceitasDto extends EntityService implements Serializable {
 	}
 	public String negar(Long id) {
 		Receita emp=em.find(Receita.class, id);
-		emp.setValidacao("valida");
+		emp.setValidacao("invalida");
 		em.remove(emp);
 		return "index";
 	}
 	
 	public String calcular() {
-		//String id = Long.toString(receita.getId());
+		long id4 = 4;
+		long id = ((Number)em.createNativeQuery("SELECT id FROM Receita R "+
+				"WHERE R.nome='"+receita.getNome()+"'").getSingleResult()).longValue();
+
+		int cal = ((Number)em.createNativeQuery("SELECT sum(calorias*Quantidade/100) FROM Ingrediente I "+
+				"INNER JOIN Receita_Ingrediente RI ON I.id = RI.ingrediente_id WHERE RI.receita_id="+id4).getSingleResult()).intValue();
 		
-		int esc = ((Number)em.createNativeQuery("SELECT sum(calorias) FROM Ingrediente I "+
-				"INNER JOIN Receita_Ingrediente RI ON I.id = RI.ingrediente_id WHERE RI.receita_id=4").getSingleResult()).intValue();
+		double prot = ((Number)em.createNativeQuery("SELECT sum(proteina*Quantidade/100) FROM Ingrediente I "+
+				"INNER JOIN Receita_Ingrediente RI ON I.id = RI.ingrediente_id WHERE RI.receita_id="+id4).getSingleResult()).doubleValue();
 		
-				System.out.println("dsffdskfdskjfdjskfhdskfhsdkdsffdskfdskjfdjskfhdskfhsdkfhsdkfddsffdskfdskjfdjskfhdskfhsdkfhsdkfdfhsdkfdsf"+esc);
-	
-		return "receitas";
+		double hid = ((Number)em.createNativeQuery("SELECT sum(hidratos*Quantidade/100) FROM Ingrediente I "+
+				"INNER JOIN Receita_Ingrediente RI ON I.id = RI.ingrediente_id WHERE RI.receita_id="+id4).getSingleResult()).doubleValue();
+		
+		double gord = ((Number)em.createNativeQuery("SELECT sum(gorduras*Quantidade/100) FROM Ingrediente I "+
+				"INNER JOIN Receita_Ingrediente RI ON I.id = RI.ingrediente_id WHERE RI.receita_id="+id4).getSingleResult()).doubleValue();
+		
+		int qtd = ((Number)em.createNativeQuery("SELECT sum(Quantidade) FROM Ingrediente I "+
+				"INNER JOIN Receita_Ingrediente RI ON I.id = RI.ingrediente_id WHERE RI.receita_id="+id4).getSingleResult()).intValue();
+		
+		int ppl;
+		if(receita.getTipo()=="sobremesa"){
+			ppl = qtd/100 +1;
+		}else{
+			ppl = qtd/350 +1;
+		}
+		System.out.println(cal);
+		
+		Receita emp=em.find(Receita.class, id);
+		emp.setCalorias(cal/ppl);
+		emp.setProteina(Math.round(prot/(double)ppl));
+		emp.setHidratos(Math.round(hid/(double)ppl));
+		emp.setGorduras(Math.round(gord/(double)ppl));
+		emp.setnPessoas(ppl);
+
+		em.merge(emp);
+		
+		
+		return "ingrediente_Receita";
 	}
 }
