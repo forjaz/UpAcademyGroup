@@ -80,7 +80,14 @@
 
 	<!-- UNIQUE NOME -->
 	<ui:define name="uniqueReceitaNome">
-		<h:outputLabel styleClass="receita-nome-unique">#{global.uniqueReceita.nome}</h:outputLabel>
+        <p:dataTable var="receita" value="#{global.uniqueReceita}">
+            <p:column headerText="Nome">
+                <h:outputText value="#{receita.nome}" />
+            </p:column>
+        </p:dataTable>
+
+
+		<!--<h:outputLabel styleClass="receita-nome-unique">#{global.uniqueReceita.nome}</h:outputLabel>-->
 	</ui:define>
 
 
@@ -88,8 +95,24 @@
 
 	<!-- UNIQUE PREPARACAO -->
 	<ui:define name="uniqueReceitaPreparacao">
-		<h:outputLabel styleClass="receita-preparacao">#{global.uniqueReceita.preparacao}</h:outputLabel>
+        <p:dataTable var="receita" value="#{global.uniqueReceita}">
+            <p:column headerText="Modo de Preparação">
+                <h:outputText value="#{receita.preparacao}" />
+            </p:column>
+        </p:dataTable>
+
+		<!--<h:outputLabel styleClass="receita-preparacao">#{global.uniqueReceita.preparacao}</h:outputLabel>-->
 	</ui:define>
+
+    <!-- BUTTON LEFT -->
+    <ui:define name="cursorLeft">
+        <h:form>
+            <h:commandLink action="index">
+                <h:graphicImage styleClass="cursor-left-click"
+                                value="#{global.receitaPlaceholder.imagem}"/>
+            </h:commandLink>
+        </h:form>
+    </ui:define>
 
 </ui:composition>
 
