@@ -125,7 +125,7 @@ body {
 }
 
 #searchBox {
-	margin-left: 33vh;
+	margin-left: 5vh;
 	margin-top: 11px;
 }
 
@@ -134,12 +134,17 @@ body {
 }
 
 .label-procurar {
-	margin-right: 10px;
+	margin-right: 20px;
 	font-size: 16px;
+	margin-top: 6px;
 }
 
 .ui-button {
-	padding: 1.5px 0px !important;
+	height: 33px;
+}
+
+.select2-container .select2-selection--multiple {
+	height: 33px;
 }
 
 /*-----------------------------------------------------------------------------------*/
@@ -154,9 +159,9 @@ body {
 	height: 791px;
 	width: 1355px;
 	left: 10vh;
-    background:
-            url('https://s24.postimg.org/w73d4usyr/white_blackboard_shadow.png')
-            no-repeat;
+	background:
+		url('https://s24.postimg.org/w73d4usyr/white_blackboard_shadow.png')
+		no-repeat;
 	background-size: cover;
 }
 
@@ -176,8 +181,8 @@ body {
 	flex-wrap: wrap;
 	height: 576px;
 	width: 900px;
-    margin-left: 265px;
-    margin-top: 100px;
+	margin-left: 265px;
+	margin-top: 100px;
 	padding: 10px;
 }
 
@@ -197,44 +202,43 @@ body {
 	left: 4%;
 	color: white;
 	text-align: center;
-    margin-top: 12px;
+	margin-top: 12px;
 }
 
 /*-----------------------------------------------------------------------------------*/
 /* CONTENT - CURSOR */
 /*-----------------------------------------------------------------------------------*/
-
 .cursor {
-    height: 100px;
-    width: 100px;
+	height: 100px;
+	width: 100px;
 }
 
 #cursorLeft {
-    position: fixed;
-    margin-top: 360px;
-    margin-left: 90px;
+	position: fixed;
+	margin-top: 360px;
+	margin-left: 90px;
 }
 
 #cursorRight {
-    position: fixed;
-    margin-top: 360px;
-    margin-left: 1240px;
+	position: fixed;
+	margin-top: 360px;
+	margin-left: 1240px;
 }
 
 .cursor-left-click {
-    height: 100px;
-    width: 100px;
-    position: fixed;
-    top: 522px;
-    left: 176px;
+	height: 100px;
+	width: 100px;
+	position: fixed;
+	top: 522px;
+	left: 176px;
 }
 
 .cursor-right-click {
-    height: 100px;
-    width: 100px;
-    position: fixed;
-    top: 522px;
-    left: 1322px;
+	height: 100px;
+	width: 100px;
+	position: fixed;
+	top: 522px;
+	left: 1322px;
 }
 
 /*-----------------------------------------------------------------------------------*/
