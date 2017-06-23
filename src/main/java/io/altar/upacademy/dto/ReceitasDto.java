@@ -23,12 +23,6 @@ public class ReceitasDto extends EntityService implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Receita receita;
-	
-	public ArrayList<Receita> listarReceitas(){
-		List<Receita> lista=  em.createNativeQuery("Select * From Receita").getResultList();
-		System.out.println((ArrayList <Receita>)lista);
-		return (ArrayList <Receita>)lista;
-	}
 
 	public Receita getReceita() {
 		return receita;
@@ -42,7 +36,7 @@ public class ReceitasDto extends EntityService implements Serializable {
 		recipie.setValidacao("invalida");
 		setReceita(recipie);
 		em.persist(recipie);
-		return "miguel";
+		return "mikeG";
 	}
 	
 	public String validar(Long id) {
@@ -84,7 +78,7 @@ public class ReceitasDto extends EntityService implements Serializable {
 		}else{
 			ppl = qtd/350 +1;
 		}
-		System.out.println(cal);
+	
 		
 		Receita emp=em.find(Receita.class, id);
 		emp.setCalorias(cal/ppl);
@@ -96,6 +90,6 @@ public class ReceitasDto extends EntityService implements Serializable {
 		em.merge(emp);
 		
 		
-		return "ingrediente_Receita";
+		return "migeG";
 	}
 }
