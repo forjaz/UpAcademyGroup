@@ -4,6 +4,7 @@ import io.altar.upacademy.model.Ingrediente;
 import io.altar.upacademy.model.Receita;
 import io.altar.upacademy.model.Receita_Ingrediente;
 import io.altar.upacademy.service.EntityService;
+import io.altar.upacademy.service.Paginator;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
@@ -49,6 +50,9 @@ public class Global extends EntityService implements Serializable {
 	// Show Receita Result Text
 	private String receitaResultCounterOutput;
 
+	// Paginator
+	private Paginator paginator;
+
 	/*-----------------------------------------------------------------------------------*/
 	/* CONSTRUCTORS */
 	/*-----------------------------------------------------------------------------------*/
@@ -66,6 +70,7 @@ public class Global extends EntityService implements Serializable {
 		receitaResult.add(receitaPlaceholder);
 		receitaResult.add(receitaPlaceholder);
 		receitaResult.add(receitaPlaceholder);
+		paginator = new Paginator(this.receitaResult);
 	}
 
 	/*-----------------------------------------------------------------------------------*/
@@ -83,6 +88,7 @@ public class Global extends EntityService implements Serializable {
 		List<Receita> receitaList = returnReceitasOrderByHit();
 		receitaResult = ensureLengthMultipleOfFour(receitaList);
 		showReceitaResultCounter();
+		paginator = new Paginator(this.receitaResult);
 	}
 
 	// 2.1 Returns Receitas by Number of Ingredientes in Common
@@ -121,6 +127,7 @@ public class Global extends EntityService implements Serializable {
 	public void renderLeft() {
 		if (startGridIndex > 3) {
 			startGridIndex -= 4;
+			paginator.setPageIndex(paginator.getPageIndex() - 1);
 		}
 	}
 
@@ -128,6 +135,7 @@ public class Global extends EntityService implements Serializable {
 	public void renderRight() {
 		if (receitaResult.size() > startGridIndex + 4) {
 			startGridIndex += 4;
+			paginator.setPageIndex(paginator.getPageIndex() + 1);
 		}
 	}
 
@@ -156,6 +164,10 @@ public class Global extends EntityService implements Serializable {
 		}
 		receitaResultNumb = receitasNotEmpty;
 		receitaResultCounterOutput = receitasNotEmpty + " Receitas Encontradas";
+	}
+
+	public void updateGridIndexFromPageIndex(int pageIndex) {
+		startGridIndex = 4 * pageIndex - 3;
 	}
 
 	/*-----------------------------------------------------------------------------------*/
@@ -234,6 +246,10 @@ public class Global extends EntityService implements Serializable {
 	public void setReceitaResultCounterOutput(
 			String receitaResultCounterOutput) {
 		this.receitaResultCounterOutput = receitaResultCounterOutput;
+	}
+
+	public Paginator getPaginator() {
+		return paginator;
 	}
 
 }

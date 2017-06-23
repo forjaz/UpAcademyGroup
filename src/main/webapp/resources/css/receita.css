@@ -147,6 +147,11 @@ body {
 	height: 33px;
 }
 
+.resultCounter {
+	margin: 0px 10px;
+	font-weight: bold;
+}
+
 .pagination {
 	display: inline;
 	padding-left: 0;
