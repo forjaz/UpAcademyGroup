@@ -147,6 +147,11 @@ body {
 	height: 33px;
 }
 
+.resultCounter {
+	margin: 0px 10px;
+	font-weight: bold;
+}
+
 .pagination {
 	display: inline;
 	padding-left: 0;
@@ -210,6 +215,20 @@ body {
 	color: white;
 	text-align: center;
 	margin-top: 12px;
+}
+
+.insert-receita-grid {
+	position: fixed;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	height: 576px;
+	width: 900px;
+    margin-left: 265px;
+    margin-top: 92px;
+	padding: 10px;
+	color: white;
 }
 
 /*-----------------------------------------------------------------------------------*/

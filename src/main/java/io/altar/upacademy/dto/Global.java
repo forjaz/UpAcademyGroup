@@ -4,6 +4,7 @@ import io.altar.upacademy.model.Ingrediente;
 import io.altar.upacademy.model.Receita;
 import io.altar.upacademy.model.Receita_Ingrediente;
 import io.altar.upacademy.service.EntityService;
+import io.altar.upacademy.service.Paginator;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
@@ -48,6 +49,32 @@ public class Global extends EntityService implements Serializable {
 
 	// Show Receita Result Text
 	private String receitaResultCounterOutput;
+	
+	// All fields below belong to the returnReceitasOrderByHit() Method
+	private boolean orderByCalorias=false;
+	private int caloriasPesquisa;
+	private boolean greaterThanC=false;
+	private boolean segundoCriterioOrdenacaoC=false;
+	
+	private boolean orderByProteinas=false;
+	private double proteinaPesquisa;
+	private boolean greaterThanP=false;
+	private boolean segundoCriterioOrdenacaoP=false;
+	
+	private boolean orderByHidratos=false;
+	private double hidratosPesquisa;
+	private boolean greaterThanH=false;
+	private boolean segundoCriterioOrdenacaoH=false;
+	
+	private boolean orderByGorduras=false;
+	private double gordurasPesquisa;
+	private boolean greaterThanG=false;
+	private boolean segundoCriterioOrdenacaoG=false;
+	
+	private boolean segundoCriterioOrdenacao=false;
+
+	// Paginator
+	private Paginator paginator;
 
 	/*-----------------------------------------------------------------------------------*/
 	/* CONSTRUCTORS */
@@ -66,6 +93,7 @@ public class Global extends EntityService implements Serializable {
 		receitaResult.add(receitaPlaceholder);
 		receitaResult.add(receitaPlaceholder);
 		receitaResult.add(receitaPlaceholder);
+		paginator = new Paginator(this.receitaResult);
 	}
 
 	/*-----------------------------------------------------------------------------------*/
@@ -83,9 +111,10 @@ public class Global extends EntityService implements Serializable {
 		List<Receita> receitaList = returnReceitasOrderByHit();
 		receitaResult = ensureLengthMultipleOfFour(receitaList);
 		showReceitaResultCounter();
+		paginator = new Paginator(this.receitaResult);
 	}
 
-	// 2.1 Returns Receitas by Number of Ingredientes in Common
+	// 2.1 Returns Receitas by Number of Ingredientes in Common 
 	public List<Receita> returnReceitasOrderByHit() {
 		List<Long> lista2 = searchQuery;
 		String var = "(";
@@ -96,12 +125,102 @@ public class Global extends EntityService implements Serializable {
 				var += lista2.get(i) + ")";
 			}
 		}
-
+		
+		String segundoCriterio="";
+		
+		if(orderByCalorias==true && greaterThanC==false && segundoCriterioOrdenacaoC==true && segundoCriterioOrdenacao==true){
+			var += "&& calorias <=" + caloriasPesquisa + " ";
+			segundoCriterio += ", calorias DESC";
+		}else if(orderByCalorias==true && greaterThanC==false && segundoCriterioOrdenacaoC==true && segundoCriterioOrdenacao==false){
+			var += "&& calorias <=" + caloriasPesquisa + " ";
+			segundoCriterio += ", calorias";
+		}else if(orderByCalorias==true && greaterThanC==true && segundoCriterioOrdenacaoC==true && segundoCriterioOrdenacao==true){
+			var += "&& calorias >=" + caloriasPesquisa + " ";
+			segundoCriterio += ", calorias DESC";
+		}else if(orderByCalorias==true && greaterThanC==true && segundoCriterioOrdenacaoC==true && segundoCriterioOrdenacao==false){
+			var += "&& calorias >=" + caloriasPesquisa + " ";
+			segundoCriterio += ", calorias";
+		}else if(orderByCalorias==true && greaterThanC==false && segundoCriterioOrdenacaoC==false){
+			var += "&& calorias <=" + caloriasPesquisa + " ";
+		}else if(orderByCalorias==true && greaterThanC==false && segundoCriterioOrdenacaoC==false){
+			var += "&& calorias <=" + caloriasPesquisa + " ";
+		}else if(orderByCalorias==true && greaterThanC==true && segundoCriterioOrdenacaoC==false){
+			var += "&& calorias >=" + caloriasPesquisa + " ";
+		}else if(orderByCalorias==true && greaterThanC==true && segundoCriterioOrdenacaoC==false){
+			var += "&& calorias >=" + caloriasPesquisa + " ";
+		}
+		
+		if(orderByProteinas==true && greaterThanP==false && segundoCriterioOrdenacaoP==true && segundoCriterioOrdenacao==true){
+			var += "&& proteina <=" + proteinaPesquisa + " ";
+			segundoCriterio += ", proteina DESC";
+		}else if(orderByProteinas==true && greaterThanP==false && segundoCriterioOrdenacaoP==true && segundoCriterioOrdenacao==false){
+			var += "&& proteina <=" + proteinaPesquisa + " ";
+			segundoCriterio += ", proteina";
+		}else if(orderByProteinas==true && greaterThanP==true && segundoCriterioOrdenacaoP==true && segundoCriterioOrdenacao==true){
+			var += "&& proteina >=" + proteinaPesquisa + " ";
+			segundoCriterio += ", proteina DESC";
+		}else if(orderByProteinas==true && greaterThanP==true && segundoCriterioOrdenacaoP==true && segundoCriterioOrdenacao==false){
+			var += "&& proteina >=" + proteinaPesquisa + " ";
+			segundoCriterio += ", proteina";
+		}else if(orderByProteinas==true && greaterThanP==false && segundoCriterioOrdenacaoP==false){
+			var += "&& proteina <=" + proteinaPesquisa + " ";
+		}else if(orderByProteinas==true && greaterThanP==false && segundoCriterioOrdenacaoP==false){
+			var += "&& proteina <=" + proteinaPesquisa + " ";
+		}else if(orderByProteinas==true && greaterThanP==true && segundoCriterioOrdenacaoP==false){
+			var += "&& proteina >=" + proteinaPesquisa + " ";
+		}else if(orderByProteinas==true && greaterThanP==true && segundoCriterioOrdenacaoP==false){
+			var += "&& proteina >=" + proteinaPesquisa + " ";
+		}
+		
+		if(orderByHidratos==true && greaterThanH==false && segundoCriterioOrdenacaoH==true && segundoCriterioOrdenacao==true){
+			var += "&& hidratos <=" + hidratosPesquisa + " ";
+			segundoCriterio += ", hidratos DESC";
+		}else if(orderByHidratos==true && greaterThanH==false && segundoCriterioOrdenacaoH==true && segundoCriterioOrdenacao==false){
+			var += "&& hidratos <=" + hidratosPesquisa + " ";
+			segundoCriterio += ", hidratos";
+		}else if(orderByHidratos==true && greaterThanH==true && segundoCriterioOrdenacaoH==true && segundoCriterioOrdenacao==true){
+			var += "&& hidratos >=" + hidratosPesquisa + " ";
+			segundoCriterio += ", hidratos DESC";
+		}else if(orderByHidratos==true && greaterThanH==true && segundoCriterioOrdenacaoH==true && segundoCriterioOrdenacao==false){
+			var += "&& hidratos >=" + hidratosPesquisa + " ";
+			segundoCriterio += ", hidratos";
+		}else if(orderByHidratos==true && greaterThanH==false && segundoCriterioOrdenacaoH==false){
+			var += "&& hidratos <=" + hidratosPesquisa + " ";
+		}else if(orderByHidratos==true && greaterThanH==false && segundoCriterioOrdenacaoH==false){
+			var += "&& hidratos <=" + hidratosPesquisa + " ";
+		}else if(orderByHidratos==true && greaterThanH==true && segundoCriterioOrdenacaoH==false){
+			var += "&& hidratos >=" + hidratosPesquisa + " ";
+		}else if(orderByHidratos==true && greaterThanH==true && segundoCriterioOrdenacaoH==false){
+			var += "&& hidratos >=" + hidratosPesquisa + " ";
+		}
+		
+		if(orderByGorduras==true && greaterThanG==false && segundoCriterioOrdenacaoG==true && segundoCriterioOrdenacao==true){
+			var += "&& gorduras <=" + gordurasPesquisa + " ";
+			segundoCriterio += ", gorduras DESC";
+		}else if(orderByGorduras==true && greaterThanG==false && segundoCriterioOrdenacaoG==true && segundoCriterioOrdenacao==false){
+			var += "&& gorduras <=" + gordurasPesquisa + " ";
+			segundoCriterio += ", gorduras";
+		}else if(orderByGorduras==true && greaterThanG==true && segundoCriterioOrdenacaoG==true && segundoCriterioOrdenacao==true){
+			var += "&& gorduras >=" + gordurasPesquisa + " ";
+			segundoCriterio += ", gorduras DESC";
+		}else if(orderByGorduras==true && greaterThanG==true && segundoCriterioOrdenacaoG==true && segundoCriterioOrdenacao==false){
+			var += "&& gorduras >=" + gordurasPesquisa + " ";
+			segundoCriterio += ", gorduras";
+		}else if(orderByGorduras==true && greaterThanG==false && segundoCriterioOrdenacaoG==false){
+			var += "&& gorduras <=" + gordurasPesquisa + " ";
+		}else if(orderByGorduras==true && greaterThanG==false && segundoCriterioOrdenacaoG==false){
+			var += "&& gorduras <=" + gordurasPesquisa + " ";
+		}else if(orderByGorduras==true && greaterThanG==true && segundoCriterioOrdenacaoG==false){
+			var += "&& gorduras >=" + gordurasPesquisa + " ";
+		}else if(orderByGorduras==true && greaterThanG==true && segundoCriterioOrdenacaoG==false){
+			var += "&& gorduras >=" + gordurasPesquisa + " ";
+		}
+		
 		String query = "SELECT R.*, (SELECT COUNT(*) FROM Receita_Ingrediente WHERE receita_id = R.id && ingrediente_id IN "
 				+ var
 				+ ") as 'Relevancia' FROM Receita R INNER JOIN Receita_Ingrediente RI ON R.id = RI.receita_id "
 				+ "WHERE RI.ingrediente_id IN " + var
-				+ " GROUP BY receita_id ORDER BY Relevancia DESC";
+				+ " GROUP BY receita_id ORDER BY Relevancia DESC"+segundoCriterio+"";
 
 		@SuppressWarnings("unchecked")
 		List<Receita> listaOrdenada = em.createNativeQuery(query, Receita.class)
@@ -121,6 +240,7 @@ public class Global extends EntityService implements Serializable {
 	public void renderLeft() {
 		if (startGridIndex > 3) {
 			startGridIndex -= 4;
+			paginator.setPageIndex(paginator.getPageIndex() - 1);
 		}
 	}
 
@@ -128,6 +248,7 @@ public class Global extends EntityService implements Serializable {
 	public void renderRight() {
 		if (receitaResult.size() > startGridIndex + 4) {
 			startGridIndex += 4;
+			paginator.setPageIndex(paginator.getPageIndex() + 1);
 		}
 	}
 
@@ -156,6 +277,10 @@ public class Global extends EntityService implements Serializable {
 		}
 		receitaResultNumb = receitasNotEmpty;
 		receitaResultCounterOutput = receitasNotEmpty + " Receitas Encontradas";
+	}
+
+	public void updateGridIndexFromPageIndex(int pageIndex) {
+		startGridIndex = 4 * pageIndex - 3;
 	}
 
 	/*-----------------------------------------------------------------------------------*/
@@ -234,6 +359,147 @@ public class Global extends EntityService implements Serializable {
 	public void setReceitaResultCounterOutput(
 			String receitaResultCounterOutput) {
 		this.receitaResultCounterOutput = receitaResultCounterOutput;
+	}
+	
+	public boolean isOrderByCalorias() {
+		return orderByCalorias;
+	}
+
+	public void setOrderByCalorias(boolean orderByCalorias) {
+		this.orderByCalorias = orderByCalorias;
+	}
+
+	public int getCaloriasPesquisa() {
+		return caloriasPesquisa;
+	}
+
+	public void setCaloriasPesquisa(int caloriasPesquisa) {
+		this.caloriasPesquisa = caloriasPesquisa;
+	}
+
+	public boolean isGreaterThanC() {
+		return greaterThanC;
+	}
+
+	public void setGreaterThanC(boolean greaterThanC) {
+		this.greaterThanC = greaterThanC;
+	}
+
+	public boolean isOrderByProteinas() {
+		return orderByProteinas;
+	}
+
+	public void setOrderByProteinas(boolean orderByProteinas) {
+		this.orderByProteinas = orderByProteinas;
+	}
+
+	public double getProteinaPesquisa() {
+		return proteinaPesquisa;
+	}
+
+	public void setProteinaPesquisa(double proteinaPesquisa) {
+		this.proteinaPesquisa = proteinaPesquisa;
+	}
+
+	public boolean isGreaterThanP() {
+		return greaterThanP;
+	}
+
+	public void setGreaterThanP(boolean greaterThanP) {
+		this.greaterThanP = greaterThanP;
+	}
+
+	public boolean isOrderByHidratos() {
+		return orderByHidratos;
+	}
+
+	public void setOrderByHidratos(boolean orderByHidratos) {
+		this.orderByHidratos = orderByHidratos;
+	}
+
+	public double getHidratosPesquisa() {
+		return hidratosPesquisa;
+	}
+
+	public void setHidratosPesquisa(double hidratosPesquisa) {
+		this.hidratosPesquisa = hidratosPesquisa;
+	}
+
+	public boolean isGreaterThanH() {
+		return greaterThanH;
+	}
+
+	public void setGreaterThanH(boolean greaterThanH) {
+		this.greaterThanH = greaterThanH;
+	}
+
+	public boolean isOrderByGorduras() {
+		return orderByGorduras;
+	}
+
+	public void setOrderByGorduras(boolean orderByGorduras) {
+		this.orderByGorduras = orderByGorduras;
+	}
+
+	public double getGordurasPesquisa() {
+		return gordurasPesquisa;
+	}
+
+	public void setGordurasPesquisa(double gordurasPesquisa) {
+		this.gordurasPesquisa = gordurasPesquisa;
+	}
+
+	public boolean isGreaterThanG() {
+		return greaterThanG;
+	}
+
+	public void setGreaterThanG(boolean greaterThanG) {
+		this.greaterThanG = greaterThanG;
+	}
+
+	public boolean isSegundoCriterioOrdenacaoC() {
+		return segundoCriterioOrdenacaoC;
+	}
+
+	public void setSegundoCriterioOrdenacaoC(boolean segundoCriterioOrdenacaoC) {
+		this.segundoCriterioOrdenacaoC = segundoCriterioOrdenacaoC;
+	}
+
+	public boolean isSegundoCriterioOrdenacaoP() {
+		return segundoCriterioOrdenacaoP;
+	}
+
+	public void setSegundoCriterioOrdenacaoP(boolean segundoCriterioOrdenacaoP) {
+		this.segundoCriterioOrdenacaoP = segundoCriterioOrdenacaoP;
+	}
+
+	public boolean isSegundoCriterioOrdenacaoH() {
+		return segundoCriterioOrdenacaoH;
+	}
+
+	public void setSegundoCriterioOrdenacaoH(boolean segundoCriterioOrdenacaoH) {
+		this.segundoCriterioOrdenacaoH = segundoCriterioOrdenacaoH;
+	}
+
+	public boolean isSegundoCriterioOrdenacaoG() {
+		return segundoCriterioOrdenacaoG;
+	}
+
+	public void setSegundoCriterioOrdenacaoG(boolean segundoCriterioOrdenacaoG) {
+		this.segundoCriterioOrdenacaoG = segundoCriterioOrdenacaoG;
+	}
+
+	public boolean isSegundoCriterioOrdenacao() {
+		return segundoCriterioOrdenacao;
+	}
+
+	public void setSegundoCriterioOrdenacao(boolean segundoCriterioOrdenacao) {
+		this.segundoCriterioOrdenacao = segundoCriterioOrdenacao;
+	}
+
+
+	public Paginator getPaginator() {
+		return paginator;
 	}
 
 }
