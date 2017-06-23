@@ -11,7 +11,7 @@
 
 		<h:form id="searchBox">
 
-			<h:panelGrid columns="5" cellpadding="5">
+			<h:panelGrid columns="11" cellpadding="5">
 
 				<h:outputLabel class="label-procurar"
 					value="Por favor introduza os Ingredientes" />
@@ -24,19 +24,33 @@
 
 				<p:commandButton value="Procurar Receitas"
 					action="#{global.searchIngredientes()}"
-					update="counter imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"
+					update="pageNumber pageIndex counter imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"
 					icon="ui-icon-search" />
 
-				<h:outputText id="counter"
+				<h:outputText id="counter" class="resultCounter"
 					value="#{global.receitaResultCounterOutput}" />
 
-				<ul class="pagination">
-					<li><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
-				</ul>
+				<h:commandButton id="prevPage" value="&lt; prev"
+					action="#{global.renderLeft()}"
+					update="pageNumber inputPage pageIndex imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4" />
+
+				<h:outputText id="pageNumber"
+					value="Página #{global.paginator.pageIndex} de #{global.paginator.pages}" />
+
+				<h:commandButton id="nextPage" value="next &gt;"
+					action="#{global.renderRight()}"
+					update="pageNumber inputPage pageIndex imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4" />
+
+				<h:outputText id="goToPage" value="Página" />
+
+				<p:inputNumber for="submitInputPage" id="inputPage"
+					value="#{global.paginator.pageIndex}" />
+
+				<h:commandButton id="submitInputPage" value="Ir"
+					action="#{global.updateGridIndexFromPageIndex(global.paginator.pageIndex)}"
+					update="pageNumber inputPage pageIndex imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4" />
+
+				<h:inputHidden id="pageIndex" value="#{global.paginator.pageIndex}" />
 
 			</h:panelGrid>
 
