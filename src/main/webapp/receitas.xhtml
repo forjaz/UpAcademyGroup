@@ -31,8 +31,8 @@
 				<div class="col-md-4">Tipo de Receita:</div>
 				<div class="col-md-8">
 				
-                	<h:selectOneListbox class="form-control" value="#{global.searchQuery}" styleClass="select2"  >
-	                    <f:selectItems var="ing" value="#{global.getTipoReceita()}"/>
+                	<h:selectOneListbox class="form-control" styleClass="select2"  >
+	                    <f:selectItems var="ing" value="#{receitaBean.tipos}"/>
 	                </h:selectOneListbox>
 					<h:outputScript>
                 		$(".select2").select2();
@@ -62,7 +62,7 @@
 			<p></p>
 
 			<h:commandButton value="Submeter"
-				action="#{receitaService.newReceita(receitaBean.receita)}"
+				action="#{receitaDto.newReceita(receitaBean.receita)}"
 				class="btn btn-default" />
 			<br />
 			<br />

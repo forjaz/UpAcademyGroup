@@ -4,67 +4,130 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jstl/core"
-	template="/template/default/uniqueLayout.xhtml"
+	template="/template/default/insertReceitaLayout.xhtml"
 	xmlns:p="http://primefaces.org/ui">
 
 	<!-- UNIQUE RECEITA -->
 
 	<!-- UNIQUE IMAGEM -->
-	<ui:define name="uniqueReceitaImagem">
-		<h:outputLabel styleClass="receita-preparacao" value="#{receitaDto.receita.nome}"></h:outputLabel>
-		<h:graphicImage styleClass="receita-imagem-unique"
-			url="#{receitaDto.receita.imagem}" />
-		<h:outputLabel styleClass="receita-preparacao" value="#{receitaDto.receita.preparacao}"></h:outputLabel>
-	</ui:define>
+	
+	<ui:define name="insertReceita">
+		<div class="col-md-6" style="height:550px">
+			
+				<h:outputLabel styleClass="receita-preparacao" value="#{receitaDto.receita.nome}"/>
+			
+			
+			<!--  
+			<div class="row" >
+				<h:graphicImage styleClass="receita-imagem-unique"
+								url="#{receitaDto.receita.imagem}" />
+			</div>
+			-->
+			
+				<h:outputLabel styleClass="receita-preparacao" value="#{receitaDto.receita.preparacao}"/>
+		
+		</div>
 
 	<!-- UNIQUE CALORIAS / PROTEINAS / HIDRATOS / GORDURAS TABLE -->
-	<ui:define name="uniqueReceitaNutricao">
-		
-		<p:panel id="panel" header="Porfavor introduza os ingredientes, as quantidades e o modo de preparação">
- 
-	        <p:messages id="msgs" />
+		<div class="col-md-6" style="height:550px">
+
+	
+		        <p:messages id="msgs" />
+		 		
+		 		<div class="row">
+		       		<div class="col-md-3">Ingrediente</div>
+					<div class="col-md-9">
+		          
+			            
+			            <h:selectOneListbox id="ing" 
+			           						class="form-control"
+			            					value="#{ingredienteBean.ingrediente.nome}" 
+											styleClass="select2"
+											style="width:80px">
+											
+							<f:selectItems var="ing" value="#{global.returnIngredientes()}"
+													 itemLabel="#{ing.nome}" 
+													 itemValue="#{ing.id}" />
+						</h:selectOneListbox>
+		            </div>	
+		            
+		     	</div>	 
+		 			<br/>
+		 			
+		 			<div class="row">
+			       		<div class="col-md-3"> Modo de Preparação:</div>
+						<div class="col-md-9">
+			          
+				            
+				            <h:selectOneListbox id="prep" 
+				            					value="#{ingredienteBean.ingrediente.modoPreparacao}" 
+				            					style="width:80px"
+				            					class="form-control"
+				            					styleClass="select2">
+				                
+				                <f:selectItems value="#{ingredienteBean.preparacoes}" />
+				            </h:selectOneListbox>
+			            </div>
+			       	</div>
+		 			<br/>
+		 			
+		 			<div class="row">
+		       			<div class="col-md-3">Quantidade</div>
+						<div class="col-md-9">
+				            <p:inputNumber id="qtd"
+				            			   style="width:80px"
+				            			   value="#{receitaIngredienteBean.receitaIngrediente.quantidadeCliente}" 
+				            			   label="quantidade" 
+				            			   required="true"
+				            			   />
+				           
+				        </div>
+				        </div>
+				        			   
+		            <br/>
+		            
+		            <div class="row">
+		       			<div class="col-md-3">Unidades</div>
+						<div class="col-md-9">
+		            <h:selectOneListbox id="uni" 
+		            					value="#{receitaIngredienteBean.receitaIngrediente.medidas}" 
+		            					style="width:80px"
+		            					class="form-control"
+		            					styleClass="select2">
+		                
+		            <f:selectItems value="#{receitaIngredienteBean.unidades}" />
+		            
+		            </h:selectOneListbox>
+		            
+	     			<h:outputScript>
+                		$(".select2").select2();
+            		</h:outputScript>
+            		
+            		<h:commandButton value="refresh"
+				action="ingrediente_Receita"
+				class="btn btn-default" />
+				
+				
+            			</div>
+            		</div>
 	 
-	        <h:panelGrid columns="3" cellpadding="5">
-	            <p:outputLabel for="ing" value="Ingrediente:" />
-	            	<p:inputText id="ing" value="#{ingredienteBean.ingrediente.nome}" required="true" label="nome"> 
-	            </p:inputText>
-	 
-	            <p:outputLabel for="prep" value="Modo de Preparação:" />
-	            	<h:selectManyListbox id="prep" value="#{ingredienteBean.ingrediente.modoPreparacao}" style="width:150px">
-	                
-	                <f:selectItems value="#{ingredienteBean.preparacoes}" />
-	            </h:selectManyListbox>
-	 			
-	 			<p:outputLabel for="qtd" value="Quantidade:" />
-	            	<p:inputNumber id="qtd" value="#{receitaIngredienteBean.receitaIngrediente.quantidadeCliente}" label="quantidade" required="true">
-	            </p:inputNumber>
-	            
-	            <p:outputLabel for="uni" value="unidades:" />
-	            	<h:selectManyListbox id="uni" value="#{receitaIngredienteBean.receitaIngrediente.medidas}" style="width:150px">
-	                
-	                <f:selectItems value="#{receitaIngredienteBean.unidades}" />
-	            </h:selectManyListbox>
-	        </h:panelGrid>
-	 
-	        <p:commandButton value="Save" update="panel" actionListener="index" icon="ui-icon-check" />
-    	</p:panel>
-		
-	</ui:define>
+	        <!--  <p:commandButton value="Save" update="panel" actionListener="index" icon="ui-icon-check" /> -->
+    		
+	
 
 	<!-- UNIQUE INGREDIENTES / QUANTIDADES / UNIDADES TABLE -->
-	<ui:define name="uniqueReceitaIngredientes">
-		
-	</ui:define>
 
 
     <!-- BUTTON LEFT -->
-    <ui:define name="cursorLeft">
-        <h:form>
-            <h:commandLink action="index">
-                <h:graphicImage styleClass="cursor-left-click"
-                                value="#{global.receitaPlaceholder.imagem}"/>
-            </h:commandLink>
-        </h:form>
+  			
+		        <h:form>
+		            <h:commandLink action="index">
+		                <h:graphicImage styleClass="cursor-left-click"
+		                                value="#{global.receitaPlaceholder.imagem}"/>
+		            </h:commandLink>
+		        </h:form>
+		    
+		</div>   	
     </ui:define>
 
 </ui:composition>

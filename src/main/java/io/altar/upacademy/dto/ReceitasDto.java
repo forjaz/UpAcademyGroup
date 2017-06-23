@@ -42,7 +42,7 @@ public class ReceitasDto extends EntityService implements Serializable {
 		recipie.setValidacao("invalida");
 		setReceita(recipie);
 		em.persist(recipie);
-		return "miguel";
+		return "ingrediente_Receita";
 	}
 	
 	public String validar(Long id) {
