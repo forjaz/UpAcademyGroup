@@ -54,27 +54,27 @@ public class Global extends EntityService implements Serializable {
     private boolean renderPageCounter;
 	
 	// All fields below belong to the returnReceitasOrderByHit() Method
-	private boolean orderByCalorias=false;
-	private int caloriasPesquisa;
-	private boolean greaterThanC=false;
-	private boolean segundoCriterioOrdenacaoC=false;
+	private boolean orderByCalorias;
+	private int caloriasPesquisa = 300;
+	private boolean greaterThanC;
+	private boolean segundoCriterioOrdenacaoC;
 	
-	private boolean orderByProteinas=false;
+	private boolean orderByProteinas;
 	private double proteinaPesquisa;
-	private boolean greaterThanP=false;
-	private boolean segundoCriterioOrdenacaoP=false;
+	private boolean greaterThanP;
+	private boolean segundoCriterioOrdenacaoP;
 	
-	private boolean orderByHidratos=false;
+	private boolean orderByHidratos;
 	private double hidratosPesquisa;
-	private boolean greaterThanH=false;
-	private boolean segundoCriterioOrdenacaoH=false;
+	private boolean greaterThanH;
+	private boolean segundoCriterioOrdenacaoH;
 	
-	private boolean orderByGorduras=false;
+	private boolean orderByGorduras;
 	private double gordurasPesquisa;
-	private boolean greaterThanG=false;
-	private boolean segundoCriterioOrdenacaoG=false;
+	private boolean greaterThanG;
+	private boolean segundoCriterioOrdenacaoG;
 	
-	private boolean segundoCriterioOrdenacao=false;
+	private boolean segundoCriterioOrdenacao;
 
 	// Paginator
 	private Paginator paginator;
