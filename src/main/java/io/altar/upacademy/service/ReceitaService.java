@@ -4,6 +4,7 @@ import io.altar.upacademy.model.Ingrediente;
 import io.altar.upacademy.model.Receita;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -40,5 +41,11 @@ public class ReceitaService extends EntityService implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
+	
+	public ArrayList <Receita> reprovadas(){
+		ArrayList <Receita> lista = (ArrayList<Receita>) em.createNativeQuery("SELECT * FROM Receita R "+
+				"WHERE R.validacao=reprovada").getResultList();
+		
+				return lista;
+	}
 }
