@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	template="/template/default/defaultLayout.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+	</h:head>
+	
+	<ui:define name="contentDisplay">
+	
+		<h:form>
+		
+			<h4>Nome da Receita</h4>
+			
+				<h:inputText value="#{receitaBean.receita.nome}"/>
+				
+			<h4>Imagem da Receita (url)</h4>
+			
+				<h:inputText value="#{receitaBean.receita.imagem}" />
+			<p></p>
+		       <h:panelGrid columns="2" cellpadding="5">
+	            <p:outputLabel for="tipo" value="Tipo de Receita: " />
+	            <p:selectOneMenu id="tipo" value="#{receitaBean.receita.tipo}" style="width:150px">
+	                
+	                <f:selectItems value="#{receitaBean.tipos}" />
+	            </p:selectOneMenu>
+	 			</h:panelGrid>
+
+			
+			<p></p>
+			
+			<h4>Preparacao da Receita</h4>
+			
+			<p:editor id="editor" widgetVar="editorWidget" value="#{receitaBean.receita.preparacao}" wisth="600" />
+			
+			<p></p>		
+			
+				<h:commandButton value="Submeter" action="#{receitaDto.newReceita(receitaBean.receita)}"/>
+			<p></p>
+			<p></p>		
+			
+				<h:commandButton value="coco" action="#{receitaDto.calcular()}"/>
+			<p></p>
+				<h:commandButton value = "Ir ecra Search" action = "search" />
+			<p></p>
+				<h:commandButton value = "Voltar ecra anterior" action = "index" />
+			<p></p>
+			
+		</h:form>
+	</ui:define>
+	
+</ui:composition>

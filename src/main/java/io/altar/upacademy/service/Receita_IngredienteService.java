@@ -72,6 +72,7 @@ public class Receita_IngredienteService extends EntityService implements Seriali
 	// Input do cliente
 	public String newRct_Ing(Receita recipie, Ingrediente ingredient, Receita_Ingrediente rct_ing) {
 		
+		System.out.println("fdsfsdfsdfdsffdsfdjhdfshdfhdsfhffkfgadjskfhdshfdsjgfgfgdsgfgdsgkjfgdsgjkfgdsgfgdsgfgdsgfgdsgfgdsgjkfgdsgjkfgdsgjkfgdsgfgdsgjkfjgdsgfgdsgjkfgsdjkfgsdjkfgfdsf comeca aqui");
 		//sacar o id da receita através do nome
 		long idR = ((Number)em.createNativeQuery("SELECT id FROM Receita R "+
 				"WHERE R.nome='"+recipie.getNome()+"'").getSingleResult()).longValue();
@@ -95,7 +96,7 @@ public class Receita_IngredienteService extends EntityService implements Seriali
 		//determinar as quantidades em gramas
 		
 		int qtd = (int) (rct_ing.getQuantidadeCliente()*conversor.get(rct_ing.getMedidas()));
-		rct_ing.setQuantidade(qtd);
+		rct_ing.setQuantidadeCliente(qtd);
 		
 		em.persist(rct_ing);
 		
