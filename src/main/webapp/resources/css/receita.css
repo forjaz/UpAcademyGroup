@@ -56,7 +56,11 @@ body {
 
 /* HEADER - LOGO */
 #headerLogoDiv {
-	background-color: #2D8B2D;
+    background:
+            url('https://s2.postimg.org/xqmgto6on/logo7.png')
+            no-repeat;
+    background-size: cover;
+    background-color: #2D8B2D;
 	height: 120px;
 	padding-top: 20px;
 	padding-left: 90px;
@@ -147,17 +151,6 @@ body {
 	height: 33px;
 }
 
-.resultCounter {
-	margin: 0px 10px;
-	font-weight: bold;
-}
-
-.pagination {
-	display: inline;
-	padding-left: 0;
-	margin: 0;
-	border-radius: 4px;
-}
 /*-----------------------------------------------------------------------------------*/
 /* CONTENT */
 /*-----------------------------------------------------------------------------------*/
@@ -230,6 +223,20 @@ body {
 	padding: 10px;
 	color: white;
 }
+
+.resultCounter{
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.pageCounter {
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 8px;
+    margin-right: 50px;
+}
+
 
 /*-----------------------------------------------------------------------------------*/
 /* CONTENT - CURSOR */

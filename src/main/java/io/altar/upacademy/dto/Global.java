@@ -49,6 +49,9 @@ public class Global extends EntityService implements Serializable {
 
 	// Show Receita Result Text
 	private String receitaResultCounterOutput;
+
+	// Show Page Counter
+    private boolean renderPageCounter;
 	
 	// All fields below belong to the returnReceitasOrderByHit() Method
 	private boolean orderByCalorias=false;
@@ -111,7 +114,7 @@ public class Global extends EntityService implements Serializable {
 		List<Receita> receitaList = returnReceitasOrderByHit();
 		receitaResult = ensureLengthMultipleOfFour(receitaList);
 		showReceitaResultCounter();
-		paginator = new Paginator(this.receitaResult);
+        setRenderPageCounter(true);
 	}
 
 	// 2.1 Returns Receitas by Number of Ingredientes in Common 
@@ -275,6 +278,7 @@ public class Global extends EntityService implements Serializable {
 				receitasNotEmpty += 1;
 			}
 		}
+		this.paginator = new Paginator(this.receitaResult);
 		receitaResultNumb = receitasNotEmpty;
 		receitaResultCounterOutput = receitasNotEmpty + " Receitas Encontradas";
 	}
@@ -502,4 +506,11 @@ public class Global extends EntityService implements Serializable {
 		return paginator;
 	}
 
+    public boolean isRenderPageCounter() {
+        return renderPageCounter;
+    }
+
+    public void setRenderPageCounter(boolean renderPageCounter) {
+        this.renderPageCounter = renderPageCounter;
+    }
 }

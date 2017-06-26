@@ -29,6 +29,10 @@ public class Paginator {
 	/* CONSTRUCTOR */
 	/*-----------------------------------------------------------------------------------*/
 
+	public Paginator(){
+
+    }
+
 	public Paginator(List<Receita> receitaResult) {
 		this.origReceitaResult = receitaResult;
 		this.receitas = DEFAULT_RECEITAS_NUMBER;
