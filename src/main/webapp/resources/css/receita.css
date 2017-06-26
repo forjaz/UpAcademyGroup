@@ -56,11 +56,9 @@ body {
 
 /* HEADER - LOGO */
 #headerLogoDiv {
-    background:
-            url('https://s2.postimg.org/xqmgto6on/logo7.png')
-            no-repeat;
-    background-size: cover;
-    background-color: #2D8B2D;
+	background: url('https://s2.postimg.org/xqmgto6on/logo7.png') no-repeat;
+	background-size: cover;
+	background-color: #2D8B2D;
 	height: 120px;
 	padding-top: 20px;
 	padding-left: 90px;
@@ -90,7 +88,7 @@ body {
 }
 
 .navbar-btn {
-	width: 30%;
+	width: 22%;
 	margin: 8px 7px 8px 7px;
 	font-size: 14px;
 	letter-spacing: 1px;
@@ -218,25 +216,24 @@ body {
 	flex-wrap: wrap;
 	height: 576px;
 	width: 900px;
-    margin-left: 265px;
-    margin-top: 92px;
+	margin-left: 265px;
+	margin-top: 92px;
 	padding: 10px;
 	color: white;
 }
 
-.resultCounter{
-    font-weight: bold;
-    margin-left: 20px;
+.resultCounter {
+	font-weight: bold;
+	margin-left: 20px;
 }
 
 .pageCounter {
-    text-align: center;
-    font-weight: bold;
-    width: 100%;
-    margin-top: 8px;
-    margin-right: 50px;
+	text-align: center;
+	font-weight: bold;
+	width: 100%;
+	margin-top: 8px;
+	margin-right: 50px;
 }
-
 
 /*-----------------------------------------------------------------------------------*/
 /* CONTENT - CURSOR */
