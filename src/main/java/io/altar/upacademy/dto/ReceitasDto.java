@@ -92,4 +92,5 @@ public class ReceitasDto extends EntityService implements Serializable {
 		
 		return "migeG";
 	}
+	
 }

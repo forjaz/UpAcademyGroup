@@ -19,6 +19,7 @@ import javax.transaction.Transactional;
 @Transactional
 public class ReceitaService extends EntityService implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
 
 	// Constructor
 	public ReceitaService() {
@@ -42,10 +43,4 @@ public class ReceitaService extends EntityService implements Serializable {
 		return serialVersionUID;
 	}
 	
-	public ArrayList <Receita> reprovadas(){
-		ArrayList <Receita> lista = (ArrayList<Receita>) em.createNativeQuery("SELECT * FROM Receita R "+
-				"WHERE R.validacao=reprovada").getResultList();
-		
-				return lista;
-	}
 }

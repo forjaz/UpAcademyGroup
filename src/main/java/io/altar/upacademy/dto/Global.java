@@ -34,7 +34,7 @@ public class Global extends EntityService implements Serializable {
 
 	// Receitas to Render in Grid
 	private List<Receita> receitaResult = new ArrayList<>();
-
+	
 	// Receita to Render in Unique
 	private Receita uniqueReceita;
 
@@ -513,4 +513,15 @@ public class Global extends EntityService implements Serializable {
     public void setRenderPageCounter(boolean renderPageCounter) {
         this.renderPageCounter = renderPageCounter;
     }
+    
+    public void reprovadas(){
+		@SuppressWarnings("unchecked")
+		ArrayList <Receita> lista = (ArrayList<Receita>) em.createNativeQuery("SELECT * FROM Receita R "+
+				"WHERE R.validacao='reprovada'").getResultList();
+		
+		receitaResult = ensureLengthMultipleOfFour(lista);
+					showReceitaResultCounter();
+			        setRenderPageCounter(true);
+	
+	}
 }
