@@ -56,26 +56,24 @@ body {
 
 /* HEADER - LOGO */
 #headerLogoDiv {
-    background:
-            url('https://s2.postimg.org/xqmgto6on/logo7.png')
-            no-repeat;
-    background-size: cover;
-    background-color: #2D8B2D;
-    height: 120px;
-    padding-top: 20px;
-    padding-left: 90px;
-    letter-spacing: 26px;
-    color: white;
+	background: url('https://s2.postimg.org/xqmgto6on/logo7.png') no-repeat;
+	background-size: cover;
+	background-color: #2D8B2D;
+	height: 120px;
+	padding-top: 20px;
+	padding-left: 90px;
+	letter-spacing: 26px;
+	color: white;
 }
 
 .logoText {
-    font-size: 38px !important;
-    font-weight: 100 !important;
+	font-size: 38px !important;
+	font-weight: 100 !important;
 }
 
 /* HEADER - NAV + SLOGAN */
 #headerNavSloganDiv {
-    height: 120px;
+	height: 120px;
 }
 
 /*-----------------------------------------------------------------------------------*/
@@ -173,8 +171,8 @@ body {
 	text-align: center;
 	height: 576px;
 	width: 1130px;
-	margin-left: 350px;
-	margin-top: 231px;
+	margin-left: 348px;
+	margin-top: 227px;
 	padding: 10px;
 	z-index: 1;
 	color: white;
@@ -202,30 +200,37 @@ body {
 .receita-imagem-unique {
 	order: 1;
 	z-index: 1;
-	flex-grow: 1;
 	height: 200px;
+	margin-bottom: 20px;
 }
 
 .receita-nome-unique {
 	order: 2;
 	z-index: 1;
 	text-align: center;
+	height: 53px;
 }
 
 .receita-preparacao {
 	order: 3;
 	z-index: 1;
 	text-align: justify;
+	overflow: auto;
+	height: 283px;
 }
 
 .table-nutricao {
 	order: 1;
 	z-index: 1;
+	margin-bottom: 20px;
+	height: 80px;
 }
-
+ 
 .table-ingredientes {
 	order: 2;
 	z-index: 1;
+	overflow: auto;
+	height: 456px;
 }
 
 .ui-datatable table {
