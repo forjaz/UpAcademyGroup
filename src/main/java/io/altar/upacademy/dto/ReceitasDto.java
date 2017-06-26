@@ -33,7 +33,7 @@ public class ReceitasDto extends EntityService implements Serializable {
 	}
 	
 	public String newReceita(Receita recipie) {
-		recipie.setValidacao("invalida");
+		recipie.setValidacao("reprovada");
 		setReceita(recipie);
 		em.persist(recipie);
 		return "mikeG";
@@ -41,36 +41,36 @@ public class ReceitasDto extends EntityService implements Serializable {
 	
 	public String validar(Long id) {
 		Receita emp=em.find(Receita.class, id);
-		emp.setValidacao("valida");
+		emp.setValidacao("aprovada");
 		em.merge(emp);
 		return "index";
 	}
 	public String negar(Long id) {
 		Receita emp=em.find(Receita.class, id);
-		emp.setValidacao("invalida");
+		emp.setValidacao("reprovada");
 		em.remove(emp);
 		return "index";
 	}
 	
 	public String calcular() {
-		long id4 = 4;
+		
 		long id = ((Number)em.createNativeQuery("SELECT id FROM Receita R "+
 				"WHERE R.nome='"+receita.getNome()+"'").getSingleResult()).longValue();
 
 		int cal = ((Number)em.createNativeQuery("SELECT sum(calorias*Quantidade/100) FROM Ingrediente I "+
-				"INNER JOIN Receita_Ingrediente RI ON I.id = RI.ingrediente_id WHERE RI.receita_id="+id4).getSingleResult()).intValue();
+				"INNER JOIN Receita_Ingrediente RI ON I.id = RI.ingrediente_id WHERE RI.receita_id="+id).getSingleResult()).intValue();
 		
 		double prot = ((Number)em.createNativeQuery("SELECT sum(proteina*Quantidade/100) FROM Ingrediente I "+
-				"INNER JOIN Receita_Ingrediente RI ON I.id = RI.ingrediente_id WHERE RI.receita_id="+id4).getSingleResult()).doubleValue();
+				"INNER JOIN Receita_Ingrediente RI ON I.id = RI.ingrediente_id WHERE RI.receita_id="+id).getSingleResult()).doubleValue();
 		
 		double hid = ((Number)em.createNativeQuery("SELECT sum(hidratos*Quantidade/100) FROM Ingrediente I "+
-				"INNER JOIN Receita_Ingrediente RI ON I.id = RI.ingrediente_id WHERE RI.receita_id="+id4).getSingleResult()).doubleValue();
+				"INNER JOIN Receita_Ingrediente RI ON I.id = RI.ingrediente_id WHERE RI.receita_id="+id).getSingleResult()).doubleValue();
 		
 		double gord = ((Number)em.createNativeQuery("SELECT sum(gorduras*Quantidade/100) FROM Ingrediente I "+
-				"INNER JOIN Receita_Ingrediente RI ON I.id = RI.ingrediente_id WHERE RI.receita_id="+id4).getSingleResult()).doubleValue();
+				"INNER JOIN Receita_Ingrediente RI ON I.id = RI.ingrediente_id WHERE RI.receita_id="+id).getSingleResult()).doubleValue();
 		
 		int qtd = ((Number)em.createNativeQuery("SELECT sum(Quantidade) FROM Ingrediente I "+
-				"INNER JOIN Receita_Ingrediente RI ON I.id = RI.ingrediente_id WHERE RI.receita_id="+id4).getSingleResult()).intValue();
+				"INNER JOIN Receita_Ingrediente RI ON I.id = RI.ingrediente_id WHERE RI.receita_id="+id).getSingleResult()).intValue();
 		
 		int ppl;
 		if(receita.getTipo()=="sobremesa"){
