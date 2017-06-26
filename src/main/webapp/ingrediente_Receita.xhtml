@@ -14,9 +14,9 @@
 	<ui:define name="insertReceita">
 		<div class="col-md-6" style="height:550px">
 			
-				<h:outputLabel styleClass="receita-preparacao" value="#{receitaDto.receita.nome}"/>
+			#{receitaDto.receita.nome}
 			
-			
+			<br/><br/>
 			<!--  
 			<div class="row" >
 				<h:graphicImage styleClass="receita-imagem-unique"
@@ -24,13 +24,14 @@
 			</div>
 			-->
 			
-				<h:outputLabel styleClass="receita-preparacao" value="#{receitaDto.receita.preparacao}"/>
+			#{receitaDto.receita.preparacao}
 		
 		</div>
 
 	<!-- UNIQUE CALORIAS / PROTEINAS / HIDRATOS / GORDURAS TABLE -->
 		<div class="col-md-6" style="height:550px">
-
+			
+			<h:form>
 	
 		        <p:messages id="msgs" />
 		 		
@@ -43,7 +44,8 @@
 			           						class="form-control"
 			            					value="#{ingredienteBean.ingrediente.nome}" 
 											styleClass="select2"
-											style="width:80px">
+											style="width:80px"
+											required="true">
 											
 							<f:selectItems var="ing" value="#{global.returnIngredientes()}"
 													 itemLabel="#{ing.nome}" 
@@ -78,8 +80,7 @@
 				            			   style="width:80px"
 				            			   value="#{receitaIngredienteBean.receitaIngrediente.quantidadeCliente}" 
 				            			   label="quantidade" 
-				            			   required="true"
-				            			   />
+				            			   required="true"/>
 				           
 				        </div>
 				        </div>
@@ -93,9 +94,10 @@
 		            					value="#{receitaIngredienteBean.receitaIngrediente.medidas}" 
 		            					style="width:80px"
 		            					class="form-control"
-		            					styleClass="select2">
+		            					styleClass="select2"
+		            					required="true">
 		                
-		            <f:selectItems value="#{receitaIngredienteBean.unidades}" />
+		            	<f:selectItems value="#{receitaIngredienteBean.unidades}" />
 		            
 		            </h:selectOneListbox>
 		            
@@ -103,14 +105,14 @@
                 		$(".select2").select2();
             		</h:outputScript>
             		
-            		<h:commandButton value="refresh"
-				action="ingrediente_Receita"
-				class="btn btn-default" />
+            		<p:commandButton value="Save" 
+									 action="#{receitaIngredienteService.newRct_Ing(receitaDto.receita, ingredienteBean.ingrediente, receitaIngredienteBean.receitaIngrediente)}"/>
+	
 				
 				
             			</div>
             		</div>
-	 
+	 		</h:form>
 	        <!--  <p:commandButton value="Save" update="panel" actionListener="index" icon="ui-icon-check" /> -->
     		
 	

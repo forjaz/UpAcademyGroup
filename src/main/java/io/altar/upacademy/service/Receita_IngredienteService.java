@@ -99,7 +99,7 @@ public class Receita_IngredienteService extends EntityService implements Seriali
 		
 		em.persist(rct_ing);
 		
-		return "migeG";
+		return "ingrediente_Receita";
 	}
 	
 }
