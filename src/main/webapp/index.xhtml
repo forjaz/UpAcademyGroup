@@ -11,7 +11,7 @@
 
         <h:form id="searchBox">
 
-            <h:panelGrid columns="4" cellpadding="5">
+            <h:panelGrid columns="12" cellpadding="5">
 
                 <h:outputLabel class="label-procurar"
                                value="Por favor introduza os Ingredientes"/>
@@ -30,9 +30,20 @@
 
                 <h:outputText id="counter" class="resultCounter"
                               value="#{global.receitaResultCounterOutput}"/>
-                              
-                <p:selectBooleanCheckbox value="#{global.orderByCalorias}" ></p:selectBooleanCheckbox>
-                <p:selectBooleanCheckbox value="#{global.greaterThanC}" ></p:selectBooleanCheckbox>
+                
+                <h:outputText id="ordenarPorRelevancia" class="resultCounter"
+                              value="Ordenar por Relevancia"/>
+                                    
+                <h:selectBooleanCheckbox value="#{global.criterioRelevancia}" ></h:selectBooleanCheckbox>              
+                
+                <h:outputText id="ordenarPorCalorias" class="resultCounter"
+                              value="Ordenar por Calorias"/>      
+                <h:selectBooleanCheckbox value="#{global.orderByCalorias}" ></h:selectBooleanCheckbox>
+                
+                <h:outputText id="maisOuMenos" class="resultCounter"
+                              value="Maior ou Igual a"/>    
+                <h:selectBooleanCheckbox value="#{global.greaterThanC}" ></h:selectBooleanCheckbox>
+                <h:inputText value="#{global.caloriasPesquisa}" />
 
             </h:panelGrid>
 
