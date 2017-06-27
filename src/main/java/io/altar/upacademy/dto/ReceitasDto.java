@@ -20,7 +20,7 @@ import java.util.List;
 @Transactional
 
 public class ReceitasDto extends EntityService implements Serializable {
-
+//coisas
 	private static final long serialVersionUID = 1L;
 	private Receita receita;
 

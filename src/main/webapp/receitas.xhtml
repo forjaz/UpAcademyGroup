@@ -31,7 +31,7 @@
 				<div class="col-md-4">Tipo de Receita:</div>
 				<div class="col-md-8">
 				
-                	<h:selectOneListbox class="form-control" styleClass="select2"  >
+                	<h:selectOneListbox class="form-control" styleClass="select2" value="#{receitaBean.receita.tipo}"  >
 	                    <f:selectItems var="ing" value="#{receitaBean.tipos}"/>
 	                </h:selectOneListbox>
 					<h:outputScript>
