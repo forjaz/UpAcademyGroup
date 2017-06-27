@@ -62,7 +62,7 @@
 
 	<!-- UNIQUE INGREDIENTES / QUANTIDADES / UNIDADES TABLE -->
 	<ui:define name="uniqueReceitaIngredientes">
-		<p:dataTable var="rec_ing"
+		<p:dataTable scrollable="true" scrollHeight="413" var="rec_ing"
 			value="#{global.getReceitaIngredienteFromReceitaID(global.uniqueReceita.id)}">
 			<p:column headerText="Ingrediente">
 				<h:outputText value="#{rec_ing.ingrediente.nome}" />
@@ -95,7 +95,8 @@
 
 	<!-- UNIQUE PREPARACAO -->
 	<ui:define name="uniqueReceitaPreparacao">
-		<p:dataTable var="receita" value="#{global.uniqueReceita}">
+		<p:dataTable scrollable="true" scrollHeight="224" var="receita"
+			value="#{global.uniqueReceita}">
 			<p:column headerText="Modo de Preparação">
 				<h:outputText value="#{receita.preparacao}" />
 			</p:column>
