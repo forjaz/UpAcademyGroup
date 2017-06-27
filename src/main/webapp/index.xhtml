@@ -11,7 +11,7 @@
 
         <h:form id="searchBox">
 
-            <h:panelGrid columns="32" cellpadding="5">
+            <h:panelGrid columns="33" cellpadding="5">
 
                 <div class="sortField">
 
@@ -49,10 +49,15 @@
 
                 <div class="sortField">
 
-                    <h:outputText id="relevanciaSort" class="subLabel"
+                    <h:outputText id="relevanciaSort" 
+                    			  class="subLabel"
                                   value="Relevância Ingrediente-Receita"/>
 
-                    <h:selectBooleanCheckbox immediate="true" value="#{global.sortByRelevancia}"/>
+                    <h:selectBooleanCheckbox immediate="false" 
+                    						 value="#{global.sortByRelevancia}"/>
+                    						 
+                	
+ 
 
 
                 </div>
@@ -119,10 +124,14 @@
                     <p:commandButton action="#{global.searchIngredientesByGordurasDesc()}"
                                      update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"
                                      icon="ui-icon-arrowthick-1-s"/>
+                                     
+                    
 
 
                 </div>
-
+				<div class="sortField">
+					ashfgasjf
+				</div>
             </h:panelGrid>
 
             <h:outputScript>
