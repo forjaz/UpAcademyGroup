@@ -2,182 +2,184 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
->
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html">
 
 
 <h:head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>UpAcademy Group 1</title>
+	<title>UpAcademy Group 1</title>
 
-    <h:outputStylesheet name="bootstrap/css/bootstrap.css"/>
-    <h:outputStylesheet name="css/receita-detalhe.css"/>
-    <h:outputStylesheet name="css/select2/select2.min.css"/>
-    <h:outputStylesheet name="css/boostrap-social/bootstrap-social.css"/>
-    <h:outputStylesheet name="css/fontawesome/font-awesome.min.css"/>
-    <h:outputScript name="js/jquery/jquery-3.2.1.min.js"/>
-    <h:outputScript name="bootstrap/js/bootstrap.js"/>
-    <h:outputScript name="js/select2/select2.min.js"/>
+	<h:outputStylesheet name="bootstrap/css/bootstrap.css" />
+	<h:outputStylesheet name="css/receita-detalhe.css" />
+	<h:outputStylesheet name="css/select2/select2.min.css" />
+	<h:outputStylesheet href="css/font-awesome/font-awesome.css" />
+	<h:outputStylesheet href="css/boostrap-social/bootstrap-social.css" />
+	<h:outputScript name="js/jquery/jquery-3.2.1.min.js" />
+	<h:outputScript name="bootstrap/js/bootstrap.js" />
+	<h:outputScript name="js/select2/select2.min.js" />
 
 </h:head>
 
 <h:body>
 
-    <div class="container-fluid">
+	<div class="container-fluid">
 
-        <div id="background">
+		<div id="background">
 
-            <!-- HEADER -->
-            <div class="row">
-                <div id="headerDiv" class="col-md-12">
+			<!-- HEADER -->
+			<div class="row">
+				<div id="headerDiv" class="col-md-12">
 
-                    <!-- HEADER - LOGO + NAV + SLOGAN -->
-                    <div id="headerLogoNavSloganDiv" class="col-md-12">
+					<!-- HEADER - LOGO + NAV + SLOGAN -->
+					<div id="headerLogoNavSloganDiv" class="col-md-12">
 
-                        <!-- HEADER - LOGO -->
-                        <div id="headerLogoDiv" class="col-md-6">
+						<!-- HEADER - LOGO -->
+						<div id="headerLogoDiv" class="col-md-6"></div>
 
-                        </div>
-
-                        <!-- HEADER - NAV + SLOGAN -->
-                        <div id="headerNavSloganDiv" class="col-md-6">
+						<!-- HEADER - NAV + SLOGAN -->
+						<div id="headerNavSloganDiv" class="col-md-6">
 
 
-                            <!-- HEADER - NAV -->
-                            <div id="headerNavDiv" class="col-md-12">
+							<!-- HEADER - NAV -->
+							<div id="headerNavDiv" class="col-md-12">
 
 
-                                <h:form>
+								<h:form>
 									<h:commandLink action="index"
 										update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4">
-										<button type="button" class="btn btn-default navbar-btn">Procurar Receitas</button>
+										<button type="button" class="btn btn-default navbar-btn">Procurar
+											Receitas</button>
 									</h:commandLink>
 
 									<h:commandLink action="receitas">
-										<button type="button" class="btn btn-default navbar-btn">Submeter Receitas</button>
+										<button type="button" class="btn btn-default navbar-btn">Submeter
+											Receitas</button>
 									</h:commandLink>
 									<h:commandLink action="sobre-nos">
 										<button type="button" class="btn btn-default navbar-btn">Sobre
 											Nós</button>
 									</h:commandLink>
 									<h:commandLink action="aprovacao">
-										<button type="button" class="btn btn-default navbar-btn">Área Privada</button>
+										<button type="button" class="btn btn-default navbar-btn">Área
+											Privada</button>
 									</h:commandLink>
 								</h:form>
 
 
-                            </div>
+							</div>
 
-                            <!-- HEADER - SLOGAN -->
-                            <div id="headerSloganDiv" class="col-md-12">
-                                <p class="sloganText">A SUA ESCOLHA O NOSSO PRAZER</p>
-                            </div>
+							<!-- HEADER - SLOGAN -->
+							<div id="headerSloganDiv" class="col-md-12">
+								<p class="sloganText">A SUA ESCOLHA O NOSSO PRAZER</p>
+							</div>
 
-                        </div>
+						</div>
 
-                    </div>
-
-
-                </div>
-
-            </div>
-
-            <div class="row">
-                <!-- HEADER - SEARCH -->
-                <div id="headerSearchDiv" class="col-md-12">
-                    <ui:insert name="searchBar">
-                    </ui:insert>
-                </div>
-
-            </div>
+					</div>
 
 
-            <!-- CONTENT DISPLAY -->
-            <div class="row">
-                <div id="contentDisplayDiv" class="content-display">
+				</div>
 
-                    <!-- CURSOR LEFT -->
-                    <div id="cursorLeft" class="cursor">
-                        <ui:insert name="cursorLeft" />
-                    </div>
+			</div>
 
-                </div>
-            </div>
+			<div class="row">
+				<!-- HEADER - SEARCH -->
+				<div id="headerSearchDiv" class="col-md-12">
+					<ui:insert name="searchBar">
+					</ui:insert>
+				</div>
 
-            <!-- UNIQUE RECEITA PAGE -->
-            <div class="row">
-                <div id="uniqueReceita" class="uniqueReceita">
-
-                    <div class="unique-col1">
-
-                        <div id="uniqueReceitaImagem" class="receita-imagem-unique">
-                            <ui:insert name="uniqueReceitaImagem"/>
-                        </div>
-
-                        <div id="uniqueReceitaNome" class="receita-nome-unique">
-                            <ui:insert name="uniqueReceitaNome"/>
-                        </div>
+			</div>
 
 
-                        <div id="uniqueReceitaPreparacao" class="receita-preparacao">
-                            <ui:insert name="uniqueReceitaPreparacao"/>
-                        </div>
+			<!-- CONTENT DISPLAY -->
+			<div class="row">
+				<div id="contentDisplayDiv" class="content-display">
+
+					<!-- CURSOR LEFT -->
+					<div id="cursorLeft" class="cursor">
+						<ui:insert name="cursorLeft" />
+					</div>
+
+				</div>
+			</div>
+
+			<!-- UNIQUE RECEITA PAGE -->
+			<div class="row">
+				<div id="uniqueReceita" class="uniqueReceita">
+					<ui:insert name="uniqueReceita" />
 
 
-                    </div>
+					<div class="unique-col1">
 
-                    <div class="unique-col2">
+						<div id="uniqueReceitaImagem" class="receita-imagem-unique">
+							<ui:insert name="uniqueReceitaImagem" />
+						</div>
 
-                        <div class="table-nutricao">
-                            <ui:insert name="uniqueReceitaNutricao"/>
-
-                        </div>
-
-                        <div id="uniqueReceitaIngredientes" class="table-ingredientes">
-                            <ui:insert name="uniqueReceitaIngredientes"/>
-                        </div>
-
-                    </div>
+						<div id="uniqueReceitaNome" class="receita-nome-unique">
+							<ui:insert name="uniqueReceitaNome" />
+						</div>
 
 
-                </div>
+						<div id="uniqueReceitaPreparacao" class="receita-preparacao">
+							<ui:insert name="uniqueReceitaPreparacao" />
+						</div>
 
 
-            </div>
+					</div>
+
+					<div class="unique-col2">
+
+						<div class="table-nutricao">
+							<ui:insert name="uniqueReceitaNutricao" />
+
+						</div>
+
+						<div id="uniqueReceitaIngredientes" class="table-ingredientes">
+							<ui:insert name="uniqueReceitaIngredientes" />
+						</div>
+
+					</div>
 
 
-            <div class="row">
-
-                <!-- FOOTER -->
-                <div id="footerDiv" class="col-md-12">
-                    <h2 id="footerContent">&#169; Up Academy Group 1</h2>
-
-                </div>
-
-                <!-- SOCIAL FOOTER MENU -->
-
-                <div id="socialButtons" class="col-md-12">
-                    <a class="btn btn-social-icon btn-facebook"> <span
-                            class="fa fa-facebook"> </span>
-                    </a> <a class="btn btn-social-icon btn-twitter"> <span
-                        class="fa fa-twitter"> </span>
-                </a> <a class="btn btn-social-icon btn-pinterest"> <span
-                        class="fa fa-pinterest"> </span>
-                </a> <a class="btn btn-social-icon btn-instagram"> <span
-                        class="fa fa-instagram"> </span>
-                </a>
-
-                </div>
+				</div>
 
 
-            </div>
+			</div>
 
-        </div>
-    </div>
+
+			<div class="row">
+
+				<!-- FOOTER -->
+				<div id="footerDiv" class="col-md-12">
+					<h2 id="footerContent">&#169; Up Academy Group 1</h2>
+
+				</div>
+
+				<!-- SOCIAL FOOTER MENU -->
+
+				<div id="socialButtons" class="col-md-12">
+					<a class="btn btn-social-icon btn-facebook"> <span
+						class="fa fa-facebook"> </span>
+					</a> <a class="btn btn-social-icon btn-twitter"> <span
+						class="fa fa-twitter"> </span>
+					</a> <a class="btn btn-social-icon btn-pinterest"> <span
+						class="fa fa-pinterest"> </span>
+					</a> <a class="btn btn-social-icon btn-instagram"> <span
+						class="fa fa-instagram"> </span>
+					</a>
+
+				</div>
+
+
+			</div>
+
+		</div>
+	</div>
 </h:body>
 
 </html>

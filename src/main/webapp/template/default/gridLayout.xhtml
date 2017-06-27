@@ -17,8 +17,8 @@
 	<h:outputStylesheet name="bootstrap/css/bootstrap.css" />
 	<h:outputStylesheet name="css/receita.css" />
 	<h:outputStylesheet name="css/select2/select2.min.css" />
-	<h:outputStylesheet name="css/boostrap-social/bootstrap-social.css" />
-	<h:outputStylesheet name="css/fontawesome/font-awesome.min.css" />
+	<h:outputStylesheet href="css/font-awesome/font-awesome.css" />
+	<h:outputStylesheet href="css/boostrap-social/bootstrap-social.css" />
 	<h:outputScript name="js/jquery/jquery-3.2.1.min.js" />
 	<h:outputScript name="bootstrap/js/bootstrap.js" />
 	<h:outputScript name="js/select2/select2.min.js" />
@@ -39,9 +39,7 @@
 					<div id="headerLogoNavSloganDiv" class="col-md-12">
 
 						<!-- HEADER - LOGO -->
-						<div id="headerLogoDiv" class="col-md-6">
-
-						</div>
+						<div id="headerLogoDiv" class="col-md-6"></div>
 
 						<!-- HEADER - NAV + SLOGAN -->
 						<div id="headerNavSloganDiv" class="col-md-6">
@@ -49,22 +47,25 @@
 
 							<!-- HEADER - NAV -->
 							<div id="headerNavDiv" class="col-md-12">
-							
-							<h:form>
+
+								<h:form>
 									<h:commandLink action="index"
 										update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4">
-										<button type="button" class="btn btn-default navbar-btn">Procurar Receitas</button>
+										<button type="button" class="btn btn-default navbar-btn">Procurar
+											Receitas</button>
 									</h:commandLink>
 
 									<h:commandLink action="receitas">
-										<button type="button" class="btn btn-default navbar-btn">Submeter Receitas</button>
+										<button type="button" class="btn btn-default navbar-btn">Submeter
+											Receitas</button>
 									</h:commandLink>
 									<h:commandLink action="sobre-nos">
 										<button type="button" class="btn btn-default navbar-btn">Sobre
 											Nós</button>
 									</h:commandLink>
 									<h:commandLink action="aprovacao">
-										<button type="button" class="btn btn-default navbar-btn">Área Privada</button>
+										<button type="button" class="btn btn-default navbar-btn">Área
+											Privada</button>
 									</h:commandLink>
 								</h:form>
 
@@ -162,9 +163,9 @@
 							</div>
 						</div>
 
-                        <div class = "pageCounter">
-                            <ui:insert name="pageCounter" />
-                        </div>
+						<div class="pageCounter">
+							<ui:insert name="pageCounter" />
+						</div>
 
 					</div>
 					<!-- END RECEITA GRID -->
