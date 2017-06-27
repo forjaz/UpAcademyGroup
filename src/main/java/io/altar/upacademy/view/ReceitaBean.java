@@ -17,7 +17,7 @@ public class ReceitaBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Receita receita = new Receita();
-	private List<String> tipos = Arrays.asList("Vegan", "Carne/Peixe",
+	private List<String> tipos = Arrays.asList("Vegan", "Carne","Peixe",
 			"Sobremesa", "Vegetariano");
 
 	// Constructor

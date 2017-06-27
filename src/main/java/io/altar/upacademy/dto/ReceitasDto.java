@@ -44,13 +44,23 @@ public class ReceitasDto extends EntityService implements Serializable {
 		Receita emp=em.find(Receita.class, id);
 		emp.setValidacao("aprovada");
 		em.merge(emp);
-		return "aprovacao";
+		return listarRep();
 	}
 	public String negar(Long id) {
 		Receita emp=em.find(Receita.class, id);
-		emp.setValidacao("reprovada");
+		
+		ArrayList<Receita_Ingrediente> lista= (ArrayList<Receita_Ingrediente>) em.createNativeQuery("SELECT * FROM Receita_Ingrediente RI WHERE RI.receita_id="+id, Receita_Ingrediente.class).getResultList();
+		
+		for(int i = 0; i < lista.size(); i++){
+			Receita_Ingrediente emi= lista.get(i);
+			
+			em.remove(emi);
+			
+		}
+		
 		em.remove(emp);
-		return "aprovacao";
+		
+		return listarRep();
 	}
 	
 	public String calcular() {

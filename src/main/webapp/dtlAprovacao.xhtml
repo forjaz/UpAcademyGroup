@@ -76,6 +76,16 @@
 				<h:outputText value="#{rec_ing.medidas}" />
 			</p:column>
 		</p:dataTable>
+		
+		<h:form>
+		<h:commandButton value="Aprovar"
+				action="#{receitaDto.validar(global.uniqueReceita.id)}"
+				class="btn btn-default" />
+				
+		<h:commandButton value="Reprovar"
+				action="#{receitaDto.negar(global.uniqueReceita.id)}"
+				class="btn btn-default" />
+		</h:form>	
 	</ui:define>
 
 	<!-- UNIQUE NOME -->
