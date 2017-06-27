@@ -176,7 +176,7 @@ body {
 	padding: 10px;
 	z-index: 1;
 	color: white;
-	font-size: 11px;
+	font-size: 13.5px;
 }
 
 .unique-col1 {
@@ -208,29 +208,28 @@ body {
 	order: 2;
 	z-index: 1;
 	text-align: center;
-	height: 53px;
+	height: 61px;
+	margin-bottom: 20px;
 }
 
 .receita-preparacao {
 	order: 3;
 	z-index: 1;
 	text-align: justify;
-	overflow: auto;
-	height: 283px;
+	height: 255px;
 }
 
 .table-nutricao {
 	order: 1;
 	z-index: 1;
 	margin-bottom: 20px;
-	height: 80px;
+	height: 92px;
 }
- 
+
 .table-ingredientes {
 	order: 2;
 	z-index: 1;
-	overflow: auto;
-	height: 456px;
+	height: 444px;
 }
 
 .ui-datatable table {
