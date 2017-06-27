@@ -38,7 +38,7 @@ public class Global extends EntityService implements Serializable {
     // Show Page Counter
     private boolean renderPageCounter;
     // RelvanciaSort
-    private boolean sortByRelevancia = true;
+    private boolean sortByRelevancia = false;
     // Paginator
     private Paginator paginator;
 
@@ -142,7 +142,7 @@ public class Global extends EntityService implements Serializable {
             if (i < lista.size() - 1) {
                 var += lista.get(i) + ",";
             } else {
-                var += lista.get(i) + ")";
+                var += lista.get(i) + ") && validacao = 'aprovada' ";
             }
         }
         if (sortByRelevancia) {
@@ -161,7 +161,7 @@ public class Global extends EntityService implements Serializable {
             if (i < lista.size() - 1) {
                 var += lista.get(i) + ",";
             } else {
-                var += lista.get(i) + ")";
+                var += lista.get(i) + ") && validacao = 'aprovada' ";
             }
         }
         if (sortByRelevancia) {
@@ -181,7 +181,7 @@ public class Global extends EntityService implements Serializable {
             if (i < lista.size() - 1) {
                 var += lista.get(i) + ",";
             } else {
-                var += lista.get(i) + ")";
+                var += lista.get(i) + ") && validacao = 'aprovada' ";
             }
         }
         if (sortByRelevancia) {
@@ -202,7 +202,7 @@ public class Global extends EntityService implements Serializable {
             if (i < lista.size() - 1) {
                 var += lista.get(i) + ",";
             } else {
-                var += lista.get(i) + ")";
+                var += lista.get(i) + ") && validacao = 'aprovada' ";
             }
         }
         if (sortByRelevancia) {
@@ -222,7 +222,7 @@ public class Global extends EntityService implements Serializable {
             if (i < lista.size() - 1) {
                 var += lista.get(i) + ",";
             } else {
-                var += lista.get(i) + ")";
+                var += lista.get(i) + ") && validacao = 'aprovada' ";
             }
         }
         if (sortByRelevancia) {
@@ -243,7 +243,7 @@ public class Global extends EntityService implements Serializable {
             if (i < lista.size() - 1) {
                 var += lista.get(i) + ",";
             } else {
-                var += lista.get(i) + ")";
+                var += lista.get(i) + ") && validacao = 'aprovada' ";
             }
         }
         if (sortByRelevancia) {
@@ -263,7 +263,7 @@ public class Global extends EntityService implements Serializable {
             if (i < lista.size() - 1) {
                 var += lista.get(i) + ",";
             } else {
-                var += lista.get(i) + ")";
+                var += lista.get(i) + ") && validacao = 'aprovada' ";
             }
         }
         if (sortByRelevancia) {
@@ -284,7 +284,7 @@ public class Global extends EntityService implements Serializable {
             if (i < lista.size() - 1) {
                 var += lista.get(i) + ",";
             } else {
-                var += lista.get(i) + ")";
+                var += lista.get(i) + ") && validacao = 'aprovada' ";
             }
         }
         if (sortByRelevancia) {
@@ -304,7 +304,7 @@ public class Global extends EntityService implements Serializable {
             if (i < lista.size() - 1) {
                 var += lista.get(i) + ",";
             } else {
-                var += lista.get(i) + ")";
+                var += lista.get(i) + ") && validacao = 'aprovada' ";
             }
         }
         if (sortByRelevancia) {
@@ -312,7 +312,7 @@ public class Global extends EntityService implements Serializable {
         } else {
             sortByRelevanciaGordurasQuery = "ORDER BY gorduras DESC";
         }
-        String query = new StringBuilder().append("SELECT R.*, (SELECT COUNT(*) FROM Receita_Ingrediente WHERE receita_id = R.id && ingrediente_id IN ").append(var).append(") as 'Relevancia' FROM Receita R INNER JOIN Receita_Ingrediente RI ON R.id = RI.receita_id ").append("WHERE RI.ingrediente_id IN ").append(var).append(" GROUP BY receita_id ").append(sortByRelevanciaGordurasQuery).toString();
+        String query = new StringBuilder().append("SELECT R.*, (SELECT COUNT(*) FROM Receita_Ingrediente WHERE receita_id = R.id && ingrediente_id IN ").append(var).append(") as 'Relevancia' FROM Receita R INNER JOIN Receita_Ingrediente RI ON R.id = RI.receita_id && validacao = 'aprovada' ").append("WHERE RI.ingrediente_id IN ").append(var).append(" GROUP BY receita_id ").append(sortByRelevanciaGordurasQuery).toString();
         return em.createNativeQuery(query, Receita.class).getResultList();
     }
 
