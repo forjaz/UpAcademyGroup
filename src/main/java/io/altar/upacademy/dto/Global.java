@@ -135,209 +135,209 @@ public class Global extends EntityService implements Serializable {
 		
 		
 		// Ordenar por Calorias
-		if(orderByCalorias==true && greaterThanC==false && criterioRelevancia==true && segundoCriterioOrdenacaoC==true && segundoCriterioOrdenacao==true){
+		if(orderByCalorias && !greaterThanC && criterioRelevancia && segundoCriterioOrdenacaoC && segundoCriterioOrdenacao){
 			var += "&& calorias <=" + caloriasPesquisa + " ";
 			criterioRelevanciaS += "ORDER BY Relevancia DESC" ; 
 			segundoCriterio += ", calorias DESC";
-		}else if(orderByCalorias==true && greaterThanC==false && criterioRelevancia==false && segundoCriterioOrdenacaoC==true && segundoCriterioOrdenacao==true){
+		}else if(orderByCalorias && greaterThanC==false && criterioRelevancia==false && segundoCriterioOrdenacaoC && segundoCriterioOrdenacao){
 			var += "&& calorias <=" + caloriasPesquisa + " ";
 			segundoCriterio += "ORDER BY calorias DESC";
 		}
 		//
-		else if(orderByCalorias==true && greaterThanC==false && criterioRelevancia==true && segundoCriterioOrdenacaoC==true && segundoCriterioOrdenacao==false){
+		else if(orderByCalorias && greaterThanC==false && criterioRelevancia && segundoCriterioOrdenacaoC && segundoCriterioOrdenacao==false){
 			var += "&& calorias <=" + caloriasPesquisa + " ";
 			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
 			segundoCriterio += ", calorias";
-		}else if(orderByCalorias==true && greaterThanC==false && criterioRelevancia==false && segundoCriterioOrdenacaoC==true && segundoCriterioOrdenacao==false){
+		}else if(orderByCalorias && greaterThanC==false && criterioRelevancia==false && segundoCriterioOrdenacaoC && segundoCriterioOrdenacao==false){
 			var += "&& calorias <=" + caloriasPesquisa + " ";
 			segundoCriterio += "ORDER BY calorias";
 		}
 		//
-		else if(orderByCalorias==true && greaterThanC==true && criterioRelevancia==true && segundoCriterioOrdenacaoC==true && segundoCriterioOrdenacao==true){
+		else if(orderByCalorias && greaterThanC && criterioRelevancia && segundoCriterioOrdenacaoC && segundoCriterioOrdenacao){
 			var += "&& calorias >=" + caloriasPesquisa + " ";
 			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
 			segundoCriterio += ", calorias DESC";
-		}else if(orderByCalorias==true && greaterThanC==true && criterioRelevancia==false && segundoCriterioOrdenacaoC==true && segundoCriterioOrdenacao==true){
+		}else if(orderByCalorias && greaterThanC && criterioRelevancia==false && segundoCriterioOrdenacaoC && segundoCriterioOrdenacao){
 			var += "&& calorias >=" + caloriasPesquisa + " ";
 			segundoCriterio += "ORDER BY calorias DESC";
 		}
 		//
-		else if(orderByCalorias==true && greaterThanC==true && criterioRelevancia==true && segundoCriterioOrdenacaoC==true && segundoCriterioOrdenacao==false){
+		else if(orderByCalorias && greaterThanC && criterioRelevancia && segundoCriterioOrdenacaoC && segundoCriterioOrdenacao==false){
 			var += "&& calorias >=" + caloriasPesquisa + " ";
 			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
 			segundoCriterio += ", calorias";
-		}else if(orderByCalorias==true && greaterThanC==true && criterioRelevancia==false && segundoCriterioOrdenacaoC==true && segundoCriterioOrdenacao==false){
+		}else if(orderByCalorias && greaterThanC && criterioRelevancia==false && segundoCriterioOrdenacaoC && segundoCriterioOrdenacao==false){
 			var += "&& calorias >=" + caloriasPesquisa + " ";
 			segundoCriterio += "ORDER BY calorias";
 		}
 		//
-		else if(orderByCalorias==true && greaterThanC==false && criterioRelevancia==true && segundoCriterioOrdenacaoC==false){
+		else if(orderByCalorias && greaterThanC==false && criterioRelevancia && segundoCriterioOrdenacaoC==false){
 			var += "&& calorias <=" + caloriasPesquisa + " ";
 			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
-		}else if(orderByCalorias==true && greaterThanC==false && criterioRelevancia==false && segundoCriterioOrdenacaoC==false){
+		}else if(orderByCalorias && greaterThanC==false && criterioRelevancia==false && segundoCriterioOrdenacaoC==false){
 			var += "&& calorias <=" + caloriasPesquisa + " ";
 		}
 		//
-		else if(orderByCalorias==true && greaterThanC==true && criterioRelevancia==true && segundoCriterioOrdenacaoC==false){
+		else if(orderByCalorias && greaterThanC && criterioRelevancia && segundoCriterioOrdenacaoC==false){
 			var += "&& calorias >=" + caloriasPesquisa + " ";
 			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
-		}else if(orderByCalorias==true && greaterThanC==true && criterioRelevancia==false && segundoCriterioOrdenacaoC==false){
+		}else if(orderByCalorias && greaterThanC && criterioRelevancia==false && segundoCriterioOrdenacaoC==false){
 			var += "&& calorias >=" + caloriasPesquisa + " ";
 		}
 		
 
 		
 		//Ordenar por Proteinas
-		if(orderByProteinas==true && greaterThanP==false && criterioRelevancia==true && segundoCriterioOrdenacaoP==true && segundoCriterioOrdenacao==true){
+		if(orderByProteinas && greaterThanP==false && criterioRelevancia && segundoCriterioOrdenacaoP && segundoCriterioOrdenacao){
 			var += "&& proteina <=" + proteinaPesquisa + " ";
 			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
 			segundoCriterio += ", proteina DESC";
-		}else if(orderByProteinas==true && greaterThanP==false && criterioRelevancia==false && segundoCriterioOrdenacaoP==true && segundoCriterioOrdenacao==true){
+		}else if(orderByProteinas && greaterThanP==false && criterioRelevancia==false && segundoCriterioOrdenacaoP && segundoCriterioOrdenacao){
 			var += "&& proteina <=" + proteinaPesquisa + " ";
 			segundoCriterio += "ORDER BY proteina DESC";
 		}
 		//
-		else if(orderByProteinas==true && greaterThanP==false && criterioRelevancia==true && segundoCriterioOrdenacaoP==true && segundoCriterioOrdenacao==false){
+		else if(orderByProteinas && greaterThanP==false && criterioRelevancia && segundoCriterioOrdenacaoP && segundoCriterioOrdenacao==false){
 			var += "&& proteina <=" + proteinaPesquisa + " ";
 			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
 			segundoCriterio += ", proteina";
-		}else if(orderByProteinas==true && greaterThanP==false && criterioRelevancia==false && segundoCriterioOrdenacaoP==true && segundoCriterioOrdenacao==false){
+		}else if(orderByProteinas && greaterThanP==false && criterioRelevancia==false && segundoCriterioOrdenacaoP && segundoCriterioOrdenacao==false){
 			var += "&& proteina <=" + proteinaPesquisa + " ";
 			segundoCriterio += "ORDER BY proteina";
 		}
 		//
-		else if(orderByProteinas==true && greaterThanP==true && criterioRelevancia==true && segundoCriterioOrdenacaoP==true && segundoCriterioOrdenacao==true){
+		else if(orderByProteinas && greaterThanP && criterioRelevancia && segundoCriterioOrdenacaoP && segundoCriterioOrdenacao){
 			var += "&& proteina >=" + proteinaPesquisa + " ";
 			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
 			segundoCriterio += ", proteina DESC";
-		}else if(orderByProteinas==true && greaterThanP==true && criterioRelevancia==false && segundoCriterioOrdenacaoP==true && segundoCriterioOrdenacao==true){
+		}else if(orderByProteinas && greaterThanP && criterioRelevancia==false && segundoCriterioOrdenacaoP && segundoCriterioOrdenacao){
 			var += "&& proteina >=" + proteinaPesquisa + " ";
 			segundoCriterio += "ORDER BY proteina DESC";
 		}
 		//
-		else if(orderByProteinas==true && greaterThanP==true && criterioRelevancia==true && segundoCriterioOrdenacaoP==true && segundoCriterioOrdenacao==false){
+		else if(orderByProteinas && greaterThanP && criterioRelevancia && segundoCriterioOrdenacaoP && segundoCriterioOrdenacao==false){
 			var += "&& proteina >=" + proteinaPesquisa + " ";
 			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
 			segundoCriterio += ", proteina";
-		}else if(orderByProteinas==true && greaterThanP==true && criterioRelevancia==false && segundoCriterioOrdenacaoP==true && segundoCriterioOrdenacao==false){
+		}else if(orderByProteinas && greaterThanP && criterioRelevancia==false && segundoCriterioOrdenacaoP && segundoCriterioOrdenacao==false){
 			var += "&& proteina >=" + proteinaPesquisa + " ";
 			segundoCriterio += "ORDER BY proteina";
 		}
 		//
-		else if(orderByProteinas==true && greaterThanP==false && criterioRelevancia==true && segundoCriterioOrdenacaoP==false){
+		else if(orderByProteinas && greaterThanP==false && criterioRelevancia && segundoCriterioOrdenacaoP==false){
 			var += "&& proteina <=" + proteinaPesquisa + " ";
 			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
-		}else if(orderByProteinas==true && greaterThanP==false && criterioRelevancia==false && segundoCriterioOrdenacaoP==false){
+		}else if(orderByProteinas && greaterThanP==false && criterioRelevancia==false && segundoCriterioOrdenacaoP==false){
 			var += "&& proteina <=" + proteinaPesquisa + " ";
 		}
 		//
-		else if(orderByProteinas==true && greaterThanP==true && criterioRelevancia==true && segundoCriterioOrdenacaoP==false){
+		else if(orderByProteinas && greaterThanP && criterioRelevancia && segundoCriterioOrdenacaoP==false){
 			var += "&& proteina >=" + proteinaPesquisa + " ";
 			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
-		}else if(orderByProteinas==true && greaterThanP==true && criterioRelevancia==false && segundoCriterioOrdenacaoP==false){
+		}else if(orderByProteinas && greaterThanP && criterioRelevancia==false && segundoCriterioOrdenacaoP==false){
 			var += "&& proteina >=" + proteinaPesquisa + " ";
 		}
 		
 		
 		// Ordenar por Hidratos	
-		if(orderByHidratos==true && greaterThanH==false && criterioRelevancia==true && segundoCriterioOrdenacaoH==true && segundoCriterioOrdenacao==true){
+		if(orderByHidratos && greaterThanH==false && criterioRelevancia && segundoCriterioOrdenacaoH && segundoCriterioOrdenacao){
 			var += "&& hidratos <=" + hidratosPesquisa + " ";
 			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
 			segundoCriterio += ", hidratos DESC";
-		}else if(orderByHidratos==true && greaterThanH==false && criterioRelevancia==false && segundoCriterioOrdenacaoH==true && segundoCriterioOrdenacao==true){
+		}else if(orderByHidratos && greaterThanH==false && criterioRelevancia==false && segundoCriterioOrdenacaoH && segundoCriterioOrdenacao){
 			var += "&& hidratos <=" + hidratosPesquisa + " ";
 			segundoCriterio += "ORDER BY hidratos DESC";
 		}
 		//
-		else if(orderByHidratos==true && greaterThanH==false && criterioRelevancia==true && segundoCriterioOrdenacaoH==true && segundoCriterioOrdenacao==false){
+		else if(orderByHidratos && greaterThanH==false && criterioRelevancia && segundoCriterioOrdenacaoH && segundoCriterioOrdenacao==false){
 			var += "&& hidratos <=" + hidratosPesquisa + " ";
 			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
 			segundoCriterio += ", hidratos";
-		}else if(orderByHidratos==true && greaterThanH==false && criterioRelevancia==false && segundoCriterioOrdenacaoH==true && segundoCriterioOrdenacao==false){
+		}else if(orderByHidratos && greaterThanH==false && criterioRelevancia==false && segundoCriterioOrdenacaoH && segundoCriterioOrdenacao==false){
 			var += "&& hidratos <=" + hidratosPesquisa + " ";
 			segundoCriterio += "ORDER BY hidratos";
 		}
 		//
-		else if(orderByHidratos==true && greaterThanH==true && criterioRelevancia==true && segundoCriterioOrdenacaoH==true && segundoCriterioOrdenacao==true){
+		else if(orderByHidratos && greaterThanH && criterioRelevancia && segundoCriterioOrdenacaoH && segundoCriterioOrdenacao){
 			var += "&& hidratos >=" + hidratosPesquisa + " ";
 			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
 			segundoCriterio += ", hidratos DESC";
-		}else if(orderByHidratos==true && greaterThanH==true && criterioRelevancia==false && segundoCriterioOrdenacaoH==true && segundoCriterioOrdenacao==true){
+		}else if(orderByHidratos && greaterThanH && criterioRelevancia==false && segundoCriterioOrdenacaoH && segundoCriterioOrdenacao){
 			var += "&& hidratos >=" + hidratosPesquisa + " ";
 			segundoCriterio += "ORDER BY hidratos DESC";
 		}
 		//
-		else if(orderByHidratos==true && greaterThanH==true && criterioRelevancia==true && segundoCriterioOrdenacaoH==true && segundoCriterioOrdenacao==false){
+		else if(orderByHidratos && greaterThanH && criterioRelevancia && segundoCriterioOrdenacaoH && segundoCriterioOrdenacao==false){
 			var += "&& hidratos >=" + hidratosPesquisa + " ";
 			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
 			segundoCriterio += ", hidratos";
-		}else if(orderByHidratos==true && greaterThanH==true && criterioRelevancia==false && segundoCriterioOrdenacaoH==true && segundoCriterioOrdenacao==false){
+		}else if(orderByHidratos && greaterThanH && criterioRelevancia==false && segundoCriterioOrdenacaoH && segundoCriterioOrdenacao==false){
 			var += "&& hidratos >=" + hidratosPesquisa + " ";
 			segundoCriterio += "ORDER BY hidratos";
 		}
 		//
-		else if(orderByHidratos==true && greaterThanH==false && criterioRelevancia==true && segundoCriterioOrdenacaoH==false){
+		else if(orderByHidratos && greaterThanH==false && criterioRelevancia && segundoCriterioOrdenacaoH==false){
 			var += "&& hidratos <=" + hidratosPesquisa + " ";
 			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
-		}else if(orderByHidratos==true && greaterThanH==false && criterioRelevancia==false && segundoCriterioOrdenacaoH==false){
+		}else if(orderByHidratos && greaterThanH==false && criterioRelevancia==false && segundoCriterioOrdenacaoH==false){
 			var += "&& hidratos <=" + hidratosPesquisa + " ";
 		}
 		//
-		else if(orderByHidratos==true && greaterThanH==true && criterioRelevancia==true && segundoCriterioOrdenacaoH==false){
+		else if(orderByHidratos && greaterThanH && criterioRelevancia && segundoCriterioOrdenacaoH==false){
 			var += "&& hidratos >=" + hidratosPesquisa + " ";
 			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
-		}else if(orderByHidratos==true && greaterThanH==true && criterioRelevancia==false && segundoCriterioOrdenacaoH==false){
+		}else if(orderByHidratos && greaterThanH && criterioRelevancia==false && segundoCriterioOrdenacaoH==false){
 			var += "&& hidratos >=" + hidratosPesquisa + " ";
 		}
 		
 		
 		// Ordenar por Gorduras
-		if(orderByGorduras==true && greaterThanG==false && criterioRelevancia==true && segundoCriterioOrdenacaoG==true && segundoCriterioOrdenacao==true){
+		if(orderByGorduras && greaterThanG==false && criterioRelevancia && segundoCriterioOrdenacaoG && segundoCriterioOrdenacao){
 			var += "&& gorduras <=" + gordurasPesquisa + " ";
 			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
 			segundoCriterio += ", gorduras DESC";
-		}else if(orderByGorduras==true && greaterThanG==false && criterioRelevancia==false && segundoCriterioOrdenacaoG==true && segundoCriterioOrdenacao==true){
+		}else if(orderByGorduras && greaterThanG==false && criterioRelevancia==false && segundoCriterioOrdenacaoG && segundoCriterioOrdenacao){
 			var += "&& gorduras <=" + gordurasPesquisa + " ";
 			segundoCriterio += "ORDER BY gorduras DESC";
 		}
 		//
-		else if(orderByGorduras==true && greaterThanG==false && criterioRelevancia==true && segundoCriterioOrdenacaoG==true && segundoCriterioOrdenacao==false){
+		else if(orderByGorduras && greaterThanG==false && criterioRelevancia && segundoCriterioOrdenacaoG && segundoCriterioOrdenacao==false){
 			var += "&& gorduras <=" + gordurasPesquisa + " ";
 			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
 			segundoCriterio += ", gorduras";
-		}else if(orderByGorduras==true && greaterThanG==false && criterioRelevancia==false && segundoCriterioOrdenacaoG==true && segundoCriterioOrdenacao==false){
+		}else if(orderByGorduras && greaterThanG==false && criterioRelevancia==false && segundoCriterioOrdenacaoG && segundoCriterioOrdenacao==false){
 			var += "&& gorduras <=" + gordurasPesquisa + " ";
 			segundoCriterio += "ORDER BY gorduras";
 		}
 		//
-		else if(orderByGorduras==true && greaterThanG==true && criterioRelevancia==true && segundoCriterioOrdenacaoG==true && segundoCriterioOrdenacao==true){
+		else if(orderByGorduras && greaterThanG && criterioRelevancia && segundoCriterioOrdenacaoG && segundoCriterioOrdenacao){
 			var += "&& gorduras >=" + gordurasPesquisa + " ";
 			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
 			segundoCriterio += ", gorduras DESC";
-		}else if(orderByGorduras==true && greaterThanG==true && criterioRelevancia==false && segundoCriterioOrdenacaoG==true && segundoCriterioOrdenacao==true){
+		}else if(orderByGorduras && greaterThanG && criterioRelevancia==false && segundoCriterioOrdenacaoG && segundoCriterioOrdenacao){
 			var += "&& gorduras >=" + gordurasPesquisa + " ";
 			segundoCriterio += "ORDER BY gorduras DESC";
 		}
 		//
-		else if(orderByGorduras==true && greaterThanG==true && criterioRelevancia==true && segundoCriterioOrdenacaoG==true && segundoCriterioOrdenacao==false){
+		else if(orderByGorduras && greaterThanG && criterioRelevancia && segundoCriterioOrdenacaoG && segundoCriterioOrdenacao==false){
 			var += "&& gorduras >=" + gordurasPesquisa + " ";
 			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
 			segundoCriterio += ", gorduras";
-		}else if(orderByGorduras==true && greaterThanG==true && criterioRelevancia==false && segundoCriterioOrdenacaoG==true && segundoCriterioOrdenacao==false){
+		}else if(orderByGorduras && greaterThanG && criterioRelevancia==false && segundoCriterioOrdenacaoG && segundoCriterioOrdenacao==false){
 			var += "&& gorduras >=" + gordurasPesquisa + " ";
 			segundoCriterio += "ORDER BY gorduras";
 		}
 		//
-		else if(orderByGorduras==true && greaterThanG==false && criterioRelevancia==true && segundoCriterioOrdenacaoG==false){
+		else if(orderByGorduras && greaterThanG==false && criterioRelevancia && segundoCriterioOrdenacaoG==false){
 			var += "&& gorduras <=" + gordurasPesquisa + " ";
 			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
-		}else if(orderByGorduras==true && greaterThanG==false && criterioRelevancia==false && segundoCriterioOrdenacaoG==false){
+		}else if(orderByGorduras && greaterThanG==false && criterioRelevancia==false && segundoCriterioOrdenacaoG==false){
 			var += "&& gorduras <=" + gordurasPesquisa + " ";
 		}
 		//
-		else if(orderByGorduras==true && greaterThanG==true && criterioRelevancia==true && segundoCriterioOrdenacaoG==false){
+		else if(orderByGorduras && greaterThanG && criterioRelevancia && segundoCriterioOrdenacaoG==false){
 			var += "&& gorduras >=" + gordurasPesquisa + " ";
-		}else if(orderByGorduras==true && greaterThanG==true && criterioRelevancia==false && segundoCriterioOrdenacaoG==false){
+		}else if(orderByGorduras && greaterThanG && criterioRelevancia==false && segundoCriterioOrdenacaoG==false){
 			var += "&& gorduras >=" + gordurasPesquisa + " ";
 		}
 		
