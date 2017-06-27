@@ -3,6 +3,7 @@ package io.altar.upacademy.dto;
 import io.altar.upacademy.model.Receita;
 import io.altar.upacademy.model.Receita_Ingrediente;
 import io.altar.upacademy.service.EntityService;
+import io.altar.upacademy.service.Paginator;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
@@ -92,5 +93,21 @@ public class ReceitasDto extends EntityService implements Serializable {
 		
 		return "migeG";
 	}
+	
+	public String listarRep() {
+		@SuppressWarnings("unchecked")
+        List<Receita> lista= (List<Receita>) em.createQuery("SELECT e FROM Receita e WHERE validacao='reprovada'").getResultList();
+        
+        global.setReceitaResult(global.ensureLengthMultipleOfFour(lista));
+		global.showReceitaResultCounter();
+        global.setRenderPageCounter(true);
+        
+        return "aprovacao";
+	}
+	
+	public String showUniqueReceita(int index) {
+        global.setUniqueReceita(global.getReceitaResult().get(index));
+        return "dtlAprovacao";
+    }
 	
 }
