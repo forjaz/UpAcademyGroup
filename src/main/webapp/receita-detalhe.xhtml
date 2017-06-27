@@ -95,7 +95,7 @@
 
 	<!-- UNIQUE PREPARACAO -->
 	<ui:define name="uniqueReceitaPreparacao">
-		<p:dataTable var="receita" value="#{global.uniqueReceita}">
+		<p:dataTable var="receita" value="#{global.uniqueReceita}" scrollable="true">
 			<p:column headerText="Modo de Preparação">
 				<h:outputText value="#{receita.preparacao}" />
 			</p:column>

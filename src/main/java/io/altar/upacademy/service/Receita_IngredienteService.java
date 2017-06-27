@@ -88,6 +88,7 @@ public class Receita_IngredienteService extends EntityService implements Seriali
 		long idI = ((Number)em.createNativeQuery("SELECT id FROM Ingrediente I "+
 				"WHERE I.nome='"+ingredient.getNome()+"' && I.modoPreparacao='"+ingredient.getModoPreparacao()+"'").getSingleResult()).longValue();
 		
+		
 		Ingrediente emp=em.find(Ingrediente.class, idI);
 		
 		rct_ing.setIngrediente(emp);

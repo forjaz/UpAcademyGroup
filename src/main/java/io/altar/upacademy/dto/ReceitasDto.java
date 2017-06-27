@@ -44,13 +44,13 @@ public class ReceitasDto extends EntityService implements Serializable {
 		Receita emp=em.find(Receita.class, id);
 		emp.setValidacao("aprovada");
 		em.merge(emp);
-		return "index";
+		return "aprovacao";
 	}
 	public String negar(Long id) {
 		Receita emp=em.find(Receita.class, id);
 		emp.setValidacao("reprovada");
 		em.remove(emp);
-		return "index";
+		return "aprovacao";
 	}
 	
 	public String calcular() {
@@ -91,7 +91,7 @@ public class ReceitasDto extends EntityService implements Serializable {
 		em.merge(emp);
 		
 		
-		return "migeG";
+		return "index";
 	}
 	
 	public String listarRep() {

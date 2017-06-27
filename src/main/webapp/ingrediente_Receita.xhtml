@@ -49,7 +49,7 @@
 											
 							<f:selectItems var="ing" value="#{global.returnIngredientes()}"
 													 itemLabel="#{ing.nome}" 
-													 itemValue="#{ing.id}" />
+													 itemValue="#{ing.nome}" />
 						</h:selectOneListbox>
 		            </div>	
 		            
@@ -108,7 +108,9 @@
             		<p:commandButton value="Save" 
 									 action="#{receitaIngredienteService.newRct_Ing(receitaDto.receita, ingredienteBean.ingrediente, receitaIngredienteBean.receitaIngrediente)}"/>
 	
-				
+					
+					<p:commandButton value="Guardar Receita" 
+									 action="#{receitaDto.calcular()}"/>
 				
             			</div>
             		</div>
