@@ -13,7 +13,7 @@
 
 				<div class="col-md-4">Nome da Receita:</div>
 				<div class="col-md-8">
-					<h:inputText class="form-control" value="#{receitaBean.receita.nome}" style="width:500px" />
+					<h:inputText class="form-control" value="#{receitaBean.receita.nome}" style="width:530px" />
 				</div>
 			</div>
 			<br />
@@ -22,7 +22,7 @@
 				<div class="col-md-4">Imagem da Receita (url):</div>
 				<div class="col-md-8">
 					<h:inputText class="form-control" value="#{receitaBean.receita.imagem}"
-						style="width:500px" />
+						style="width:530px" />
 				</div>
 			</div>
 			<br />
@@ -31,7 +31,7 @@
 				<div class="col-md-4">Tipo de Receita:</div>
 				<div class="col-md-8">
 				
-                	<h:selectOneListbox class="form-control" styleClass="select2"  >
+                	<h:selectOneListbox class="form-control" styleClass="select2"  value="#{receitaBean.receita.tipo}">
 	                    <f:selectItems var="ing" value="#{receitaBean.tipos}"/>
 	                </h:selectOneListbox>
 					<h:outputScript>
@@ -56,7 +56,7 @@
 			
 			Preparacao da Receita:
 			<p></p>
-			<p:inputTextarea rows="10" cols="104" class="form-control"
+			<p:inputTextarea rows="10" cols="110" class="form-control"
 				value="#{receitaBean.receita.preparacao}" />
 
 			<p></p>
