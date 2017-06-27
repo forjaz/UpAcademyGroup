@@ -11,28 +11,117 @@
 
         <h:form id="searchBox">
 
-            <h:panelGrid columns="4" cellpadding="5">
+            <h:panelGrid columns="32" cellpadding="5">
 
-                <h:outputLabel class="label-procurar"
-                               value="Por favor introduza os Ingredientes"/>
+                <div class="sortField">
 
-                <h:selectManyListbox value="#{global.searchQuery}"
-                                     styleClass="select2">
-                    <f:selectItems var="ing" value="#{global.returnIngredientes()}"
-                                   itemLabel="#{ing.nome}" itemValue="#{ing.id}"/>
-                </h:selectManyListbox>
+                    <h:outputLabel class="mainLabel"
+                                   value="Seleccione os Ingredientes"/>
 
-                <p:commandButton value="Procurar Receitas"
-                                 action="#{global.searchIngredientes()}"
-                                 update="counter paginator imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"
-                                 icon="ui-icon-search">
-                </p:commandButton>
+                </div>
+                <div class="sortField">
 
-                <h:outputText id="counter" class="resultCounter"
-                              value="#{global.receitaResultCounterOutput}"/>
-                              
-                <p:selectBooleanCheckbox value="#{global.orderByCalorias}" ></p:selectBooleanCheckbox>
-                <p:selectBooleanCheckbox value="#{global.greaterThanC}" ></p:selectBooleanCheckbox>
+                    <h:selectManyListbox value="#{global.searchQuery}"
+                                         styleClass="select2">
+                        <f:selectItems var="ing" value="#{global.returnIngredientes()}"
+                                       itemLabel="#{ing.nome}" itemValue="#{ing.id}"/>
+                    </h:selectManyListbox>
+
+                    <p:commandButton value="Procurar Receitas"
+                                     action="#{global.searchIngredientes()}"
+                                     update="paginator imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"
+                                     icon="ui-icon-search">
+                    </p:commandButton>
+
+                </div>
+
+                <div class="sortField">
+
+                    <h:outputLabel class="mainLabel"
+                                   value="Ordenação:"/>
+
+                </div>
+
+                <div class="sortField">
+                    <h:outputLabel class="mainLabel"
+                                   value="1)"/>
+                </div>
+
+                <div class="sortField">
+
+                    <h:outputText id="relevanciaSort" class="subLabel"
+                                  value="Relevância Ingrediente-Receita"/>
+
+                    <h:selectBooleanCheckbox immediate="true" value="#{global.sortByRelevancia}"/>
+
+
+                </div>
+                <div class="sortField">
+                    <h:outputLabel class="mainLabel"
+                                   value="+"/>
+                </div>
+                <div class="sortField">
+                    <h:outputLabel class="mainLabel"
+                                   value="2)"/>
+                </div>
+                <div class="sortField">
+
+                    <h:outputText id="caloriasSort" class="subLabel"
+                                  value="Calorias"/>
+
+                    <p:commandButton action="#{global.searchIngredientesByCaloriasAsc()}"
+                                     update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"
+                                     icon="ui-icon-arrowthick-1-n"/>
+                    <p:commandButton action="#{global.searchIngredientesByCaloriasDesc()}"
+                                     update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"
+                                     icon="ui-icon-arrowthick-1-s"/>
+
+
+                </div>
+                <div class="sortField">
+
+
+                    <h:outputText id="proteinasSort" class="subLabel"
+                                  value="Proteínas"/>
+
+                    <p:commandButton action="#{global.searchIngredientesByProteinasAsc()}"
+                                     update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"
+                                     icon="ui-icon-arrowthick-1-n"/>
+                    <p:commandButton action="#{global.searchIngredientesByProteinasDesc()}"
+                                     update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"
+                                     icon="ui-icon-arrowthick-1-s"/>
+
+
+                </div>
+                <div class="sortField">
+
+
+                    <h:outputText id="hidratosSort" class="subLabel"
+                                  value="Hidratos"/>
+
+                    <p:commandButton action="#{global.searchIngredientesByHidratosAsc()}"
+                                     update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"
+                                     icon="ui-icon-arrowthick-1-n"/>
+                    <p:commandButton action="#{global.searchIngredientesByHidratosDesc()}"
+                                     update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"
+                                     icon="ui-icon-arrowthick-1-s"/>
+
+
+                </div>
+                <div class="sortField">
+
+                    <h:outputText id="gordurasSort" class="subLabel"
+                                  value="Gorduras"/>
+
+                    <p:commandButton action="#{global.searchIngredientesByGordurasAsc()}"
+                                     update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"
+                                     icon="ui-icon-arrowthick-1-n"/>
+                    <p:commandButton action="#{global.searchIngredientesByGordurasDesc()}"
+                                     update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"
+                                     icon="ui-icon-arrowthick-1-s"/>
+
+
+                </div>
 
             </h:panelGrid>
 
@@ -120,8 +209,12 @@
     <ui:define name="pageCounter">
         <h:form id="paginator">
             <h:inputHidden id="pageIndex" value="#{global.paginator.pageIndex}"/>
-            <h:outputText id="pageNumber" rendered="#{global.renderPageCounter}"
-                          value="Página #{global.paginator.pageIndex} de #{global.paginator.pages}"/>
+            <h:outputLabel id="pageNumber" class="paginatorLabel" rendered="#{global.renderPageCounter}"
+                           value="Página #{global.paginator.pageIndex} de #{global.paginator.pages}"/>
+            <h:outputLabel class="paginatorBulletLabel" rendered="#{global.renderPageCounter}"
+                           value="◆"/>
+            <h:outputLabel id="counter" class="paginatorLabel" rendered="#{global.renderPageCounter}"
+                           value="#{global.receitaResultCounterOutput}"/>
         </h:form>
     </ui:define>
 

@@ -127,18 +127,25 @@ body {
 }
 
 #searchBox {
-	margin-left: 5vh;
-	margin-top: 11px;
+	margin-top: 13px;
 }
 
 .select2-container {
-	width: 500px !important;
+	width: 530px !important;
 }
 
-.label-procurar {
-	margin-right: 20px;
-	font-size: 16px;
-	margin-top: 6px;
+.subLabel {
+    font-weight: bold;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 13px;
+}
+
+.mainLabel {
+    font-weight: bold;
+    margin-left: 10px;
+    font-size: 15px;
+    margin-top: 4px;
 }
 
 .ui-button {
@@ -148,6 +155,31 @@ body {
 .select2-container .select2-selection--multiple {
 	height: 33px;
 }
+
+
+.sortField {
+    margin-left: 10px;
+}
+
+.ui-button-icon-only {
+    width: 1.5em !important;
+    height: 1.5em !important;
+}
+
+.paginatorLabel {
+    font-weight: bold;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 15px;
+}
+
+.paginatorBulletLabel {
+    font-weight: bold;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 15px;
+}
+
 
 /*-----------------------------------------------------------------------------------*/
 /* CONTENT */
@@ -222,17 +254,12 @@ body {
 	color: white;
 }
 
-.resultCounter {
-	font-weight: bold;
-	margin-left: 20px;
-}
-
 .pageCounter {
 	text-align: center;
 	font-weight: bold;
 	width: 100%;
 	margin-top: 8px;
-	margin-right: 50px;
+	margin-left: 40px;
 }
 
 /*-----------------------------------------------------------------------------------*/
