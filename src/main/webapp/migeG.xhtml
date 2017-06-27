@@ -3,14 +3,14 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	template="/template/default/insertReceitaLayout.xhtml"
+	template="/template/default/defaultLayout.xhtml"
 	xmlns:p="http://primefaces.org/ui">
 
 	<h:head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	</h:head>
 
-	<ui:define name="insertReceita">
+	<ui:define name="contentDisplay">
 		<h:form>
 			<h:outputLabel styleClass="receita-preparacao"
 				value="#{receitaDto.receita.nome}"></h:outputLabel>
@@ -22,7 +22,7 @@
 
 
 			<p:panel id="panel"
-				header="Porfavor introduza os ingredientes, as quantidades e o modo de preparação">
+				header="Por favor introduza os ingredientes, as quantidades e o modo de preparação">
 
 				<p:messages id="msgs" />
 
