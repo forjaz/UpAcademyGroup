@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/template/default/uniqueLayout.xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<!-- UNIQUE RECEITA -->
+
+	<!-- UNIQUE IMAGEM -->
+	<ui:define name="uniqueReceitaImagem">
+		<h:graphicImage styleClass="receita-imagem-unique"
+			url="#{global.uniqueReceita.imagem}" />
+	</ui:define>
+
+	<!-- UNIQUE CALORIAS / PROTEINAS / HIDRATOS / GORDURAS TABLE -->
+	<ui:define name="uniqueReceitaNutricao">
+		<p:dataTable var="receita" value="#{global.uniqueReceita}"
+			resizableColumns="true" resizeMode="expand">
+
+			<p:columnGroup type="header">
+				<p:row>
+					<p:column colspan="4" headerText="Valor Nutricional / Porção" />
+					<p:column rowspan="2" headerText="Porções" />
+					<p:column rowspan="2" headerText="Tipo" />
+				</p:row>
+				<p:row>
+					<p:column headerText="Calorias" />
+					<p:column headerText="Proteínas" />
+					<p:column headerText="Hidratos" />
+					<p:column headerText="Gorduras" />
+				</p:row>
+			</p:columnGroup>
+
+			<p:column>
+				<h:outputText value="#{receita.calorias}" />
+			</p:column>
+
+			<p:column>
+				<h:outputText value="#{receita.proteina}" />
+			</p:column>
+
+			<p:column>
+				<h:outputText value="#{receita.hidratos}" />
+			</p:column>
+
+			<p:column>
+				<h:outputText value="#{receita.gorduras}" />
+			</p:column>
+
+			<p:column>
+				<h:outputText value="#{receita.nPessoas}" />
+			</p:column>
+
+			<p:column>
+				<h:outputText value="#{receita.tipo}" />
+			</p:column>
+
+		</p:dataTable>
+	</ui:define>
+
+	<!-- UNIQUE INGREDIENTES / QUANTIDADES / UNIDADES TABLE -->
+	<ui:define name="uniqueReceitaIngredientes">
+		<p:dataTable var="rec_ing"
+			value="#{global.getReceitaIngredienteFromReceitaID(global.uniqueReceita.id)}">
+			<p:column headerText="Ingrediente">
+				<h:outputText value="#{rec_ing.ingrediente.nome}" />
+			</p:column>
+
+			<p:column headerText="Quantidade">
+				<h:outputText value="#{rec_ing.quantidadeCliente}" />
+			</p:column>
+
+			<p:column headerText="Medida">
+				<h:outputText value="#{rec_ing.medidas}" />
+			</p:column>
+		</p:dataTable>
+	</ui:define>
+
+	<!-- UNIQUE NOME -->
+	<ui:define name="uniqueReceitaNome">
+		<p:dataTable var="receita" value="#{global.uniqueReceita}">
+			<p:column headerText="Nome">
+				<h:outputText value="#{receita.nome}" />
+			</p:column>
+		</p:dataTable>
+
+
+		<!--<h:outputLabel styleClass="receita-nome-unique">#{global.uniqueReceita.nome}</h:outputLabel>-->
+	</ui:define>
+
+
+
+
+	<!-- UNIQUE PREPARACAO -->
+	<ui:define name="uniqueReceitaPreparacao">
+		<p:dataTable var="receita" value="#{global.uniqueReceita}">
+			<p:column headerText="Modo de Preparação">
+				<h:outputText value="#{receita.preparacao}" />
+			</p:column>
+		</p:dataTable>
+
+		<!--<h:outputLabel styleClass="receita-preparacao">#{global.uniqueReceita.preparacao}</h:outputLabel>-->
+	</ui:define>
+
+	<!-- BUTTON LEFT -->
+	<ui:define name="cursorLeft">
+		<h:form>
+			<h:commandLink action="index">
+				<h:graphicImage styleClass="cursor-left-click"
+					value="#{global.receitaPlaceholder.imagem}" />
+			</h:commandLink>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+
+
+
+
+
+
+
+

@@ -2,7 +2,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	template="/template/default/insertReceitaLayout.xhtml"
+	template="/template/default/uniqueLayout.xhtml"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
 
@@ -10,10 +10,80 @@
 
 
 	<!-- UNIQUE PREPARACAO -->
-	<ui:define name="insertReceita">
-		<h:outputLabel styleClass="receita-preparacao">
-			Scenas Batatais ou ate mesmo Bananais sobre nos
-		</h:outputLabel>
+	<ui:define name="uniqueReceita">
+		<div class="sobre-nos-equipa">
+			<div class="sobre-nos-imagem-1">
+				<h:graphicImage styleClass="sobre-nos-imagem"
+					url="http://www.petiscos.com/fotos_utilizadores/34578504fffb23b1b5e05e367fa3d9def1c81_tomatensuppe-mit-creme-fraiche-2.jpg" />
+			</div>
+			<div class="sobre-nos-nome-1">
+				<h:outputText styleClass="sobre-nos-nome" value="Bruno Mendes" />
+			</div>
+		</div>
+
+		<div class="sobre-nos-equipa">
+			<div class="sobre-nos-imagem-2">
+				<h:graphicImage styleClass="sobre-nos-imagem"
+					url="http://www.petiscos.com/fotos_utilizadores/34578504fffb23b1b5e05e367fa3d9def1c81_tomatensuppe-mit-creme-fraiche-2.jpg" />
+			</div>
+			<div class="sobre-nos-nome-2">
+				<h:outputText styleClass="sobre-nos-nome" value="Francisco Fialho" />
+			</div>
+		</div>
+
+		<div class="sobre-nos-equipa">
+			<div class="sobre-nos-imagem-3">
+				<h:graphicImage styleClass="sobre-nos-imagem"
+					url="http://www.petiscos.com/fotos_utilizadores/34578504fffb23b1b5e05e367fa3d9def1c81_tomatensuppe-mit-creme-fraiche-2.jpg" />
+			</div>
+			<div class="sobre-nos-nome-3">
+				<h:outputText styleClass="sobre-nos-nome" value="Gonçalo Forjaz" />
+			</div>
+		</div>
+
+		<div class="sobre-nos-equipa">
+			<div class="sobre-nos-imagem-4">
+				<h:graphicImage styleClass="sobre-nos-imagem"
+					url="http://www.petiscos.com/fotos_utilizadores/34578504fffb23b1b5e05e367fa3d9def1c81_tomatensuppe-mit-creme-fraiche-2.jpg" />
+			</div>
+			<div class="sobre-nos-nome-4">
+				<h:outputText styleClass="sobre-nos-nome" value="Miguel Gonçalves" />
+			</div>
+		</div>
+
+		<div class="sobre-nos-headline">
+			<h1>Programa UpAcademy</h1>
+		</div>
+
+		<div class="sobre-nos-projecto">
+			<p>Receita-me foi o nosso primeiro projecto de grupo no âmbito do
+				curso JAVA Starter da HRB UpAcademy. A aplicação web foi
+				desenvolvida a partir de JavaServer Faces (JSF) com componentes de
+				PrimeFaces, Bootstrap, SQL, e Javascript. O projecto teve a duração
+				de 3 semanas e foi planeado com base no método SCRUM-AGILE.</p>
+		</div>
+
+		<div class="sobre-nos-headline">
+			<h1>Projecto Receita-me</h1>
+		</div>
+
+		<div class="sobre-nos-descricao">
+			<p>
+				Receita-me é uma interface de busca de receitas com base nos
+				ingredientes introduzidos. O utilizador tem a possibilidade de
+				introduzir os ingredientes disponíveis em casa e pesquisar por
+				receitas relevantes que contêm o maior número de ingredientes em
+				comum. Adicionalmente, o utilizador pode efectuar uma pesquisa
+				avançada com base no valor nutricional de cada receita. <br /> Caso
+				o utilizador pretenda submeter uma nova receita, a interface possui
+				um sistema de submissão que passa pela aprovação do administrador
+				antes de ser introduzida na base de dados.
+			</p>
+		</div>
+
+		<div class="sobre-nos-agradecimentos">
+			<p>Gostaríamos de agradecer</p>
+		</div>
 	</ui:define>
 
 </ui:composition>

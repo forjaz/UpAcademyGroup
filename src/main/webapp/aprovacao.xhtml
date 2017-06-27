@@ -12,7 +12,7 @@
     <ui:define name="receitaImagem1">
         <h:form id="imagem1">
             <h:commandLink
-                    action="#{global.showUniqueReceita(global.startGridIndex)}">
+                    action="#{receitaDto.showUniqueReceita(global.startGridIndex)}">
                 <h:graphicImage styleClass="receita-imagem"
                                 value="#{global.receitaResult.get(global.startGridIndex).imagem}"/>
             </h:commandLink>
@@ -30,7 +30,7 @@
     <ui:define name="receitaImagem2">
         <h:form id="imagem2">
             <h:commandLink
-                    action="#{global.showUniqueReceita(global.startGridIndex + 1)}">
+                    action="#{receitaDto.showUniqueReceita(global.startGridIndex + 1)}">
                 <h:graphicImage styleClass="receita-imagem"
                                 url="#{global.receitaResult.get(global.startGridIndex + 1).imagem}"/>
             </h:commandLink>
@@ -48,7 +48,7 @@
     <ui:define name="receitaImagem3">
         <h:form id="imagem3">
             <h:commandLink
-                    action="#{global.showUniqueReceita(global.startGridIndex + 2)}">
+                    action="#{receitaDto.showUniqueReceita(global.startGridIndex + 2)}">
                 <h:graphicImage styleClass="receita-imagem"
                                 url="#{global.receitaResult.get(global.startGridIndex + 2).imagem}"/>
             </h:commandLink>
@@ -66,7 +66,7 @@
     <ui:define name="receitaImagem4">
         <h:form id="imagem4">
             <h:commandLink
-                    action="#{global.showUniqueReceita(global.startGridIndex + 3)}">
+                    action="#{receitaDto.showUniqueReceita(global.startGridIndex + 3)}">
                 <h:graphicImage styleClass="receita-imagem"
                                 url="#{global.receitaResult.get(global.startGridIndex + 3).imagem}"/>
             </h:commandLink>

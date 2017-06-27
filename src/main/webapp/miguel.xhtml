@@ -4,14 +4,14 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jstl/core"
-	template="/template/default/defaultLayout.xhtml"
+	template="/template/default/insertReceitaLayout.xhtml"
 	xmlns:p="http://primefaces.org/ui">
 
 	<h:head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
 	</h:head>
 	
-	<ui:define name="contentDisplay">
+	<ui:define name="insertReceita">
 	
 		<h:form>
 		
@@ -42,6 +42,12 @@
 			
 				<h:commandButton value="Submeter" action="#{receitaDto.newReceita(receitaBean.receita)}"/>
 			<p></p>
+			
+			<p></p>		
+			
+				<h:commandButton value="aprovacao" action="#{receitaDto.listarRep()}"/>
+			<p></p>
+			
 			<p></p>		
 			
 				<h:commandButton value="coco" action="#{receitaDto.calcular()}"/>
