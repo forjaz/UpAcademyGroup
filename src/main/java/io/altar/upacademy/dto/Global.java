@@ -1,5 +1,4 @@
 package io.altar.upacademy.dto;
-
 import io.altar.upacademy.model.Ingrediente;
 import io.altar.upacademy.model.Receita;
 import io.altar.upacademy.model.Receita_Ingrediente;
@@ -11,7 +10,6 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.inject.Named;
 import javax.transaction.Transactional;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,617 +19,406 @@ import java.util.List;
 @SessionScoped
 public class Global extends EntityService implements Serializable {
 
-	/*-----------------------------------------------------------------------------------*/
-	/* FIELDS */
-	/*-----------------------------------------------------------------------------------*/
-	private static final long serialVersionUID = 1L;
-
-	// Empty Receita Placeholder - Default
-	private Receita receitaPlaceholder;
-
-	// Search Bar Output Ingredientes -> Ingrediente ID
-	private List<Long> searchQuery;
-
-	// Receitas to Render in Grid
-	private List<Receita> receitaResult = new ArrayList<>();
-
-	// Receita to Render in Unique
-	private Receita uniqueReceita;
-
-	// Receita_Ingrediente to use in Ingrediente/Nutricao Table
-	private List<Receita_Ingrediente> uniqueReceitaIngredienteList;
-
-	// ReceitaResult Index that Renders 1st Image in Grid
-	private int startGridIndex = 0;
-
-	// Receita Results Non-Placeholders
-	private int receitaResultNumb = 0;
-
-	// Show Receita Result Text
-	private String receitaResultCounterOutput;
-
-	// Show Page Counter
+    /*-----------------------------------------------------------------------------------*/
+    /* FIELDS */
+    /*-----------------------------------------------------------------------------------*/
+    private static final long serialVersionUID = 1L;
+    // Empty Receita Placeholder - Default
+    private Receita receitaPlaceholder;
+    // Search Bar Output Ingredientes -> Ingrediente ID
+    private List<Long> searchQuery;
+    // Receitas to Render in Grid
+    private List<Receita> receitaResult = new ArrayList<>();
+    // Receita to Render in Unique
+    private Receita uniqueReceita;
+    // ReceitaResult Index that Renders 1st Image in Grid
+    private int startGridIndex = 0;
+    // Show Receita Result Text
+    private String receitaResultCounterOutput;
+    // Show Page Counter
     private boolean renderPageCounter;
-	
-	// All fields below belong to the returnReceitasOrderByHit() Method
-	private boolean orderByCalorias;
-	private int caloriasPesquisa;
-	private boolean greaterThanC;
-	private boolean segundoCriterioOrdenacaoC;
-	
-	private boolean orderByProteinas;
-	private double proteinaPesquisa;
-	private boolean greaterThanP;
-	private boolean segundoCriterioOrdenacaoP;
-	
-	private boolean orderByHidratos;
-	private double hidratosPesquisa;
-	private boolean greaterThanH;
-	private boolean segundoCriterioOrdenacaoH;
-	
-	private boolean orderByGorduras;
-	private double gordurasPesquisa;
-	private boolean greaterThanG;
-	private boolean segundoCriterioOrdenacaoG;
-	
-	private boolean criterioRelevancia;
+    // RelvanciaSort
+    private boolean sortByRelevancia = true;
+    // Paginator
+    private Paginator paginator;
 
-	private boolean segundoCriterioOrdenacao;
+    /*-----------------------------------------------------------------------------------*/
+    /* CONSTRUCTORS */
+    /*-----------------------------------------------------------------------------------*/
+    public Global() {
+    }
 
-	// Paginator
-	private Paginator paginator;
+    // Fills Grid With Empty Placeholder at Start
+    @PostConstruct
+    @Transactional
+    public void renderResultInit() {
+        receitaPlaceholder = (Receita) em.createQuery("SELECT e FROM Receita e WHERE id=1").getResultList().get(0);
+        receitaResult.add(receitaPlaceholder);
+        receitaResult.add(receitaPlaceholder);
+        receitaResult.add(receitaPlaceholder);
+        receitaResult.add(receitaPlaceholder);
+        paginator = new Paginator(this.receitaResult);
+    }
 
+    /*-----------------------------------------------------------------------------------*/
+    /* METHODS */
 	/*-----------------------------------------------------------------------------------*/
-	/* CONSTRUCTORS */
-	/*-----------------------------------------------------------------------------------*/
-	public Global() {
-	}
+    // 1. SELECT2 DROPDOWN IN SEARCH BAR
+    @SuppressWarnings("unchecked")
+    public List<Ingrediente> returnIngredientes() {
+        return em.createQuery("SELECT e FROM Ingrediente e ORDER BY e.nome").getResultList();
+    }
 
-	// Fills Grid With Empty Placeholder at Start
-	@PostConstruct
-	@Transactional
-	public void renderResultInit() {
-		receitaPlaceholder = (Receita) em
-				.createQuery("SELECT e FROM Receita e WHERE id=1")
-				.getResultList().get(0);
-		receitaResult.add(receitaPlaceholder);
-		receitaResult.add(receitaPlaceholder);
-		receitaResult.add(receitaPlaceholder);
-		receitaResult.add(receitaPlaceholder);
-		paginator = new Paginator(this.receitaResult);
-	}
-
-	/*-----------------------------------------------------------------------------------*/
-	/* METHODS */
-	/*-----------------------------------------------------------------------------------*/
-	// 1. SELECT2 DROPDOWN IN SEARCH BAR
-	@SuppressWarnings("unchecked")
-	public List<Ingrediente> returnIngredientes() {
-		return em.createQuery("SELECT e FROM Ingrediente e ORDER BY e.nome")
-				.getResultList();
-	}
-
-	// 2 SEARCH INGREDIENTES IN SEARCH BAR
-	public void searchIngredientes() {
-		List<Receita> receitaList = returnReceitasOrderByHit();
-		receitaResult = ensureLengthMultipleOfFour(receitaList);
-		showReceitaResultCounter();
+    // 2 SEARCH INGREDIENTES IN SEARCH BAR
+    public void searchIngredientes() {
+        List<Receita> receitaList = sortByRelevancia();
+        receitaResult = ensureLengthMultipleOfFour(receitaList);
+        showReceitaResultCounter();
         setRenderPageCounter(true);
-	}
+    }
 
-	// 2.1 Returns Receitas by Number of Ingredientes in Common 
-	public List<Receita> returnReceitasOrderByHit() {
-		List<Long> lista2 = searchQuery;
-		String var = "(";
-		for (int i = 0; i <= lista2.size() - 1; i++) {
-			if (i < lista2.size() - 1) {
-				var += lista2.get(i) + ",";
-			} else {
-				var += lista2.get(i) + ") && validacao = 'aprovada' ";
-			}
-		}
-		String criterioRelevanciaS="";
-		String segundoCriterio="";
-		
-		
-		// Ordenar por Calorias
-		if(orderByCalorias && !greaterThanC && criterioRelevancia && segundoCriterioOrdenacaoC && segundoCriterioOrdenacao){
-			var += "&& calorias <=" + caloriasPesquisa + " ";
-			criterioRelevanciaS += "ORDER BY Relevancia DESC" ; 
-			segundoCriterio += ", calorias DESC";
-		}else if(orderByCalorias && greaterThanC==false && criterioRelevancia==false && segundoCriterioOrdenacaoC && segundoCriterioOrdenacao){
-			var += "&& calorias <=" + caloriasPesquisa + " ";
-			segundoCriterio += "ORDER BY calorias DESC";
-		}
-		//
-		else if(orderByCalorias && greaterThanC==false && criterioRelevancia && segundoCriterioOrdenacaoC && segundoCriterioOrdenacao==false){
-			var += "&& calorias <=" + caloriasPesquisa + " ";
-			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
-			segundoCriterio += ", calorias";
-		}else if(orderByCalorias && greaterThanC==false && criterioRelevancia==false && segundoCriterioOrdenacaoC && segundoCriterioOrdenacao==false){
-			var += "&& calorias <=" + caloriasPesquisa + " ";
-			segundoCriterio += "ORDER BY calorias";
-		}
-		//
-		else if(orderByCalorias && greaterThanC && criterioRelevancia && segundoCriterioOrdenacaoC && segundoCriterioOrdenacao){
-			var += "&& calorias >=" + caloriasPesquisa + " ";
-			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
-			segundoCriterio += ", calorias DESC";
-		}else if(orderByCalorias && greaterThanC && criterioRelevancia==false && segundoCriterioOrdenacaoC && segundoCriterioOrdenacao){
-			var += "&& calorias >=" + caloriasPesquisa + " ";
-			segundoCriterio += "ORDER BY calorias DESC";
-		}
-		//
-		else if(orderByCalorias && greaterThanC && criterioRelevancia && segundoCriterioOrdenacaoC && segundoCriterioOrdenacao==false){
-			var += "&& calorias >=" + caloriasPesquisa + " ";
-			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
-			segundoCriterio += ", calorias";
-		}else if(orderByCalorias && greaterThanC && criterioRelevancia==false && segundoCriterioOrdenacaoC && segundoCriterioOrdenacao==false){
-			var += "&& calorias >=" + caloriasPesquisa + " ";
-			segundoCriterio += "ORDER BY calorias";
-		}
-		//
-		else if(orderByCalorias && greaterThanC==false && criterioRelevancia && segundoCriterioOrdenacaoC==false){
-			var += "&& calorias <=" + caloriasPesquisa + " ";
-			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
-		}else if(orderByCalorias && greaterThanC==false && criterioRelevancia==false && segundoCriterioOrdenacaoC==false){
-			var += "&& calorias <=" + caloriasPesquisa + " ";
-		}
-		//
-		else if(orderByCalorias && greaterThanC && criterioRelevancia && segundoCriterioOrdenacaoC==false){
-			var += "&& calorias >=" + caloriasPesquisa + " ";
-			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
-		}else if(orderByCalorias && greaterThanC && criterioRelevancia==false && segundoCriterioOrdenacaoC==false){
-			var += "&& calorias >=" + caloriasPesquisa + " ";
-		}
-		
+    public void searchIngredientesByCaloriasAsc() {
+        List<Receita> receitaList = sortByCaloriasAsc();
+        receitaResult = ensureLengthMultipleOfFour(receitaList);
+        showReceitaResultCounter();
+        setRenderPageCounter(true);
+    }
 
-		
-		//Ordenar por Proteinas
-		if(orderByProteinas && greaterThanP==false && criterioRelevancia && segundoCriterioOrdenacaoP && segundoCriterioOrdenacao){
-			var += "&& proteina <=" + proteinaPesquisa + " ";
-			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
-			segundoCriterio += ", proteina DESC";
-		}else if(orderByProteinas && greaterThanP==false && criterioRelevancia==false && segundoCriterioOrdenacaoP && segundoCriterioOrdenacao){
-			var += "&& proteina <=" + proteinaPesquisa + " ";
-			segundoCriterio += "ORDER BY proteina DESC";
-		}
-		//
-		else if(orderByProteinas && greaterThanP==false && criterioRelevancia && segundoCriterioOrdenacaoP && segundoCriterioOrdenacao==false){
-			var += "&& proteina <=" + proteinaPesquisa + " ";
-			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
-			segundoCriterio += ", proteina";
-		}else if(orderByProteinas && greaterThanP==false && criterioRelevancia==false && segundoCriterioOrdenacaoP && segundoCriterioOrdenacao==false){
-			var += "&& proteina <=" + proteinaPesquisa + " ";
-			segundoCriterio += "ORDER BY proteina";
-		}
-		//
-		else if(orderByProteinas && greaterThanP && criterioRelevancia && segundoCriterioOrdenacaoP && segundoCriterioOrdenacao){
-			var += "&& proteina >=" + proteinaPesquisa + " ";
-			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
-			segundoCriterio += ", proteina DESC";
-		}else if(orderByProteinas && greaterThanP && criterioRelevancia==false && segundoCriterioOrdenacaoP && segundoCriterioOrdenacao){
-			var += "&& proteina >=" + proteinaPesquisa + " ";
-			segundoCriterio += "ORDER BY proteina DESC";
-		}
-		//
-		else if(orderByProteinas && greaterThanP && criterioRelevancia && segundoCriterioOrdenacaoP && segundoCriterioOrdenacao==false){
-			var += "&& proteina >=" + proteinaPesquisa + " ";
-			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
-			segundoCriterio += ", proteina";
-		}else if(orderByProteinas && greaterThanP && criterioRelevancia==false && segundoCriterioOrdenacaoP && segundoCriterioOrdenacao==false){
-			var += "&& proteina >=" + proteinaPesquisa + " ";
-			segundoCriterio += "ORDER BY proteina";
-		}
-		//
-		else if(orderByProteinas && greaterThanP==false && criterioRelevancia && segundoCriterioOrdenacaoP==false){
-			var += "&& proteina <=" + proteinaPesquisa + " ";
-			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
-		}else if(orderByProteinas && greaterThanP==false && criterioRelevancia==false && segundoCriterioOrdenacaoP==false){
-			var += "&& proteina <=" + proteinaPesquisa + " ";
-		}
-		//
-		else if(orderByProteinas && greaterThanP && criterioRelevancia && segundoCriterioOrdenacaoP==false){
-			var += "&& proteina >=" + proteinaPesquisa + " ";
-			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
-		}else if(orderByProteinas && greaterThanP && criterioRelevancia==false && segundoCriterioOrdenacaoP==false){
-			var += "&& proteina >=" + proteinaPesquisa + " ";
-		}
-		
-		
-		// Ordenar por Hidratos	
-		if(orderByHidratos && greaterThanH==false && criterioRelevancia && segundoCriterioOrdenacaoH && segundoCriterioOrdenacao){
-			var += "&& hidratos <=" + hidratosPesquisa + " ";
-			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
-			segundoCriterio += ", hidratos DESC";
-		}else if(orderByHidratos && greaterThanH==false && criterioRelevancia==false && segundoCriterioOrdenacaoH && segundoCriterioOrdenacao){
-			var += "&& hidratos <=" + hidratosPesquisa + " ";
-			segundoCriterio += "ORDER BY hidratos DESC";
-		}
-		//
-		else if(orderByHidratos && greaterThanH==false && criterioRelevancia && segundoCriterioOrdenacaoH && segundoCriterioOrdenacao==false){
-			var += "&& hidratos <=" + hidratosPesquisa + " ";
-			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
-			segundoCriterio += ", hidratos";
-		}else if(orderByHidratos && greaterThanH==false && criterioRelevancia==false && segundoCriterioOrdenacaoH && segundoCriterioOrdenacao==false){
-			var += "&& hidratos <=" + hidratosPesquisa + " ";
-			segundoCriterio += "ORDER BY hidratos";
-		}
-		//
-		else if(orderByHidratos && greaterThanH && criterioRelevancia && segundoCriterioOrdenacaoH && segundoCriterioOrdenacao){
-			var += "&& hidratos >=" + hidratosPesquisa + " ";
-			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
-			segundoCriterio += ", hidratos DESC";
-		}else if(orderByHidratos && greaterThanH && criterioRelevancia==false && segundoCriterioOrdenacaoH && segundoCriterioOrdenacao){
-			var += "&& hidratos >=" + hidratosPesquisa + " ";
-			segundoCriterio += "ORDER BY hidratos DESC";
-		}
-		//
-		else if(orderByHidratos && greaterThanH && criterioRelevancia && segundoCriterioOrdenacaoH && segundoCriterioOrdenacao==false){
-			var += "&& hidratos >=" + hidratosPesquisa + " ";
-			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
-			segundoCriterio += ", hidratos";
-		}else if(orderByHidratos && greaterThanH && criterioRelevancia==false && segundoCriterioOrdenacaoH && segundoCriterioOrdenacao==false){
-			var += "&& hidratos >=" + hidratosPesquisa + " ";
-			segundoCriterio += "ORDER BY hidratos";
-		}
-		//
-		else if(orderByHidratos && greaterThanH==false && criterioRelevancia && segundoCriterioOrdenacaoH==false){
-			var += "&& hidratos <=" + hidratosPesquisa + " ";
-			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
-		}else if(orderByHidratos && greaterThanH==false && criterioRelevancia==false && segundoCriterioOrdenacaoH==false){
-			var += "&& hidratos <=" + hidratosPesquisa + " ";
-		}
-		//
-		else if(orderByHidratos && greaterThanH && criterioRelevancia && segundoCriterioOrdenacaoH==false){
-			var += "&& hidratos >=" + hidratosPesquisa + " ";
-			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
-		}else if(orderByHidratos && greaterThanH && criterioRelevancia==false && segundoCriterioOrdenacaoH==false){
-			var += "&& hidratos >=" + hidratosPesquisa + " ";
-		}
-		
-		
-		// Ordenar por Gorduras
-		if(orderByGorduras && greaterThanG==false && criterioRelevancia && segundoCriterioOrdenacaoG && segundoCriterioOrdenacao){
-			var += "&& gorduras <=" + gordurasPesquisa + " ";
-			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
-			segundoCriterio += ", gorduras DESC";
-		}else if(orderByGorduras && greaterThanG==false && criterioRelevancia==false && segundoCriterioOrdenacaoG && segundoCriterioOrdenacao){
-			var += "&& gorduras <=" + gordurasPesquisa + " ";
-			segundoCriterio += "ORDER BY gorduras DESC";
-		}
-		//
-		else if(orderByGorduras && greaterThanG==false && criterioRelevancia && segundoCriterioOrdenacaoG && segundoCriterioOrdenacao==false){
-			var += "&& gorduras <=" + gordurasPesquisa + " ";
-			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
-			segundoCriterio += ", gorduras";
-		}else if(orderByGorduras && greaterThanG==false && criterioRelevancia==false && segundoCriterioOrdenacaoG && segundoCriterioOrdenacao==false){
-			var += "&& gorduras <=" + gordurasPesquisa + " ";
-			segundoCriterio += "ORDER BY gorduras";
-		}
-		//
-		else if(orderByGorduras && greaterThanG && criterioRelevancia && segundoCriterioOrdenacaoG && segundoCriterioOrdenacao){
-			var += "&& gorduras >=" + gordurasPesquisa + " ";
-			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
-			segundoCriterio += ", gorduras DESC";
-		}else if(orderByGorduras && greaterThanG && criterioRelevancia==false && segundoCriterioOrdenacaoG && segundoCriterioOrdenacao){
-			var += "&& gorduras >=" + gordurasPesquisa + " ";
-			segundoCriterio += "ORDER BY gorduras DESC";
-		}
-		//
-		else if(orderByGorduras && greaterThanG && criterioRelevancia && segundoCriterioOrdenacaoG && segundoCriterioOrdenacao==false){
-			var += "&& gorduras >=" + gordurasPesquisa + " ";
-			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
-			segundoCriterio += ", gorduras";
-		}else if(orderByGorduras && greaterThanG && criterioRelevancia==false && segundoCriterioOrdenacaoG && segundoCriterioOrdenacao==false){
-			var += "&& gorduras >=" + gordurasPesquisa + " ";
-			segundoCriterio += "ORDER BY gorduras";
-		}
-		//
-		else if(orderByGorduras && greaterThanG==false && criterioRelevancia && segundoCriterioOrdenacaoG==false){
-			var += "&& gorduras <=" + gordurasPesquisa + " ";
-			criterioRelevanciaS += "ORDER BY Relevancia DESC" ;
-		}else if(orderByGorduras && greaterThanG==false && criterioRelevancia==false && segundoCriterioOrdenacaoG==false){
-			var += "&& gorduras <=" + gordurasPesquisa + " ";
-		}
-		//
-		else if(orderByGorduras && greaterThanG && criterioRelevancia && segundoCriterioOrdenacaoG==false){
-			var += "&& gorduras >=" + gordurasPesquisa + " ";
-		}else if(orderByGorduras && greaterThanG && criterioRelevancia==false && segundoCriterioOrdenacaoG==false){
-			var += "&& gorduras >=" + gordurasPesquisa + " ";
-		}
-		
-		
-		
-		String query = "SELECT R.*, (SELECT COUNT(*) FROM Receita_Ingrediente WHERE receita_id = R.id && ingrediente_id IN "
-				+ var
-				+ ") as 'Relevancia' FROM Receita R INNER JOIN Receita_Ingrediente RI ON R.id = RI.receita_id "
-				+ "WHERE RI.ingrediente_id IN " + var
-				+ " GROUP BY receita_id "+criterioRelevanciaS+segundoCriterio+"";
+    public void searchIngredientesByCaloriasDesc() {
+        List<Receita> receitaList = sortByCaloriasDesc();
+        receitaResult = ensureLengthMultipleOfFour(receitaList);
+        showReceitaResultCounter();
+        setRenderPageCounter(true);
+    }
 
-		@SuppressWarnings("unchecked")
-		List<Receita> listaOrdenada = em.createNativeQuery(query, Receita.class)
-				.getResultList();
-		return listaOrdenada;
-		
-	}
-		
-	
+    public void searchIngredientesByProteinasAsc() {
+        List<Receita> receitaList = sortByProteinasAsc();
+        receitaResult = ensureLengthMultipleOfFour(receitaList);
+        showReceitaResultCounter();
+        setRenderPageCounter(true);
+    }
 
-	// 2.2 Ensure ResultList is Multiple of Four to Enable Navigation
-	public List<Receita> ensureLengthMultipleOfFour(List<Receita> inputList) {
-		while (inputList.size() % 4 != 0) {
-			inputList.add(receitaPlaceholder);
-		}
-		return inputList;
-	}
+    public void searchIngredientesByProteinasDesc() {
+        List<Receita> receitaList = sortByProteinasDesc();
+        receitaResult = ensureLengthMultipleOfFour(receitaList);
+        showReceitaResultCounter();
+        setRenderPageCounter(true);
+    }
 
-	// 3. NAVIGATE LEFT
-	public void renderLeft() {
-		if (startGridIndex > 3) {
-			startGridIndex -= 4;
-			paginator.setPageIndex(paginator.getPageIndex() - 1);
-		}
-	}
+    public void searchIngredientesByHidratosAsc() {
+        List<Receita> receitaList = sortByHidratosAsc();
+        receitaResult = ensureLengthMultipleOfFour(receitaList);
+        showReceitaResultCounter();
+        setRenderPageCounter(true);
+    }
 
-	// 4. NAVIGATE RIGHT
-	public void renderRight() {
-		if (receitaResult.size() > startGridIndex + 4) {
-			startGridIndex += 4;
-			paginator.setPageIndex(paginator.getPageIndex() + 1);
-		}
-	}
+    public void searchIngredientesByHidratosDesc() {
+        List<Receita> receitaList = sortByHidratosDesc();
+        receitaResult = ensureLengthMultipleOfFour(receitaList);
+        showReceitaResultCounter();
+        setRenderPageCounter(true);
+    }
 
-	// 5. GET RECEITA ID FROM CLICKABLE IMAGE
-	public String showUniqueReceita(int index) {
-		uniqueReceita = receitaResult.get(index);
-		return "receita-detalhe";
-	}
+    public void searchIngredientesByGordurasAsc() {
+        List<Receita> receitaList = sortByGordurasAsc();
+        receitaResult = ensureLengthMultipleOfFour(receitaList);
+        showReceitaResultCounter();
+        setRenderPageCounter(true);
+    }
 
-	// 6. GET RECEITA_INGREDIENTE LIST FROM RECEITA ID
-	@SuppressWarnings("unchecked")
-	public List<Receita_Ingrediente> getReceitaIngredienteFromReceitaID(
-			Long ID) {
-		return em.createQuery(
-				"SELECT e FROM Receita_Ingrediente e WHERE receita_id=" + ID)
-				.getResultList();
-	}
+    public void searchIngredientesByGordurasDesc() {
+        List<Receita> receitaList = sortByGordurasDesc();
+        receitaResult = ensureLengthMultipleOfFour(receitaList);
+        showReceitaResultCounter();
+        setRenderPageCounter(true);
+    }
 
-	// 7. GET RECEITA RESULT NOT EMPTY NUMBER
-	public void showReceitaResultCounter() {
-		int receitasNotEmpty = 0;
-		for (Receita receita : receitaResult) {
-			if (receita.getId() != 1) {
-				receitasNotEmpty += 1;
-			}
-		}
-		this.paginator = new Paginator(this.receitaResult);
-		receitaResultNumb = receitasNotEmpty;
-		receitaResultCounterOutput = receitasNotEmpty + " Receitas Encontradas";
-	}
+    // 2.1 Returns Receitas by Number of Ingredientes
+    public List sortByRelevancia() {
+        List<Long> lista = searchQuery;
+        String sortByRelevanciaQuery = "";
+        String var = "(";
+        for (int i = 0; i <= lista.size() - 1; i++) {
+            if (i < lista.size() - 1) {
+                var += lista.get(i) + ",";
+            } else {
+                var += lista.get(i) + ")";
+            }
+        }
+        if (sortByRelevancia) {
+            sortByRelevanciaQuery = "ORDER BY Relevancia DESC";
+        }
+        String query = new StringBuilder().append("SELECT R.*, (SELECT COUNT(*) FROM Receita_Ingrediente WHERE receita_id = R.id && ingrediente_id IN ").append(var).append(") as 'Relevancia' FROM Receita R INNER JOIN Receita_Ingrediente RI ON R.id = RI.receita_id ").append("WHERE RI.ingrediente_id IN ").append(var).append(" GROUP BY receita_id ").append(sortByRelevanciaQuery).toString();
+        return em.createNativeQuery(query, Receita.class).getResultList();
+    }
 
-	public void updateGridIndexFromPageIndex(int pageIndex) {
-		startGridIndex = 4 * pageIndex - 3;
-	}
+    // 2.1.1 Sorts by Calorias
+    public List sortByCaloriasAsc() {
+        List<Long> lista = searchQuery;
+        String sortByRelevanciaCaloriasQuery = "";
+        String var = "(";
+        for (int i = 0; i <= lista.size() - 1; i++) {
+            if (i < lista.size() - 1) {
+                var += lista.get(i) + ",";
+            } else {
+                var += lista.get(i) + ")";
+            }
+        }
+        if (sortByRelevancia) {
+            sortByRelevanciaCaloriasQuery = "ORDER BY Relevancia DESC, calorias ASC";
+        } else {
+            sortByRelevanciaCaloriasQuery = "ORDER BY calorias ASC";
+        }
+        String query = new StringBuilder().append("SELECT R.*, (SELECT COUNT(*) FROM Receita_Ingrediente WHERE receita_id = R.id && ingrediente_id IN ").append(var).append(") as 'Relevancia' FROM Receita R INNER JOIN Receita_Ingrediente RI ON R.id = RI.receita_id ").append("WHERE RI.ingrediente_id IN ").append(var).append(" GROUP BY receita_id ").append(sortByRelevanciaCaloriasQuery).toString();
+        return em.createNativeQuery(query, Receita.class).getResultList();
+    }
+
+    public List sortByCaloriasDesc() {
+        List<Long> lista = searchQuery;
+        String sortByRelevanciaCaloriasQuery = "";
+        String var = "(";
+        for (int i = 0; i <= lista.size() - 1; i++) {
+            if (i < lista.size() - 1) {
+                var += lista.get(i) + ",";
+            } else {
+                var += lista.get(i) + ")";
+            }
+        }
+        if (sortByRelevancia) {
+            sortByRelevanciaCaloriasQuery = "ORDER BY Relevancia DESC, calorias DESC";
+        } else {
+            sortByRelevanciaCaloriasQuery = "ORDER BY calorias DESC";
+        }
+        String query = new StringBuilder().append("SELECT R.*, (SELECT COUNT(*) FROM Receita_Ingrediente WHERE receita_id = R.id && ingrediente_id IN ").append(var).append(") as 'Relevancia' FROM Receita R INNER JOIN Receita_Ingrediente RI ON R.id = RI.receita_id ").append("WHERE RI.ingrediente_id IN ").append(var).append(" GROUP BY receita_id ").append(sortByRelevanciaCaloriasQuery).toString();
+        return em.createNativeQuery(query, Receita.class).getResultList();
+    }
+
+    // 2.1.2 Sorts by Proteinas
+    public List sortByProteinasAsc() {
+        List<Long> lista = searchQuery;
+        String sortByRelevanciaProteinasQuery = "";
+        String var = "(";
+        for (int i = 0; i <= lista.size() - 1; i++) {
+            if (i < lista.size() - 1) {
+                var += lista.get(i) + ",";
+            } else {
+                var += lista.get(i) + ")";
+            }
+        }
+        if (sortByRelevancia) {
+            sortByRelevanciaProteinasQuery = "ORDER BY Relevancia DESC, proteina ASC";
+        } else {
+            sortByRelevanciaProteinasQuery = "ORDER BY proteina ASC";
+        }
+        String query = new StringBuilder().append("SELECT R.*, (SELECT COUNT(*) FROM Receita_Ingrediente WHERE receita_id = R.id && ingrediente_id IN ").append(var).append(") as 'Relevancia' FROM Receita R INNER JOIN Receita_Ingrediente RI ON R.id = RI.receita_id ").append("WHERE RI.ingrediente_id IN ").append(var).append(" GROUP BY receita_id ").append(sortByRelevanciaProteinasQuery).toString();
+        return em.createNativeQuery(query, Receita.class).getResultList();
+    }
+
+    public List sortByProteinasDesc() {
+        List<Long> lista = searchQuery;
+        String sortByRelevanciaProteinasQuery = "";
+        String var = "(";
+        for (int i = 0; i <= lista.size() - 1; i++) {
+            if (i < lista.size() - 1) {
+                var += lista.get(i) + ",";
+            } else {
+                var += lista.get(i) + ")";
+            }
+        }
+        if (sortByRelevancia) {
+            sortByRelevanciaProteinasQuery = "ORDER BY Relevancia DESC, proteina DESC";
+        } else {
+            sortByRelevanciaProteinasQuery = "ORDER BY proteina DESC";
+        }
+        String query = new StringBuilder().append("SELECT R.*, (SELECT COUNT(*) FROM Receita_Ingrediente WHERE receita_id = R.id && ingrediente_id IN ").append(var).append(") as 'Relevancia' FROM Receita R INNER JOIN Receita_Ingrediente RI ON R.id = RI.receita_id ").append("WHERE RI.ingrediente_id IN ").append(var).append(" GROUP BY receita_id ").append(sortByRelevanciaProteinasQuery).toString();
+        return em.createNativeQuery(query, Receita.class).getResultList();
+    }
+
+    // 2.1.3 Sorts by Hidratos
+    public List sortByHidratosAsc() {
+        List<Long> lista = searchQuery;
+        String sortByRelevanciaHidratosQuery = "";
+        String var = "(";
+        for (int i = 0; i <= lista.size() - 1; i++) {
+            if (i < lista.size() - 1) {
+                var += lista.get(i) + ",";
+            } else {
+                var += lista.get(i) + ")";
+            }
+        }
+        if (sortByRelevancia) {
+            sortByRelevanciaHidratosQuery = "ORDER BY Relevancia DESC, hidratos ASC";
+        } else {
+            sortByRelevanciaHidratosQuery = "ORDER BY hidratos ASC";
+        }
+        String query = new StringBuilder().append("SELECT R.*, (SELECT COUNT(*) FROM Receita_Ingrediente WHERE receita_id = R.id && ingrediente_id IN ").append(var).append(") as 'Relevancia' FROM Receita R INNER JOIN Receita_Ingrediente RI ON R.id = RI.receita_id ").append("WHERE RI.ingrediente_id IN ").append(var).append(" GROUP BY receita_id ").append(sortByRelevanciaHidratosQuery).toString();
+        return em.createNativeQuery(query, Receita.class).getResultList();
+    }
+
+    public List sortByHidratosDesc() {
+        List<Long> lista = searchQuery;
+        String sortByRelevanciaHidratosQuery = "";
+        String var = "(";
+        for (int i = 0; i <= lista.size() - 1; i++) {
+            if (i < lista.size() - 1) {
+                var += lista.get(i) + ",";
+            } else {
+                var += lista.get(i) + ")";
+            }
+        }
+        if (sortByRelevancia) {
+            sortByRelevanciaHidratosQuery = "ORDER BY Relevancia DESC, hidratos DESC";
+        } else {
+            sortByRelevanciaHidratosQuery = "ORDER BY hidratos DESC";
+        }
+        String query = new StringBuilder().append("SELECT R.*, (SELECT COUNT(*) FROM Receita_Ingrediente WHERE receita_id = R.id && ingrediente_id IN ").append(var).append(") as 'Relevancia' FROM Receita R INNER JOIN Receita_Ingrediente RI ON R.id = RI.receita_id ").append("WHERE RI.ingrediente_id IN ").append(var).append(" GROUP BY receita_id ").append(sortByRelevanciaHidratosQuery).toString();
+        return em.createNativeQuery(query, Receita.class).getResultList();
+    }
+
+    // 2.1.2 Sorts by Gorduras
+    public List sortByGordurasAsc() {
+        List<Long> lista = searchQuery;
+        String sortByRelevanciaGordurasQuery = "";
+        String var = "(";
+        for (int i = 0; i <= lista.size() - 1; i++) {
+            if (i < lista.size() - 1) {
+                var += lista.get(i) + ",";
+            } else {
+                var += lista.get(i) + ")";
+            }
+        }
+        if (sortByRelevancia) {
+            sortByRelevanciaGordurasQuery = "ORDER BY Relevancia DESC, gorduras ASC";
+        } else {
+            sortByRelevanciaGordurasQuery = "ORDER BY gorduras ASC";
+        }
+        String query = new StringBuilder().append("SELECT R.*, (SELECT COUNT(*) FROM Receita_Ingrediente WHERE receita_id = R.id && ingrediente_id IN ").append(var).append(") as 'Relevancia' FROM Receita R INNER JOIN Receita_Ingrediente RI ON R.id = RI.receita_id ").append("WHERE RI.ingrediente_id IN ").append(var).append(" GROUP BY receita_id ").append(sortByRelevanciaGordurasQuery).toString();
+        return em.createNativeQuery(query, Receita.class).getResultList();
+    }
+
+    public List sortByGordurasDesc() {
+        List<Long> lista = searchQuery;
+        String sortByRelevanciaGordurasQuery = "";
+        String var = "(";
+        for (int i = 0; i <= lista.size() - 1; i++) {
+            if (i < lista.size() - 1) {
+                var += lista.get(i) + ",";
+            } else {
+                var += lista.get(i) + ")";
+            }
+        }
+        if (sortByRelevancia) {
+            sortByRelevanciaGordurasQuery = "ORDER BY Relevancia DESC, gorduras DESC";
+        } else {
+            sortByRelevanciaGordurasQuery = "ORDER BY gorduras DESC";
+        }
+        String query = new StringBuilder().append("SELECT R.*, (SELECT COUNT(*) FROM Receita_Ingrediente WHERE receita_id = R.id && ingrediente_id IN ").append(var).append(") as 'Relevancia' FROM Receita R INNER JOIN Receita_Ingrediente RI ON R.id = RI.receita_id ").append("WHERE RI.ingrediente_id IN ").append(var).append(" GROUP BY receita_id ").append(sortByRelevanciaGordurasQuery).toString();
+        return em.createNativeQuery(query, Receita.class).getResultList();
+    }
+
+    // 2.2 Ensure ResultList is Multiple of Four to Enable Navigation
+    public List<Receita> ensureLengthMultipleOfFour(List<Receita> inputList) {
+        while (inputList.size() % 4 != 0) {
+            inputList.add(receitaPlaceholder);
+        }
+        return inputList;
+    }
+    // 3. NAVIGATE LEFT
+
+    public void renderLeft() {
+        if (startGridIndex > 3) {
+            startGridIndex -= 4;
+            paginator.setPageIndex(paginator.getPageIndex() - 1);
+        }
+    }
+
+    // 4. NAVIGATE RIGHT
+    public void renderRight() {
+        if (receitaResult.size() > startGridIndex + 4) {
+            startGridIndex += 4;
+            paginator.setPageIndex(paginator.getPageIndex() + 1);
+        }
+    }
+
+    // 5. GET RECEITA ID FROM CLICKABLE IMAGE
+    public String showUniqueReceita(int index) {
+        uniqueReceita = receitaResult.get(index);
+        return "receita-detalhe";
+    }
+
+    // 6. GET RECEITA_INGREDIENTE LIST FROM RECEITA ID
+    @SuppressWarnings("unchecked")
+    public List<Receita_Ingrediente> getReceitaIngredienteFromReceitaID(Long ID) {
+        return em.createQuery("SELECT e FROM Receita_Ingrediente e WHERE receita_id=" + ID).getResultList();
+    }
+
+    // 7. GET RECEITA RESULT NOT EMPTY NUMBER
+    public void showReceitaResultCounter() {
+        int receitasNotEmpty = 0;
+        for (Receita receita : receitaResult) {
+            if (receita.getId() != 1) {
+                receitasNotEmpty += 1;
+            }
+        }
+        this.paginator = new Paginator(this.receitaResult);
+        receitaResultCounterOutput = receitasNotEmpty + " Receitas Encontradas";
+    }
 
 	/*-----------------------------------------------------------------------------------*/
 	/* GETTERS AND SETTERS */
 	/*-----------------------------------------------------------------------------------*/
 
-	public static long getSerialVersionUID() {
-		return serialVersionUID;
-	}
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
-	public List<Long> getSearchQuery() {
-		return searchQuery;
-	}
+    public Receita getReceitaPlaceholder() {
+        return receitaPlaceholder;
+    }
 
-	public void setSearchQuery(List<Long> searchQuery) {
-		this.searchQuery = searchQuery;
-	}
+    public void setReceitaPlaceholder(Receita receitaPlaceholder) {
+        this.receitaPlaceholder = receitaPlaceholder;
+    }
 
-	public Receita getUniqueReceita() {
-		return uniqueReceita;
-	}
+    public List<Long> getSearchQuery() {
+        return searchQuery;
+    }
 
-	public void setUniqueReceita(Receita uniqueReceita) {
-		this.uniqueReceita = uniqueReceita;
-	}
+    public void setSearchQuery(List<Long> searchQuery) {
+        this.searchQuery = searchQuery;
+    }
 
-	public List<Receita_Ingrediente> getUniqueReceitaIngredienteList() {
-		return uniqueReceitaIngredienteList;
-	}
+    public List<Receita> getReceitaResult() {
+        return receitaResult;
+    }
 
-	public void setUniqueReceitaIngredienteList(
-			List<Receita_Ingrediente> uniqueReceitaIngredienteList) {
-		this.uniqueReceitaIngredienteList = uniqueReceitaIngredienteList;
-	}
+    public void setReceitaResult(List<Receita> receitaResult) {
+        this.receitaResult = receitaResult;
+    }
 
-	public int getStartGridIndex() {
-		return startGridIndex;
-	}
+    public Receita getUniqueReceita() {
+        return uniqueReceita;
+    }
 
-	public void setStartGridIndex(int startGridIndex) {
-		this.startGridIndex = startGridIndex;
-	}
+    public void setUniqueReceita(Receita uniqueReceita) {
+        this.uniqueReceita = uniqueReceita;
+    }
 
-	public List<Receita> getReceitaResult() {
-		return receitaResult;
-	}
+    public int getStartGridIndex() {
+        return startGridIndex;
+    }
 
-	public void setReceitaResult(List<Receita> receitaResult) {
-		this.receitaResult = receitaResult;
-	}
+    public void setStartGridIndex(int startGridIndex) {
+        this.startGridIndex = startGridIndex;
+    }
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+    public String getReceitaResultCounterOutput() {
+        return receitaResultCounterOutput;
+    }
 
-	public Receita getReceitaPlaceholder() {
-		return receitaPlaceholder;
-	}
-
-	public void setReceitaPlaceholder(Receita receitaPlaceholder) {
-		this.receitaPlaceholder = receitaPlaceholder;
-	}
-
-	public int getReceitaResultNumb() {
-		return receitaResultNumb;
-	}
-
-	public void setReceitaResultNumb(int receitaResultNumb) {
-		this.receitaResultNumb = receitaResultNumb;
-	}
-
-	public String getReceitaResultCounterOutput() {
-		return receitaResultCounterOutput;
-	}
-
-	public void setReceitaResultCounterOutput(
-			String receitaResultCounterOutput) {
-		this.receitaResultCounterOutput = receitaResultCounterOutput;
-	}
-	
-	public boolean isOrderByCalorias() {
-		return orderByCalorias;
-	}
-
-	public void setOrderByCalorias(boolean orderByCalorias) {
-		this.orderByCalorias = orderByCalorias;
-	}
-
-	public int getCaloriasPesquisa() {
-		return caloriasPesquisa;
-	}
-
-	public void setCaloriasPesquisa(int caloriasPesquisa) {
-		this.caloriasPesquisa = caloriasPesquisa;
-	}
-
-	public boolean isGreaterThanC() {
-		return greaterThanC;
-	}
-
-	public void setGreaterThanC(boolean greaterThanC) {
-		this.greaterThanC = greaterThanC;
-	}
-
-	public boolean isOrderByProteinas() {
-		return orderByProteinas;
-	}
-
-	public void setOrderByProteinas(boolean orderByProteinas) {
-		this.orderByProteinas = orderByProteinas;
-	}
-
-	public double getProteinaPesquisa() {
-		return proteinaPesquisa;
-	}
-
-	public void setProteinaPesquisa(double proteinaPesquisa) {
-		this.proteinaPesquisa = proteinaPesquisa;
-	}
-
-	public boolean isGreaterThanP() {
-		return greaterThanP;
-	}
-
-	public void setGreaterThanP(boolean greaterThanP) {
-		this.greaterThanP = greaterThanP;
-	}
-
-	public boolean isOrderByHidratos() {
-		return orderByHidratos;
-	}
-
-	public void setOrderByHidratos(boolean orderByHidratos) {
-		this.orderByHidratos = orderByHidratos;
-	}
-
-	public double getHidratosPesquisa() {
-		return hidratosPesquisa;
-	}
-
-	public void setHidratosPesquisa(double hidratosPesquisa) {
-		this.hidratosPesquisa = hidratosPesquisa;
-	}
-
-	public boolean isGreaterThanH() {
-		return greaterThanH;
-	}
-
-	public void setGreaterThanH(boolean greaterThanH) {
-		this.greaterThanH = greaterThanH;
-	}
-
-	public boolean isOrderByGorduras() {
-		return orderByGorduras;
-	}
-
-	public void setOrderByGorduras(boolean orderByGorduras) {
-		this.orderByGorduras = orderByGorduras;
-	}
-
-	public double getGordurasPesquisa() {
-		return gordurasPesquisa;
-	}
-
-	public void setGordurasPesquisa(double gordurasPesquisa) {
-		this.gordurasPesquisa = gordurasPesquisa;
-	}
-
-	public boolean isGreaterThanG() {
-		return greaterThanG;
-	}
-
-	public void setGreaterThanG(boolean greaterThanG) {
-		this.greaterThanG = greaterThanG;
-	}
-
-	public boolean isSegundoCriterioOrdenacaoC() {
-		return segundoCriterioOrdenacaoC;
-	}
-
-	public void setSegundoCriterioOrdenacaoC(boolean segundoCriterioOrdenacaoC) {
-		this.segundoCriterioOrdenacaoC = segundoCriterioOrdenacaoC;
-	}
-
-	public boolean isSegundoCriterioOrdenacaoP() {
-		return segundoCriterioOrdenacaoP;
-	}
-
-	public void setSegundoCriterioOrdenacaoP(boolean segundoCriterioOrdenacaoP) {
-		this.segundoCriterioOrdenacaoP = segundoCriterioOrdenacaoP;
-	}
-
-	public boolean isSegundoCriterioOrdenacaoH() {
-		return segundoCriterioOrdenacaoH;
-	}
-
-	public void setSegundoCriterioOrdenacaoH(boolean segundoCriterioOrdenacaoH) {
-		this.segundoCriterioOrdenacaoH = segundoCriterioOrdenacaoH;
-	}
-
-	public boolean isSegundoCriterioOrdenacaoG() {
-		return segundoCriterioOrdenacaoG;
-	}
-
-	public void setSegundoCriterioOrdenacaoG(boolean segundoCriterioOrdenacaoG) {
-		this.segundoCriterioOrdenacaoG = segundoCriterioOrdenacaoG;
-	}
-
-	public boolean isSegundoCriterioOrdenacao() {
-		return segundoCriterioOrdenacao;
-	}
-
-	public void setSegundoCriterioOrdenacao(boolean segundoCriterioOrdenacao) {
-		this.segundoCriterioOrdenacao = segundoCriterioOrdenacao;
-	}
-
-
-	public Paginator getPaginator() {
-		return paginator;
-	}
+    public void setReceitaResultCounterOutput(String receitaResultCounterOutput) {
+        this.receitaResultCounterOutput = receitaResultCounterOutput;
+    }
 
     public boolean isRenderPageCounter() {
         return renderPageCounter;
@@ -640,12 +427,20 @@ public class Global extends EntityService implements Serializable {
     public void setRenderPageCounter(boolean renderPageCounter) {
         this.renderPageCounter = renderPageCounter;
     }
-    
-	public boolean isCriterioRelevancia() {
-		return criterioRelevancia;
-	}
 
-	public void setCriterioRelevancia(boolean criterioRelevancia) {
-		this.criterioRelevancia = criterioRelevancia;
-	}
+    public boolean isSortByRelevancia() {
+        return sortByRelevancia;
+    }
+
+    public void setSortByRelevancia(boolean sortByRelevancia) {
+        this.sortByRelevancia = sortByRelevancia;
+    }
+
+    public Paginator getPaginator() {
+        return paginator;
+    }
+
+    public void setPaginator(Paginator paginator) {
+        this.paginator = paginator;
+    }
 }
