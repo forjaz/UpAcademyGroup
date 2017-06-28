@@ -49,15 +49,12 @@
 
                 <div class="sortField">
 
-                    <h:outputText id="relevanciaSort" 
-                    			  class="subLabel"
+                    <h:outputText id="relevanciaSort"
+                                  class="subLabel"
                                   value="Relevância Ingrediente-Receita"/>
 
-                    <h:selectBooleanCheckbox immediate="false" 
-                    						 value="#{global.sortByRelevancia}"/>
-                    						 
-                	
- 
+                    <h:selectBooleanCheckbox immediate="false"
+                                             value="#{global.sortByRelevancia}"/>
 
 
                 </div>
@@ -74,10 +71,10 @@
                     <h:outputText id="caloriasSort" class="subLabel"
                                   value="Calorias"/>
 
-                    <p:commandButton action="#{global.searchIngredientesByCaloriasAsc()}"
+                    <p:commandButton action="#{global.searchIngredientesByParameter('calorias ASC')}"
                                      update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"
                                      icon="ui-icon-arrowthick-1-n"/>
-                    <p:commandButton action="#{global.searchIngredientesByCaloriasDesc()}"
+                    <p:commandButton action="#{global.searchIngredientesByParameter('calorias DESC')}"
                                      update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"
                                      icon="ui-icon-arrowthick-1-s"/>
 
@@ -89,10 +86,10 @@
                     <h:outputText id="proteinasSort" class="subLabel"
                                   value="Proteínas"/>
 
-                    <p:commandButton action="#{global.searchIngredientesByProteinasAsc()}"
+                    <p:commandButton action="#{global.searchIngredientesByParameter('proteina ASC')}"
                                      update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"
                                      icon="ui-icon-arrowthick-1-n"/>
-                    <p:commandButton action="#{global.searchIngredientesByProteinasDesc()}"
+                    <p:commandButton action="#{global.searchIngredientesByParameter('proteina DESC')}"
                                      update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"
                                      icon="ui-icon-arrowthick-1-s"/>
 
@@ -104,10 +101,10 @@
                     <h:outputText id="hidratosSort" class="subLabel"
                                   value="Hidratos"/>
 
-                    <p:commandButton action="#{global.searchIngredientesByHidratosAsc()}"
+                    <p:commandButton action="#{global.searchIngredientesByParameter('hidratos ASC')}"
                                      update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"
                                      icon="ui-icon-arrowthick-1-n"/>
-                    <p:commandButton action="#{global.searchIngredientesByHidratosDesc()}"
+                    <p:commandButton action="#{global.searchIngredientesByParameter('hidratos DESC')}"
                                      update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"
                                      icon="ui-icon-arrowthick-1-s"/>
 
@@ -118,20 +115,15 @@
                     <h:outputText id="gordurasSort" class="subLabel"
                                   value="Gorduras"/>
 
-                    <p:commandButton action="#{global.searchIngredientesByGordurasAsc()}"
+                    <p:commandButton action="#{global.searchIngredientesByParameter('gorduras ASC')}"
                                      update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"
                                      icon="ui-icon-arrowthick-1-n"/>
-                    <p:commandButton action="#{global.searchIngredientesByGordurasDesc()}"
+                    <p:commandButton action="#{global.searchIngredientesByParameter('calorias DESC')}"
                                      update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"
                                      icon="ui-icon-arrowthick-1-s"/>
-                                     
-                    
 
 
                 </div>
-				<div class="sortField">
-					ashfgasjf
-				</div>
             </h:panelGrid>
 
             <h:outputScript>

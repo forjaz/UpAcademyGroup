@@ -6,13 +6,35 @@
                 template="/template/default/gridLayout.xhtml"
                 xmlns:p="http://primefaces.org/ui">
 
-   
+    <!-- SEARCH BAR -->
+    <ui:define name="searchBar">
+
+        <h:form id="searchBox">
+
+            <h:panelGrid columns="1" cellpadding="5">
+
+                <div class="sortField">
+
+                    <p:commandButton value="Procurar Receitas Não Aprovadas"
+                                     action="#{global.searchReceitasNaoAprovadas()}"
+                                     update="paginator imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4"
+                                     icon="ui-icon-search">
+                    </p:commandButton>
+
+                </div>
+
+            </h:panelGrid>
+
+        </h:form>
+
+    </ui:define>
+
     <!-- GRID -->
     <!-- IMAGE 1 -->
     <ui:define name="receitaImagem1">
         <h:form id="imagem1">
             <h:commandLink
-                    action="#{receitaDto.showUniqueReceita(global.startGridIndex)}">
+                    action="#{global.showUniqueReceita(global.startGridIndex)}">
                 <h:graphicImage styleClass="receita-imagem"
                                 value="#{global.receitaResult.get(global.startGridIndex).imagem}"/>
             </h:commandLink>
@@ -30,7 +52,7 @@
     <ui:define name="receitaImagem2">
         <h:form id="imagem2">
             <h:commandLink
-                    action="#{receitaDto.showUniqueReceita(global.startGridIndex + 1)}">
+                    action="#{global.showUniqueReceita(global.startGridIndex + 1)}">
                 <h:graphicImage styleClass="receita-imagem"
                                 url="#{global.receitaResult.get(global.startGridIndex + 1).imagem}"/>
             </h:commandLink>
@@ -48,7 +70,7 @@
     <ui:define name="receitaImagem3">
         <h:form id="imagem3">
             <h:commandLink
-                    action="#{receitaDto.showUniqueReceita(global.startGridIndex + 2)}">
+                    action="#{global.showUniqueReceita(global.startGridIndex + 2)}">
                 <h:graphicImage styleClass="receita-imagem"
                                 url="#{global.receitaResult.get(global.startGridIndex + 2).imagem}"/>
             </h:commandLink>
@@ -66,7 +88,7 @@
     <ui:define name="receitaImagem4">
         <h:form id="imagem4">
             <h:commandLink
-                    action="#{receitaDto.showUniqueReceita(global.startGridIndex + 3)}">
+                    action="#{global.showUniqueReceita(global.startGridIndex + 3)}">
                 <h:graphicImage styleClass="receita-imagem"
                                 url="#{global.receitaResult.get(global.startGridIndex + 3).imagem}"/>
             </h:commandLink>
@@ -83,8 +105,12 @@
     <ui:define name="pageCounter">
         <h:form id="paginator">
             <h:inputHidden id="pageIndex" value="#{global.paginator.pageIndex}"/>
-            <h:outputText id="pageNumber" rendered="#{global.renderPageCounter}"
-                          value="Página #{global.paginator.pageIndex} de #{global.paginator.pages}"/>
+            <h:outputLabel id="pageNumber" class="paginatorLabel" rendered="#{global.renderPageCounter}"
+                           value="Página #{global.paginator.pageIndex} de #{global.paginator.pages}"/>
+            <h:outputLabel class="paginatorBulletLabel" rendered="#{global.renderPageCounter}"
+                           value="◆"/>
+            <h:outputLabel id="counter" class="paginatorLabel" rendered="#{global.renderPageCounter}"
+                           value="#{global.receitaResultCounterOutput}"/>
         </h:form>
     </ui:define>
 

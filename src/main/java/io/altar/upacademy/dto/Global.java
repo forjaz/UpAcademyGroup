@@ -12,6 +12,7 @@ import javax.inject.Named;
 import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @ManagedBean(eager = true)
@@ -62,7 +63,7 @@ public class Global extends EntityService implements Serializable {
 
     /*-----------------------------------------------------------------------------------*/
     /* METHODS */
-	/*-----------------------------------------------------------------------------------*/
+    /*-----------------------------------------------------------------------------------*/
     // 1. SELECT2 DROPDOWN IN SEARCH BAR
     @SuppressWarnings("unchecked")
     public List<Ingrediente> returnIngredientes() {
@@ -77,57 +78,16 @@ public class Global extends EntityService implements Serializable {
         setRenderPageCounter(true);
     }
 
-    public void searchIngredientesByCaloriasAsc() {
-        List<Receita> receitaList = sortByCaloriasAsc();
+    public void searchIngredientesByParameter(String parameter) {
+        List<Receita> receitaList = sortByParameter(parameter);
         receitaResult = ensureLengthMultipleOfFour(receitaList);
         showReceitaResultCounter();
         setRenderPageCounter(true);
     }
 
-    public void searchIngredientesByCaloriasDesc() {
-        List<Receita> receitaList = sortByCaloriasDesc();
-        receitaResult = ensureLengthMultipleOfFour(receitaList);
-        showReceitaResultCounter();
-        setRenderPageCounter(true);
-    }
-
-    public void searchIngredientesByProteinasAsc() {
-        List<Receita> receitaList = sortByProteinasAsc();
-        receitaResult = ensureLengthMultipleOfFour(receitaList);
-        showReceitaResultCounter();
-        setRenderPageCounter(true);
-    }
-
-    public void searchIngredientesByProteinasDesc() {
-        List<Receita> receitaList = sortByProteinasDesc();
-        receitaResult = ensureLengthMultipleOfFour(receitaList);
-        showReceitaResultCounter();
-        setRenderPageCounter(true);
-    }
-
-    public void searchIngredientesByHidratosAsc() {
-        List<Receita> receitaList = sortByHidratosAsc();
-        receitaResult = ensureLengthMultipleOfFour(receitaList);
-        showReceitaResultCounter();
-        setRenderPageCounter(true);
-    }
-
-    public void searchIngredientesByHidratosDesc() {
-        List<Receita> receitaList = sortByHidratosDesc();
-        receitaResult = ensureLengthMultipleOfFour(receitaList);
-        showReceitaResultCounter();
-        setRenderPageCounter(true);
-    }
-
-    public void searchIngredientesByGordurasAsc() {
-        List<Receita> receitaList = sortByGordurasAsc();
-        receitaResult = ensureLengthMultipleOfFour(receitaList);
-        showReceitaResultCounter();
-        setRenderPageCounter(true);
-    }
-
-    public void searchIngredientesByGordurasDesc() {
-        List<Receita> receitaList = sortByGordurasDesc();
+    // GET RECEITAS NOT APPROVED
+    public void searchReceitasNaoAprovadas() {
+        List<Receita> receitaList = sortByNaoAprovadas();
         receitaResult = ensureLengthMultipleOfFour(receitaList);
         showReceitaResultCounter();
         setRenderPageCounter(true);
@@ -138,182 +98,61 @@ public class Global extends EntityService implements Serializable {
         List<Long> lista = searchQuery;
         String sortByRelevanciaQuery = "";
         String var = "(";
-        for (int i = 0; i <= lista.size() - 1; i++) {
-            if (i < lista.size() - 1) {
-                var += lista.get(i) + ",";
-            } else {
-                var += lista.get(i) + ") && validacao = 'aprovada' ";
-            }
-        }
-        if (sortByRelevancia) {
-            sortByRelevanciaQuery = "ORDER BY Relevancia DESC";
-        }
-        String query = new StringBuilder().append("SELECT R.*, (SELECT COUNT(*) FROM Receita_Ingrediente WHERE receita_id = R.id && ingrediente_id IN ").append(var).append(") as 'Relevancia' FROM Receita R INNER JOIN Receita_Ingrediente RI ON R.id = RI.receita_id ").append("WHERE RI.ingrediente_id IN ").append(var).append(" GROUP BY receita_id ").append(sortByRelevanciaQuery).toString();
-        return em.createNativeQuery(query, Receita.class).getResultList();
-    }
-
-    // 2.1.1 Sorts by Calorias
-    public List sortByCaloriasAsc() {
-        List<Long> lista = searchQuery;
-        String sortByRelevanciaCaloriasQuery = "";
-        String var = "(";
-        for (int i = 0; i <= lista.size() - 1; i++) {
-            if (i < lista.size() - 1) {
-                var += lista.get(i) + ",";
-            } else {
-                var += lista.get(i) + ") && validacao = 'aprovada' ";
-            }
-        }
-        if (sortByRelevancia) {
-            sortByRelevanciaCaloriasQuery = "ORDER BY Relevancia DESC, calorias ASC";
+        StringBuilder query = new StringBuilder();
+        List<Receita> searchResult = new ArrayList<>();
+        if (searchQuery.isEmpty()) {
+            searchResult.add(receitaPlaceholder);
+            return searchResult;
         } else {
-            sortByRelevanciaCaloriasQuery = "ORDER BY calorias ASC";
-        }
-        String query = new StringBuilder().append("SELECT R.*, (SELECT COUNT(*) FROM Receita_Ingrediente WHERE receita_id = R.id && ingrediente_id IN ").append(var).append(") as 'Relevancia' FROM Receita R INNER JOIN Receita_Ingrediente RI ON R.id = RI.receita_id ").append("WHERE RI.ingrediente_id IN ").append(var).append(" GROUP BY receita_id ").append(sortByRelevanciaCaloriasQuery).toString();
-        return em.createNativeQuery(query, Receita.class).getResultList();
-    }
-
-    public List sortByCaloriasDesc() {
-        List<Long> lista = searchQuery;
-        String sortByRelevanciaCaloriasQuery = "";
-        String var = "(";
-        for (int i = 0; i <= lista.size() - 1; i++) {
-            if (i < lista.size() - 1) {
-                var += lista.get(i) + ",";
-            } else {
-                var += lista.get(i) + ") && validacao = 'aprovada' ";
+            for (int i = 0; i <= lista.size() - 1; i++) {
+                if (i < lista.size() - 1) {
+                    var += lista.get(i) + ",";
+                } else {
+                    var += lista.get(i) + ") && validacao = 'aprovada' ";
+                }
             }
-        }
-        if (sortByRelevancia) {
-            sortByRelevanciaCaloriasQuery = "ORDER BY Relevancia DESC, calorias DESC";
-        } else {
-            sortByRelevanciaCaloriasQuery = "ORDER BY calorias DESC";
-        }
-        String query = new StringBuilder().append("SELECT R.*, (SELECT COUNT(*) FROM Receita_Ingrediente WHERE receita_id = R.id && ingrediente_id IN ").append(var).append(") as 'Relevancia' FROM Receita R INNER JOIN Receita_Ingrediente RI ON R.id = RI.receita_id ").append("WHERE RI.ingrediente_id IN ").append(var).append(" GROUP BY receita_id ").append(sortByRelevanciaCaloriasQuery).toString();
-        return em.createNativeQuery(query, Receita.class).getResultList();
-    }
-
-    // 2.1.2 Sorts by Proteinas
-    public List sortByProteinasAsc() {
-        List<Long> lista = searchQuery;
-        String sortByRelevanciaProteinasQuery = "";
-        String var = "(";
-        for (int i = 0; i <= lista.size() - 1; i++) {
-            if (i < lista.size() - 1) {
-                var += lista.get(i) + ",";
-            } else {
-                var += lista.get(i) + ") && validacao = 'aprovada' ";
+            if (sortByRelevancia) {
+                sortByRelevanciaQuery = "ORDER BY Relevancia DESC";
             }
+            query = query.append("SELECT R.*, (SELECT COUNT(*) FROM Receita_Ingrediente WHERE receita_id = R.id && ingrediente_id IN ").append(var).append(") as 'Relevancia' FROM Receita R INNER JOIN Receita_Ingrediente RI ON R.id = RI.receita_id ").append("WHERE RI.ingrediente_id IN ").append(var).append(" GROUP BY receita_id ").append(sortByRelevanciaQuery);
         }
-        if (sortByRelevancia) {
-            sortByRelevanciaProteinasQuery = "ORDER BY Relevancia DESC, proteina ASC";
-        } else {
-            sortByRelevanciaProteinasQuery = "ORDER BY proteina ASC";
-        }
-        String query = new StringBuilder().append("SELECT R.*, (SELECT COUNT(*) FROM Receita_Ingrediente WHERE receita_id = R.id && ingrediente_id IN ").append(var).append(") as 'Relevancia' FROM Receita R INNER JOIN Receita_Ingrediente RI ON R.id = RI.receita_id ").append("WHERE RI.ingrediente_id IN ").append(var).append(" GROUP BY receita_id ").append(sortByRelevanciaProteinasQuery).toString();
-        return em.createNativeQuery(query, Receita.class).getResultList();
+        return em.createNativeQuery(query.toString(), Receita.class).getResultList();
     }
 
-    public List sortByProteinasDesc() {
-        List<Long> lista = searchQuery;
-        String sortByRelevanciaProteinasQuery = "";
-        String var = "(";
-        for (int i = 0; i <= lista.size() - 1; i++) {
-            if (i < lista.size() - 1) {
-                var += lista.get(i) + ",";
-            } else {
-                var += lista.get(i) + ") && validacao = 'aprovada' ";
-            }
-        }
-        if (sortByRelevancia) {
-            sortByRelevanciaProteinasQuery = "ORDER BY Relevancia DESC, proteina DESC";
-        } else {
-            sortByRelevanciaProteinasQuery = "ORDER BY proteina DESC";
-        }
-        String query = new StringBuilder().append("SELECT R.*, (SELECT COUNT(*) FROM Receita_Ingrediente WHERE receita_id = R.id && ingrediente_id IN ").append(var).append(") as 'Relevancia' FROM Receita R INNER JOIN Receita_Ingrediente RI ON R.id = RI.receita_id ").append("WHERE RI.ingrediente_id IN ").append(var).append(" GROUP BY receita_id ").append(sortByRelevanciaProteinasQuery).toString();
-        return em.createNativeQuery(query, Receita.class).getResultList();
-    }
-
-    // 2.1.3 Sorts by Hidratos
-    public List sortByHidratosAsc() {
-        List<Long> lista = searchQuery;
-        String sortByRelevanciaHidratosQuery = "";
-        String var = "(";
-        for (int i = 0; i <= lista.size() - 1; i++) {
-            if (i < lista.size() - 1) {
-                var += lista.get(i) + ",";
-            } else {
-                var += lista.get(i) + ") && validacao = 'aprovada' ";
-            }
-        }
-        if (sortByRelevancia) {
-            sortByRelevanciaHidratosQuery = "ORDER BY Relevancia DESC, hidratos ASC";
-        } else {
-            sortByRelevanciaHidratosQuery = "ORDER BY hidratos ASC";
-        }
-        String query = new StringBuilder().append("SELECT R.*, (SELECT COUNT(*) FROM Receita_Ingrediente WHERE receita_id = R.id && ingrediente_id IN ").append(var).append(") as 'Relevancia' FROM Receita R INNER JOIN Receita_Ingrediente RI ON R.id = RI.receita_id ").append("WHERE RI.ingrediente_id IN ").append(var).append(" GROUP BY receita_id ").append(sortByRelevanciaHidratosQuery).toString();
-        return em.createNativeQuery(query, Receita.class).getResultList();
-    }
-
-    public List sortByHidratosDesc() {
-        List<Long> lista = searchQuery;
-        String sortByRelevanciaHidratosQuery = "";
-        String var = "(";
-        for (int i = 0; i <= lista.size() - 1; i++) {
-            if (i < lista.size() - 1) {
-                var += lista.get(i) + ",";
-            } else {
-                var += lista.get(i) + ") && validacao = 'aprovada' ";
-            }
-        }
-        if (sortByRelevancia) {
-            sortByRelevanciaHidratosQuery = "ORDER BY Relevancia DESC, hidratos DESC";
-        } else {
-            sortByRelevanciaHidratosQuery = "ORDER BY hidratos DESC";
-        }
-        String query = new StringBuilder().append("SELECT R.*, (SELECT COUNT(*) FROM Receita_Ingrediente WHERE receita_id = R.id && ingrediente_id IN ").append(var).append(") as 'Relevancia' FROM Receita R INNER JOIN Receita_Ingrediente RI ON R.id = RI.receita_id ").append("WHERE RI.ingrediente_id IN ").append(var).append(" GROUP BY receita_id ").append(sortByRelevanciaHidratosQuery).toString();
-        return em.createNativeQuery(query, Receita.class).getResultList();
-    }
-
-    // 2.1.2 Sorts by Gorduras
-    public List sortByGordurasAsc() {
+    // Sort Query
+    public List sortByParameter(String parameter) {
         List<Long> lista = searchQuery;
         String sortByRelevanciaGordurasQuery = "";
         String var = "(";
-        for (int i = 0; i <= lista.size() - 1; i++) {
-            if (i < lista.size() - 1) {
-                var += lista.get(i) + ",";
-            } else {
-                var += lista.get(i) + ") && validacao = 'aprovada' ";
-            }
-        }
-        if (sortByRelevancia) {
-            sortByRelevanciaGordurasQuery = "ORDER BY Relevancia DESC, gorduras ASC";
+        StringBuilder query = new StringBuilder();
+        List<Receita> searchResult = new ArrayList<>();
+        if (searchQuery.isEmpty()) {
+            searchResult.add(receitaPlaceholder);
+            return searchResult;
         } else {
-            sortByRelevanciaGordurasQuery = "ORDER BY gorduras ASC";
+            for (int i = 0; i <= lista.size() - 1; i++) {
+                if (i < lista.size() - 1) {
+                    var += lista.get(i) + ",";
+                } else {
+                    var += lista.get(i) + ") && validacao = 'aprovada' ";
+                }
+            }
+            if (sortByRelevancia) {
+                sortByRelevanciaGordurasQuery = "ORDER BY Relevancia DESC, " + parameter;
+            } else {
+                sortByRelevanciaGordurasQuery = "ORDER BY " + parameter;
+            }
+            query = query.append("SELECT R.*, (SELECT COUNT(*) FROM Receita_Ingrediente WHERE receita_id = R.id && ingrediente_id IN ").append(var).append(") as 'Relevancia' FROM Receita R INNER JOIN Receita_Ingrediente RI ON R.id = RI.receita_id && validacao = 'aprovada' ").append("WHERE RI.ingrediente_id IN ").append(var).append(" GROUP BY receita_id ").append(sortByRelevanciaGordurasQuery);
         }
-        String query = new StringBuilder().append("SELECT R.*, (SELECT COUNT(*) FROM Receita_Ingrediente WHERE receita_id = R.id && ingrediente_id IN ").append(var).append(") as 'Relevancia' FROM Receita R INNER JOIN Receita_Ingrediente RI ON R.id = RI.receita_id ").append("WHERE RI.ingrediente_id IN ").append(var).append(" GROUP BY receita_id ").append(sortByRelevanciaGordurasQuery).toString();
-        return em.createNativeQuery(query, Receita.class).getResultList();
+        return em.createNativeQuery(query.toString(), Receita.class).getResultList();
     }
 
-    public List sortByGordurasDesc() {
-        List<Long> lista = searchQuery;
-        String sortByRelevanciaGordurasQuery = "";
-        String var = "(";
-        for (int i = 0; i <= lista.size() - 1; i++) {
-            if (i < lista.size() - 1) {
-                var += lista.get(i) + ",";
-            } else {
-                var += lista.get(i) + ") && validacao = 'aprovada' ";
-            }
+    public List sortByNaoAprovadas() {
+        List<Receita> receitasNaoAprovadas = em.createNativeQuery("SELECT * FROM receita WHERE receita.validacao='reprovada' ORDER BY receita.id", Receita.class).getResultList();
+        if (receitasNaoAprovadas.isEmpty()) {
+            receitasNaoAprovadas.add(receitaPlaceholder);
         }
-        if (sortByRelevancia) {
-            sortByRelevanciaGordurasQuery = "ORDER BY Relevancia DESC, gorduras DESC";
-        } else {
-            sortByRelevanciaGordurasQuery = "ORDER BY gorduras DESC";
-        }
-        String query = new StringBuilder().append("SELECT R.*, (SELECT COUNT(*) FROM Receita_Ingrediente WHERE receita_id = R.id && ingrediente_id IN ").append(var).append(") as 'Relevancia' FROM Receita R INNER JOIN Receita_Ingrediente RI ON R.id = RI.receita_id && validacao = 'aprovada' ").append("WHERE RI.ingrediente_id IN ").append(var).append(" GROUP BY receita_id ").append(sortByRelevanciaGordurasQuery).toString();
-        return em.createNativeQuery(query, Receita.class).getResultList();
+        return receitasNaoAprovadas;
     }
 
     // 2.2 Ensure ResultList is Multiple of Four to Enable Navigation
@@ -346,6 +185,12 @@ public class Global extends EntityService implements Serializable {
         return "receita-detalhe";
     }
 
+    // 5. GET RECEITA ID FROM CLICKABLE IMAGE
+    public String showUniqueReceitaNaoAprovada(int index) {
+        uniqueReceita = receitaResult.get(index);
+        return "aprovacao-detalhe";
+    }
+
     // 6. GET RECEITA_INGREDIENTE LIST FROM RECEITA ID
     @SuppressWarnings("unchecked")
     public List<Receita_Ingrediente> getReceitaIngredienteFromReceitaID(Long ID) {
@@ -364,9 +209,32 @@ public class Global extends EntityService implements Serializable {
         receitaResultCounterOutput = receitasNotEmpty + " Receitas Encontradas";
     }
 
+    // APPROVE RECEITA
+    public String approveReceita(Receita receita) {
+        receita.setValidacao("aprovada");
+        return "aprovacao";
+    }
+
+    // APPROVE RECEITA
+    public String rejectReceita(Receita receita) {
+        List<Receita_Ingrediente> receitaIngredienteToDelete;
+        receitaIngredienteToDelete = em.createNativeQuery("SELECT * FROM receita_ingrediente RI WHERE RI.receita_id=" + receita.getId(), Receita_Ingrediente.class).getResultList();
+        for (Receita_Ingrediente receitaIngrediente : receitaIngredienteToDelete) {
+            em.remove(receitaIngrediente);
+        }
+        em.remove(receita);
+        return "aprovacao";
+    }
+
+    // RESET RECEITAS
+    public void resetReceitaGrid(){
+        receitaResult = new ArrayList<>();
+        receitaResult.addAll(Arrays.asList(receitaPlaceholder, receitaPlaceholder, receitaPlaceholder, receitaPlaceholder));
+    }
+
 	/*-----------------------------------------------------------------------------------*/
-	/* GETTERS AND SETTERS */
-	/*-----------------------------------------------------------------------------------*/
+    /* GETTERS AND SETTERS */
+    /*-----------------------------------------------------------------------------------*/
 
     public static long getSerialVersionUID() {
         return serialVersionUID;

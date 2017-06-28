@@ -1,5 +1,6 @@
 package io.altar.upacademy.dto;
 
+import io.altar.upacademy.model.Ingrediente;
 import io.altar.upacademy.model.Receita;
 import io.altar.upacademy.model.Receita_Ingrediente;
 import io.altar.upacademy.service.EntityService;
@@ -24,14 +25,8 @@ public class ReceitasDto extends EntityService implements Serializable {
 //coisas
 	private static final long serialVersionUID = 1L;
 	private Receita receita;
-
-	public Receita getReceita() {
-		return receita;
-	}
-
-	public void setReceita(Receita receita) {
-		this.receita = receita;
-	}
+	private Ingrediente ingrediente;
+	private Receita_Ingrediente receitaIngrediente;
 	
 	public String newReceita(Receita recipie) {
 		recipie.setValidacao("reprovada");
@@ -99,9 +94,9 @@ public class ReceitasDto extends EntityService implements Serializable {
 		emp.setnPessoas(ppl);
 
 		em.merge(emp);
-		
-		
-		return "index";
+		global.resetReceitaGrid();
+
+		return "aprovacao";
 	}
 	
 	public String listarRep() {
@@ -119,5 +114,34 @@ public class ReceitasDto extends EntityService implements Serializable {
         global.setUniqueReceita(global.getReceitaResult().get(index));
         return "dtlAprovacao";
     }
-	
+
+    // Getters e Setters
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public Ingrediente getIngrediente() {
+        return ingrediente;
+    }
+
+    public void setIngrediente(Ingrediente ingrediente) {
+        this.ingrediente = ingrediente;
+    }
+
+    public Receita_Ingrediente getReceitaIngrediente() {
+        return receitaIngrediente;
+    }
+
+    public void setReceitaIngrediente(Receita_Ingrediente receitaIngrediente) {
+        this.receitaIngrediente = receitaIngrediente;
+    }
+
+    public Receita getReceita() {
+        return receita;
+    }
+
+    public void setReceita(Receita receita) {
+        this.receita = receita;
+    }
 }
