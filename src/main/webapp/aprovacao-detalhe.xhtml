@@ -99,7 +99,19 @@
             </p:column>
         </p:dataTable>
 
-        <!--<h:outputLabel styleClass="receita-preparacao">#{global.uniqueReceita.preparacao}</h:outputLabel>-->
+    </ui:define>
+
+    <!-- APPROVE BUTTONS -->
+    <ui:define name="approveButtons">
+        <h:form>
+            <h:panelGrid columns="2" cellpadding="5">
+                <p:commandButton value="Aprovar Receita" action="#{global.approveReceita(receita)}"
+                                 icon="ui-icon-check"/>
+
+                <p:commandButton value="Rejeitar Receita" action="#{global.rejectReceita(receita)}"
+                                 icon="ui-icon-closethick"/>
+            </h:panelGrid>
+        </h:form>
     </ui:define>
 
     <!-- BUTTON LEFT -->
@@ -109,19 +121,6 @@
                 <h:graphicImage styleClass="cursor-left-click"
                                 value="#{global.receitaPlaceholder.imagem}"/>
             </h:commandLink>
-        </h:form>
-    </ui:define>
-
-    <!-- APPROVE BUTTONS -->
-    <ui:define name="approveButtons">
-        <h:form>
-            <h:panelGrid columns="2" cellpadding="5">
-                <p:commandButton styleClass="approveButton" action="#{global.approveReceita(receita)}"
-                                 icon="ui-icon-check"/>
-
-                <p:commandButton styleClass="rejectButton" action="#{global.rejectReceita(receita)}"
-                                 icon="ui-icon-closethick"/>
-            </h:panelGrid>
         </h:form>
     </ui:define>
 

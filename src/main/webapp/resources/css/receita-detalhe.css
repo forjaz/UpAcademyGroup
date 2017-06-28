@@ -266,20 +266,7 @@ label {
 /* CONTENT - BUTTONS */
 /*-----------------------------------------------------------------------------------*/
 
-.approveButtons {
-    height: 30px;
-    width: 30px;
-}
 
-.approveButton {
-    height: 10px;
-    width: 10px;
-}
-
-.rejectButton {
-    height: 10px;
-    width: 10px;
-}
 
 /*-----------------------------------------------------------------------------------*/
 /* FOOTER */
