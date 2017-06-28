@@ -277,6 +277,126 @@ label {
 }
 
 /*-----------------------------------------------------------------------------------*/
+/* CONTENT - SOBRE-NOS */
+/*-----------------------------------------------------------------------------------*/
+.sobre-nos {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	text-align: center;
+	height: 576px;
+	width: 1130px;
+	margin-left: 348px;
+	margin-top: 227px;
+	padding: 10px;
+	z-index: 1;
+	color: white;
+	font-size: 13.5px;
+}
+
+.sobre-nos-col1 {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	text-align: center;
+	height: 556px;
+	width: 48%;
+	z-index: 1;
+}
+
+.sobre-nos-col2 {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	text-align: center;
+	height: 556px;
+	width: 48%;
+	z-index: 1;
+	align-items: center;
+}
+
+.sobre-nos-row1, .sobre-nos-row2 {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	text-align: center;
+	height: 240px;
+	width: 100%;
+}
+
+.sobre-nos-pessoa {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	text-align: center;
+	height: 240px;
+	width: 48%;
+}
+
+.sobre-nos-headlineBig {
+	height: 36px;
+	margin-top: 10px;
+	font-size: 20px;
+	z-index: 1;
+}
+
+.sobre-nos-imagem {
+	height: 200px
+}
+
+.sobre-nos-imagem-format {
+	height: 200px;
+	border-radius: 10px;
+}
+
+.sobre-nos-nome {
+	height: 30px;
+	margin-top: 10px;
+}
+
+.sobre-nos-nome-format {
+	height: 30px;
+}
+
+.sobre-nos-headline {
+	height: 30px;
+	margin-top: 10px;
+	font-size: 20px;
+}
+
+.sobre-nos-projecto {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	text-align: justify;
+	font-size: 15px;
+	font-weight: 300;
+	color: #6cb59f;
+}
+
+.sobre-nos-descricao {
+	text-align: justify;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-size: 15px;
+	font-weight: 300;
+	color: #6cb59f;
+}
+
+.sobre-nos-agradecimentos {
+	margin-top: 20px;
+	text-align: justify;
+	font-size: 15px;
+	font-weight: 300;
+	color: #6cb59f;
+}
+
+/*-----------------------------------------------------------------------------------*/
 /* FOOTER */
 /*-----------------------------------------------------------------------------------*/
 #footerDiv {
