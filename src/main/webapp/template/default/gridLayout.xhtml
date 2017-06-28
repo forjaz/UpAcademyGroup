@@ -49,7 +49,7 @@
 							<div id="headerNavDiv" class="col-md-12">
 
 								<h:form>
-									<h:commandLink action="index"
+									<h:commandLink action="#{receitaDto.listarRep()}"
 										update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4">
 										<button type="button" class="btn btn-default navbar-btn">Procurar
 											Receitas</button>
@@ -63,7 +63,7 @@
 										<button type="button" class="btn btn-default navbar-btn">Sobre
 											Nós</button>
 									</h:commandLink>
-									<h:commandLink action="aprovacao">
+									<h:commandLink action="#{receitaDto.listarRep()}">
 										<button type="button" class="btn btn-default navbar-btn">Área
 											Privada</button>
 									</h:commandLink>

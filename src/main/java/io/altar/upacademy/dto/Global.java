@@ -42,6 +42,8 @@ public class Global extends EntityService implements Serializable {
     private boolean sortByRelevancia = false;
     // Paginator
     private Paginator paginator;
+    
+    ArrayList<String> prep= new ArrayList<String>();
 
     /*-----------------------------------------------------------------------------------*/
     /* CONSTRUCTORS */
@@ -311,4 +313,26 @@ public class Global extends EntityService implements Serializable {
     public void setPaginator(Paginator paginator) {
         this.paginator = paginator;
     }
+    public ArrayList<String> getPrep() {
+		return prep;
+	}
+
+	public void setPrep(ArrayList<String> prep) {
+		this.prep = prep;
+	}
+	
+    public void listarPrep(String nome) {
+		@SuppressWarnings("unchecked")
+        ArrayList<Ingrediente> lista= (ArrayList<Ingrediente>) em.createNativeQuery("SELECT * FROM Ingrediente I "+
+				"WHERE I.nome='"+nome+"'", Ingrediente.class).getResultList();
+        
+        ArrayList<String> mprep= new ArrayList<String>();
+        
+        for(int i = 0; i<lista.size(); i++){
+        	mprep.add(lista.get(i).getModoPreparacao());
+        }
+        
+        prep = mprep;
+	}
+
 }

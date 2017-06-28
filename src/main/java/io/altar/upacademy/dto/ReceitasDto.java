@@ -96,24 +96,33 @@ public class ReceitasDto extends EntityService implements Serializable {
 		em.merge(emp);
 		global.resetReceitaGrid();
 
-		return "aprovacao";
+		return "index";
 	}
 	
 	public String listarRep() {
 		@SuppressWarnings("unchecked")
         List<Receita> lista= (List<Receita>) em.createQuery("SELECT e FROM Receita e WHERE validacao='reprovada'").getResultList();
-        
+        if(lista.size() == 0){
+        	global.resetReceitaGrid();
+        	return "index";
+        }else{
         global.setReceitaResult(global.ensureLengthMultipleOfFour(lista));
 		global.showReceitaResultCounter();
         global.setRenderPageCounter(true);
         
         return "aprovacao";
+        }
 	}
 	
 	public String showUniqueReceita(int index) {
         global.setUniqueReceita(global.getReceitaResult().get(index));
         return "dtlAprovacao";
     }
+	
+	public String procRct(){
+		global.resetReceitaGrid();
+    	return "index";
+	}
 
     // Getters e Setters
 

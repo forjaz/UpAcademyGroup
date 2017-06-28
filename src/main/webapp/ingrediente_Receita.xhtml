@@ -40,17 +40,17 @@
 					<div class="col-md-9">
 		          
 			            
-			            <h:selectOneListbox id="ing" 
+			            <h:selectOneMenu id="ing" 
 			           						class="form-control"
 			            					value="#{ingredienteBean.ingrediente.nome}" 
 											styleClass="select2"
 											style="width:80px"
 											required="true">
-											
+							<p:ajax listener="#{global.listarPrep(ingredienteBean.ingrediente.nome)}" update="prep" />				
 							<f:selectItems var="ing" value="#{global.returnIngredientes()}"
 													 itemLabel="#{ing.nome}" 
 													 itemValue="#{ing.nome}" />
-						</h:selectOneListbox>
+						</h:selectOneMenu>
 		            </div>	
 		            
 		     	</div>	 
@@ -61,29 +61,31 @@
 						<div class="col-md-9">
 			          
 				            
-				            <h:selectOneListbox id="prep" 
+				            <h:selectOneMenu id="prep" 
 				            					value="#{ingredienteBean.ingrediente.modoPreparacao}" 
 				            					style="width:80px"
 				            					class="form-control"
-				            					styleClass="select2">
+				            					>
 				                
-				                <f:selectItems value="#{ingredienteBean.preparacoes}" />
-				            </h:selectOneListbox>
+				                <f:selectItems var="prep" value="#{global.prep}" itemValue="#{prep}" itemLabel="#{prep}" />
+				                
+				            
+				            </h:selectOneMenu>
 			            </div>
 			       	</div>
 		 			<br/>
 		 			
 		 			<div class="row">
 		       			<div class="col-md-3">Quantidade</div>
-						<div class="col-md-9">
-				            <p:inputNumber id="qtd"
-				            			   style="width:80px"
-				            			   value="#{receitaIngredienteBean.receitaIngrediente.quantidadeCliente}" 
-				            			   label="quantidade" 
-				            			   required="true"/>
+							<div class="col-md-9">
+					            <p:inputNumber id="qtd"
+					            			   style="width:80px"
+					            			   value="#{receitaIngredienteBean.receitaIngrediente.quantidadeCliente}" 
+					            			   label="quantidade" 
+					            			   required="true"/>
 				           
 				        </div>
-				        </div>
+				     </div>
 				        			   
 		            <br/>
 		            
