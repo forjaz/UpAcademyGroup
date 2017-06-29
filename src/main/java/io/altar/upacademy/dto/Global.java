@@ -232,6 +232,8 @@ public class Global extends EntityService implements Serializable {
     public void resetReceitaGrid(){
         receitaResult = new ArrayList<>();
         receitaResult.addAll(Arrays.asList(receitaPlaceholder, receitaPlaceholder, receitaPlaceholder, receitaPlaceholder));
+        setRenderPageCounter(false);
+        startGridIndex = 0;
     }
 
 	/*-----------------------------------------------------------------------------------*/

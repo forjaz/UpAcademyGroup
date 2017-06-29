@@ -48,26 +48,26 @@
 							<div id="headerNavDiv" class="col-md-12">
 
 
-								<h:form>
-									<h:commandLink action="index"
-										update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4">
-										<button type="button" class="btn btn-default navbar-btn">Procurar
-											Receitas</button>
-									</h:commandLink>
+                                <h:form>
+                                    <h:commandLink action="#{receitaDto.procRct()}"
+                                                   update="imagem1 imagem2 imagem3 imagem4 nome1 nome2 nome3 nome4">
+                                        <button type="button" class="btn btn-default navbar-btn">Procurar
+                                            Receitas</button>
+                                    </h:commandLink>
 
-									<h:commandLink action="receitas">
-										<button type="button" class="btn btn-default navbar-btn">Submeter
-											Receitas</button>
-									</h:commandLink>
-									<h:commandLink action="sobre-nos">
-										<button type="button" class="btn btn-default navbar-btn">Sobre
-											Nós</button>
-									</h:commandLink>
-									<h:commandLink action="aprovacao">
-										<button type="button" class="btn btn-default navbar-btn">Área
-											Privada</button>
-									</h:commandLink>
-								</h:form>
+                                    <h:commandLink action="receitas">
+                                        <button type="button" class="btn btn-default navbar-btn">Submeter
+                                            Receitas</button>
+                                    </h:commandLink>
+                                    <h:commandLink action="sobre-nos">
+                                        <button type="button" class="btn btn-default navbar-btn">Sobre
+                                            Nós</button>
+                                    </h:commandLink>
+                                    <h:commandLink action="#{receitaDto.listarRep()}">
+                                        <button type="button" class="btn btn-default navbar-btn">Área
+                                            Privada</button>
+                                    </h:commandLink>
+                                </h:form>
 
 
 							</div>

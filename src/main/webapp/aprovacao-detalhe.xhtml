@@ -75,7 +75,7 @@
                 <h:outputText value="#{rec_ing.medidas}"/>
             </p:column>
         </p:dataTable>
-        
+
     </ui:define>
 
     <!-- UNIQUE NOME -->
@@ -104,18 +104,18 @@
 
     <!-- APPROVE BUTTONS -->
     <ui:define name="approveButtons">
-  
+
         <h:form>
             <h:panelGrid columns="2" cellpadding="5">
                 <p:commandButton value="Aprovar"
-				action="#{receitaDto.validar(global.uniqueReceita.id)}"
-				styleClass="btn-approve"
-				/>
-				
-				<p:commandButton value="Reprovar"
-				action="#{receitaDto.negar(global.uniqueReceita.id)}"
-				styleClass="btn-approve"
-				/>
+                                 action="#{receitaDto.validar(global.uniqueReceita.id)}"
+                                 styleClass="btn-approve btn-green"
+                />
+
+                <p:commandButton value="Reprovar"
+                                 action="#{receitaDto.negar(global.uniqueReceita.id)}"
+                                 styleClass="btn-approve btn-red"
+                />
             </h:panelGrid>
         </h:form>
     </ui:define>
@@ -123,7 +123,7 @@
     <!-- BUTTON LEFT -->
     <ui:define name="cursorLeft">
         <h:form>
-            <h:commandLink action="index">
+            <h:commandLink action="aprovacao">
                 <h:graphicImage styleClass="cursor-left-click"
                                 value="#{global.receitaPlaceholder.imagem}"/>
             </h:commandLink>
