@@ -8,10 +8,17 @@
 
 	<ui:define name="insertReceita">
 
-		<h:form>
+		<h:form styleClass="submeterReceitas">
+
+            <div class="row">
+
+                <div class="col-md-12 submeterTitle">Submeter Receitas</div>
+            </div>
+            <br />
+
 			<div class="row">
 
-				<div class="col-md-4">Nome da Receita:</div>
+				<div class="col-md-4 submeterLabel">Nome da Receita</div>
 				<div class="col-md-8">
 					<h:inputText class="form-control" value="#{receitaBean.receita.nome}" style="width:530px" />
 				</div>
@@ -19,7 +26,7 @@
 			<br />
 			<div class="row">
 
-				<div class="col-md-4">Imagem da Receita (url):</div>
+				<div class="col-md-4 submeterLabel">Imagem da Receita (URL)</div>
 				<div class="col-md-8">
 					<h:inputText class="form-control" value="#{receitaBean.receita.imagem}"
 						style="width:530px" />
@@ -28,7 +35,7 @@
 			<br />
 			<div class="row">
 
-				<div class="col-md-4">Tipo de Receita:</div>
+				<div class="col-md-4 submeterLabel">Tipo de Receita</div>
 				<div class="col-md-8">
 				
                 	<h:selectOneListbox class="form-control" styleClass="select2" value="#{receitaBean.receita.tipo}"  >
@@ -51,19 +58,20 @@
 
 			</h:panelGrid>
 
-
+            <br />
+            <br />
 			<p></p>
 			
-			Preparacao da Receita:
+			Preparação da Receita
 			<p></p>
-			<p:inputTextarea rows="10" cols="110" class="form-control"
+			<p:inputTextarea rows="10" cols="110" class="text-area form-control"
 				value="#{receitaBean.receita.preparacao}" />
 
 			<p></p>
 
 			<h:commandButton value="Submeter"
 				action="#{receitaDto.newReceita(receitaBean.receita)}"
-				class="btn btn-default" />
+				class="btn btn-default navbar-btn submeter-btn" />
 			<br />
 		
 

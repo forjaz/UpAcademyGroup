@@ -12,32 +12,39 @@
 	<!-- UNIQUE IMAGEM coisas --> 
 	
 	<ui:define name="insertReceita">
-		<div class="col-md-12" style="height:300px">
-			
-			#{receitaDto.receita.nome}
-			
-			<br/><br/>
-			<!--  
-			<div class="row" >
-				<h:graphicImage styleClass="receita-imagem-unique"
-								url="#{receitaDto.receita.imagem}" />
-			</div>
-			-->
-			
-			#{receitaDto.receita.preparacao}
-		
-		</div>
 
 	<!-- UNIQUE CALORIAS / PROTEINAS / HIDRATOS / GORDURAS TABLE -->
-		<div class="col-md-12">
+		<div class="col-md-12 submeterReceitaIngrediente">
 			
 			<h:form>
 	
 		        <p:messages id="msgs" />
-		 		
-		 		<div class="row">
-		       		<div class="col-md-3">Ingrediente</div>
-					<div class="col-md-9">
+
+                <div class="row submeter-campo">
+                    <div class="col-md-4">Nome da Receita</div>
+                    <div class="col-md-8">
+
+                        <h:outputText value="#{receitaDto.receita.nome}"/>
+
+                    </div>
+
+                </div>
+                <br/>
+
+                <div class="row submeter-campo">
+                    <div class="col-md-4">Preparação da Receita</div>
+                    <div class="col-md-8 submeter-preparacao">
+
+                        <h:outputText value="#{receitaDto.receita.preparacao}"/>
+
+                    </div>
+
+                </div>
+                <br/>
+
+                <div class="row submeter-campo">
+		       		<div class="col-md-4">Ingrediente</div>
+					<div class="col-md-8">
 		          
 			            
 			            <h:selectOneMenu id="ing" 
@@ -56,15 +63,15 @@
 		     	</div>	 
 		 			<br/>
 		 			
-		 			<div class="row">
-			       		<div class="col-md-3"> Modo de Preparação:</div>
-						<div class="col-md-9">
+		 			<div class="row submeter-campo">
+			       		<div class="col-md-4"> Modo de Preparação:</div>
+						<div class="col-md-8">
 			          
 				            
 				            <h:selectOneMenu id="prep" 
 				            					value="#{ingredienteBean.ingrediente.modoPreparacao}" 
 				            					style="width:80px"
-				            					class="form-control"
+				            					class="form-control submeter-modo-preparacao"
 				            					>
 				                
 				                <f:selectItems var="prep" value="#{global.prep}" itemValue="#{prep}" itemLabel="#{prep}" />
@@ -75,9 +82,9 @@
 			       	</div>
 		 			<br/>
 		 			
-		 			<div class="row">
-		       			<div class="col-md-3">Quantidade</div>
-							<div class="col-md-9">
+		 			<div class="row submeter-campo">
+		       			<div class="col-md-4">Quantidade</div>
+							<div class="col-md-8  submeter-quantidades">
 					            <p:inputNumber id="qtd"
 					            			   style="width:80px"
 					            			   value="#{receitaIngredienteBean.receitaIngrediente.quantidadeCliente}" 
@@ -89,9 +96,9 @@
 				        			   
 		            <br/>
 		            
-		            <div class="row">
-		       			<div class="col-md-3">Unidades</div>
-						<div class="col-md-9">
+		            <div class="row submeter-campo">
+		       			<div class="col-md-4">Unidades</div>
+						<div class="col-md-8">
 				            <h:selectOneListbox id="uni" 
 				            					value="#{receitaIngredienteBean.receitaIngrediente.medidas}" 
 				            					style="width:80px"
@@ -109,14 +116,14 @@
 		            		<br/><br/>
 		            		
 		            		<div class="col-md-6">
-			            		<p:commandButton value="Introduzir Ingrediente" 
-			            					     class="btn btn-default"
+			            		<h:commandButton value="Introduzir Ingrediente"
+			            					     class="btn btn-default navbar-btn ingrediente-btn"
 												 action="#{receitaIngredienteService.newRct_Ing(receitaDto.receita, ingredienteBean.ingrediente, receitaIngredienteBean.receitaIngrediente)}"/>
 							</div>
 							
 							<div class="col-md-6">
-								<p:commandButton value="Guardar Receita" 
-												 class="btn btn-default"
+								<h:commandButton value="Guardar Receita"
+												 class="btn btn-default navbar-btn guardar-btn"
 												 action="#{receitaDto.calcular()}"/>
 							</div>	
 				
@@ -130,14 +137,7 @@
 	<!-- UNIQUE INGREDIENTES / QUANTIDADES / UNIDADES TABLE -->
 
 
-    <!-- BUTTON LEFT -->
-  			
-		        <h:form>
-		            <h:commandLink action="index">
-		                <h:graphicImage styleClass="cursor-left-click"
-		                                value="#{global.receitaPlaceholder.imagem}"/>
-		            </h:commandLink>
-		        </h:form>
+
 		    
 		</div>   	
     </ui:define>
