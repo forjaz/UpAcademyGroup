@@ -77,7 +77,7 @@ public class ReceitasDto extends EntityService implements Serializable {
         @SuppressWarnings("unchecked") List<Receita> lista = (List<Receita>) em.createQuery("SELECT e FROM Receita e WHERE validacao='reprovada'").getResultList();
         if (lista.size() == 0) {
             global.resetReceitaGrid();
-            return "index";
+            return "aprovacao";
         } else {
             global.setStartGridIndex(0);
             global.setReceitaResult(global.ensureLengthMultipleOfFour(lista));
