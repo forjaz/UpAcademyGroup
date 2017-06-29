@@ -21,10 +21,10 @@
                 </div>
                 <div class="sortField">
 
-                    <h:selectManyListbox value="#{global.searchQuery}"
+                    <h:selectManyListbox value="#{global.searchName}"
                                          styleClass="select2">
                         <f:selectItems var="ing" value="#{global.returnIngredientes()}"
-                                       itemLabel="#{ing.nome}" itemValue="#{ing.id}"/>
+                                       itemLabel="#{ing.nome}" itemValue="#{ing.nome}"/>
                     </h:selectManyListbox>
 
                     <p:commandButton value="Procurar Receitas"
