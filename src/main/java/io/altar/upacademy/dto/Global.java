@@ -28,6 +28,8 @@ public class Global extends EntityService implements Serializable {
     private Receita receitaPlaceholder;
     // Search Bar Output Ingredientes -> Ingrediente ID
     private List<Long> searchQuery;
+    //Ingredientes -> Ingrediente nome
+    private ArrayList<String> searchName;
     // Receitas to Render in Grid
     private List<Receita> receitaResult = new ArrayList<>();
     // Receita to Render in Unique
@@ -69,11 +71,20 @@ public class Global extends EntityService implements Serializable {
     // 1. SELECT2 DROPDOWN IN SEARCH BAR
     @SuppressWarnings("unchecked")
     public List<Ingrediente> returnIngredientes() {
-        return em.createQuery("SELECT e FROM Ingrediente e ORDER BY e.nome").getResultList();
+    	ArrayList<Ingrediente> listaFinal = new ArrayList<Ingrediente>();
+    	ArrayList<Ingrediente> listaNome = (ArrayList<Ingrediente>) em.createQuery("SELECT e FROM Ingrediente e ORDER BY e.nome").getResultList();
+    	listaFinal.add(listaNome.get(0));
+    	for(int i = 0; i<listaNome.size()-1; i++){
+    		if(listaNome.get(i).getNome()!=listaNome.get(i+1).getNome()){
+    			listaFinal.add(listaNome.get(i+1));
+    		}
+    	}
+    	return listaFinal;
     }
 
     // 2 SEARCH INGREDIENTES IN SEARCH BAR
     public void searchIngredientes() {
+    	nametoId();
         List<Receita> receitaList = sortByRelevancia();
         receitaResult = ensureLengthMultipleOfFour(receitaList);
         showReceitaResultCounter();
@@ -81,6 +92,7 @@ public class Global extends EntityService implements Serializable {
     }
 
     public void searchIngredientesByParameter(String parameter) {
+    	nametoId();
         List<Receita> receitaList = sortByParameter(parameter);
         receitaResult = ensureLengthMultipleOfFour(receitaList);
         showReceitaResultCounter();
@@ -335,6 +347,38 @@ public class Global extends EntityService implements Serializable {
         }
         
         prep = mprep;
+	}
+
+	public ArrayList<String> getSearchName() {
+		return searchName;
+	}
+
+	public void setSearchName(ArrayList<String> searchName) {
+		this.searchName = searchName;
+	}
+	
+	public void nametoId() {
+    	StringBuilder query = new StringBuilder();
+    	query = query.append("SELECT * FROM Ingrediente I "+
+				"WHERE I.nome='"+searchName.get(0)+"'");
+		for(int i = 1; i<searchName.size(); i++){
+
+			query.append(" Or I.nome='"+searchName.get(i)+"'");
+		}
+		
+		
+		List<Long> lista2= new ArrayList<Long>();
+		
+		@SuppressWarnings("unchecked")
+		
+		ArrayList<Ingrediente> lista1= (ArrayList<Ingrediente>) em.createNativeQuery(query.toString(), Ingrediente.class).getResultList();
+		
+		for(int j = 0; j < lista1.size(); j++){
+			lista2.add(lista1.get(j).getId());
+		}
+		searchQuery=lista2;
+
+			
 	}
 
 }
