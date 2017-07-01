@@ -144,6 +144,15 @@ body {
 	padding: 1.5px 0px !important;
 }
 
+.aprovacaoTitle {
+    margin-top: 11px;
+    margin-left: 110px;
+    font-size: 28px;
+    letter-spacing: 4px;
+    color: #004900;
+    font-weight: 600;
+}
+
 /*-----------------------------------------------------------------------------------*/
 /* CONTENT */
 /*-----------------------------------------------------------------------------------*/
@@ -269,7 +278,7 @@ label {
 	width: 100px;
 	height: 30px;
     margin-left: 770px;
-    margin-top: 7px;
+    margin-top: 12px;
 }
 
 .btn-approve {

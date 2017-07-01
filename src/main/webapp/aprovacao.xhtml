@@ -2,9 +2,15 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core"
                 template="/template/default/gridLayout.xhtml"
-                xmlns:p="http://primefaces.org/ui">
+>
+
+    <!-- TITLE -->
+    <ui:define name="searchBar">
+        <div class="aprovacaoTitle">
+            <h:outputText value="Área Privada &#8764; Receitas Submetidas"/>
+        </div>
+    </ui:define>
 
     <!-- GRID -->
     <!-- IMAGE 1 -->
